@@ -40,7 +40,7 @@
         .blob-shape {
             position: absolute;
             z-index: -1;
-            filter: blur(40px);
+            filter: blur(120px);
             opacity: 0.6;
         }
         .text-shadow {
@@ -54,10 +54,12 @@
     <div id="navbar-placeholder" data-theme="light"></div>
 
     <!-- Hero Section -->
-    <div class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <!-- Decorative Background Blobs -->
-        <div class="blob-shape bg-blue-200 w-96 h-96 rounded-full top-0 right-0 mix-blend-multiply animate-pulse"></div>
-        <div class="blob-shape bg-cyan-200 w-96 h-96 rounded-full bottom-0 left-0 mix-blend-multiply animate-pulse delay-700"></div>
+    <div class="relative min-h-screen flex items-center pt-20 pb-20">
+        <!-- Decorative Background Blobs Wrapper -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="blob-shape bg-cyan-200 w-[600px] h-[600px] rounded-full -top-40 -right-20 mix-blend-multiply animate-pulse"></div>
+            <div class="blob-shape bg-blue-200 w-[600px] h-[600px] rounded-full -bottom-40 -left-20 mix-blend-multiply animate-pulse delay-700"></div>
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -109,8 +111,8 @@
 
                 <!-- Hero Image -->
                 <div class="relative hidden lg:block">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-10 rounded-[3rem] transform rotate-3 scale-105"></div>
-                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Innovation" class="relative rounded-[2.5rem] shadow-2xl object-cover h-[500px] w-full transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-10 rounded-3xl transform rotate-3 scale-105"></div>
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=max&w=1000&q=80" alt="Innovation" class="relative rounded-2xl shadow-2xl object-cover h-[500px] w-full transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                     
                     <!-- Floating Badge -->
                     <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md px-6 py-4 rounded-full shadow-xl border border-white/40 flex items-center gap-4 transition-transform hover:scale-105 duration-300">
@@ -129,10 +131,8 @@
 
     <!-- Process Section -->
     <section class="py-24 relative bg-white">
-        <!-- Decorative background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white"></div>
         <!-- Soft Radial Gradient Blob (Moved further up and reduced size) -->
-        <div class="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-[radial-gradient(circle,rgba(219,234,254,0.4)_0%,transparent_60%)] pointer-events-none mix-blend-multiply"></div>
+        <div class="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-[radial-gradient(circle,rgba(219,234,254,0.15)_0%,transparent_70%)] pointer-events-none mix-blend-multiply"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-20">
@@ -189,9 +189,9 @@
     </section>
 
     <!-- Timeline Section (Law SME 'News' Style List) -->
-    <section class="py-20 bg-white relative overflow-hidden">
+    <section class="py-20 relative overflow-hidden bg-white">
          <!-- Blob decoration -->
-         <div class="blob-shape bg-gray-100 w-[500px] h-[500px] rounded-full bottom-[-100px] right-[-100px]"></div>
+         <div class="blob-shape bg-blue-50 w-[500px] h-[500px] rounded-full bottom-[-100px] right-[-100px]"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
@@ -266,8 +266,10 @@
     </section>
 
     <!-- Cases Section (Grid) -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-20 bg-white relative">
+        <!-- Subtle gradient overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(219,234,254,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
                 <span class="text-primary font-bold tracking-widest uppercase text-sm">CASES</span>
                 <h2 class="text-3xl font-bold mt-2 mb-4 text-gray-800">成功案例</h2>

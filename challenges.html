@@ -38,7 +38,7 @@
 <body class="font-sans text-gray-700 bg-gray-50 antialiased">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3">
@@ -287,6 +287,20 @@
             <p>&copy; 2025 Innovation Matchmaking Platform.</p>
         </div>
     </footer>
+
+    <script>
+        // Scroll effect for navigation bar
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 10) {
+                nav.classList.remove('bg-transparent');
+                nav.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+            } else {
+                nav.classList.add('bg-transparent');
+                nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+            }
+        });
+    </script>
 
 </body>
 </html>

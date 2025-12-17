@@ -38,13 +38,19 @@
     <style>
         /* Custom styles that act like the Law SME "blobs" */
         .blob-shape {
-            position: absolute;
-            z-index: -1;
-            filter: blur(40px);
+            position: fixed;
+            z-index: 0;
+            filter: blur(60px);
             opacity: 0.6;
+            pointer-events: none;
         }
         .text-shadow {
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        /* Ensure content sits above the fixed blobs */
+        section, header, footer, .relative {
+            position: relative;
+            z-index: 10;
         }
     </style>
 </head>
@@ -53,12 +59,12 @@
     <!-- Reusable Header Placeholder -->
     <div id="navbar-placeholder" data-theme="light"></div>
 
-    <!-- Hero Section -->
-    <div class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <!-- Decorative Background Blobs -->
-        <div class="blob-shape bg-blue-200 w-96 h-96 rounded-full top-0 right-0 mix-blend-multiply animate-pulse"></div>
-        <div class="blob-shape bg-cyan-200 w-96 h-96 rounded-full bottom-0 left-0 mix-blend-multiply animate-pulse delay-700"></div>
+    <!-- Global Background Blobs (Fixed position to cross sections naturally) -->
+    <div class="blob-shape bg-blue-200 w-96 h-96 rounded-full top-0 right-0 mix-blend-multiply animate-pulse"></div>
+    <div class="blob-shape bg-cyan-200 w-96 h-96 rounded-full bottom-0 left-0 mix-blend-multiply animate-pulse delay-700"></div>
 
+    <!-- Hero Section -->
+    <div class="relative pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <!-- Text Content -->
@@ -128,12 +134,10 @@
     </div>
 
     <!-- Process Section -->
-    <section class="py-24 relative bg-white">
+    <section class="py-24 relative">
         <!-- Decorative background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white"></div>
-        <!-- Soft Radial Gradient Blob (No hard cut-off) -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] aspect-square bg-[radial-gradient(circle,rgba(219,234,254,0.6)_0%,transparent_70%)] pointer-events-none mix-blend-multiply"></div>
-
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/30 to-white -z-10"></div>
+        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-20">
                 <span class="text-primary font-bold tracking-widest uppercase text-sm bg-blue-50 px-3 py-1 rounded-full">PROCESS</span>

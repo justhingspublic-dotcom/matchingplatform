@@ -20,9 +20,10 @@ document.addEventListener("DOMContentLoaded", function() {
         : "bg-primary text-white hover:bg-blue-800";
 
     // Proposal Button colors (Submit Proposal)
+    // Default (Light theme / Scrolled): bg-primary/20 text-primary border border-primary/20 hover:bg-primary hover:text-white
     const proposalBtnClasses = initialTheme === 'dark'
-        ? "bg-white/10 text-white border border-white/30 hover:bg-white hover:text-primary"
-        : "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white";
+        ? "bg-white/20 text-white border border-white/30 hover:bg-white hover:text-primary"
+        : "bg-primary/20 text-primary border-transparent hover:bg-primary hover:text-white";
 
     // Nav Link Helper to generate initial classes
     const getLinkClass = (page) => {
@@ -113,8 +114,10 @@ document.addEventListener("DOMContentLoaded", function() {
             // Login Button -> Primary Style
             navLoginBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
 
-            // Proposal Button -> Outline Primary Style
-            navProposalBtn.className = "px-5 py-2.5 rounded-full bg-transparent text-primary border-2 border-primary font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2";
+            // Proposal Button -> Light Primary Capsule Style
+            // bg-primary/20 (0.2 opacity theme blue), text-primary (theme blue text)
+            // hover -> bg-primary (100% theme blue), text-white
+            navProposalBtn.className = "px-5 py-2.5 rounded-full bg-primary/20 text-primary font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2";
 
             // Links -> Dark Text style
             navLinks.forEach(link => {
@@ -159,7 +162,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 navLogoBg.className = "w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
                 navBrandText.className = "font-bold text-xl tracking-wide text-primary transition-colors duration-300";
                 navLoginBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-                navProposalBtn.className = "px-5 py-2.5 rounded-full bg-transparent text-primary border-2 border-primary font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2";
+                
+                // Proposal Button: Initial Light Theme State
+                navProposalBtn.className = "px-5 py-2.5 rounded-full bg-primary/20 text-primary font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2";
 
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href');

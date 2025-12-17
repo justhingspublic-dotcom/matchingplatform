@@ -128,41 +128,60 @@
     </div>
 
     <!-- Process Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-primary font-bold tracking-widest uppercase text-sm">PROCESS</span>
-                <h2 class="text-3xl font-bold mt-2 mb-4 text-gray-800">如何參與挑戰？</h2>
-                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+    <section class="py-24 relative overflow-hidden bg-white">
+        <!-- Decorative background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white"></div>
+        <div class="blob-shape bg-blue-100 w-[800px] h-[800px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-30"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-primary font-bold tracking-widest uppercase text-sm bg-blue-50 px-3 py-1 rounded-full">PROCESS</span>
+                <h2 class="text-4xl font-bold mt-4 mb-4 text-gray-800">如何參與挑戰？</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">簡單四步驟，開啟您的創新實證之旅</p>
             </div>
 
             <div class="grid md:grid-cols-4 gap-8 relative">
-                <!-- Connecting Line -->
-                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-200 -z-10"></div>
-
-                <!-- Steps -->
-                <div class="relative bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border-4 border-white shadow-sm relative z-10">1</div>
-                    <h3 class="font-bold text-lg mb-2">探索主題</h3>
-                    <p class="text-gray-500 text-sm">瀏覽來自各機關、國營事業的多元實證題目。</p>
+                <!-- Dashed Line behind -->
+                <div class="hidden md:block absolute top-10 left-[12%] right-[12%] h-0.5 border-t-2 border-dashed border-gray-200 -z-10"></div>
+                
+                <!-- Step 1 -->
+                <div class="group text-center relative">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-primary mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 relative z-10">
+                        <i class="fa-regular fa-compass"></i>
+                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-primary to-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">1</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">探索主題</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed px-4">瀏覽來自各機關、國營事業的多元實證題目，尋找合適機會。</p>
                 </div>
                 
-                <div class="relative bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border-4 border-white shadow-sm relative z-10">2</div>
-                    <h3 class="font-bold text-lg mb-2">提交提案</h3>
-                    <p class="text-gray-500 text-sm">鎖定符合您技術的挑戰，線上提交解決方案。</p>
+                <!-- Step 2 -->
+                <div class="group text-center relative">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-secondary mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 relative z-10">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-secondary to-blue-400 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">2</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-secondary transition-colors">提交提案</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed px-4">鎖定符合您技術的挑戰，線上提交完整的解決方案計畫書。</p>
                 </div>
 
-                <div class="relative bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border-4 border-white shadow-sm relative z-10">3</div>
-                    <h3 class="font-bold text-lg mb-2">審查評選</h3>
-                    <p class="text-gray-500 text-sm">您的提案將由專業評委審查，爭取入選機會。</p>
+                <!-- Step 3 -->
+                <div class="group text-center relative">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-purple-500 mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 relative z-10">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">3</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-500 transition-colors">審查評選</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed px-4">您的提案將由專業評委進行書面與會議審查，爭取入選機會。</p>
                 </div>
 
-                <div class="relative bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                    <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border-4 border-white shadow-sm relative z-10">4</div>
-                    <h3 class="font-bold text-lg mb-2">實證合作</h3>
-                    <p class="text-gray-500 text-sm">與出題機關攜手，在真實場域驗證您的技術。</p>
+                <!-- Step 4 -->
+                <div class="group text-center relative">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-green-500 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 relative z-10">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">4</div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-500 transition-colors">實證合作</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed px-4">與出題機關攜手，在真實場域驗證您的技術，加速商業化進程。</p>
                 </div>
             </div>
         </div>

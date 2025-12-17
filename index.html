@@ -50,44 +50,8 @@
 </head>
 <body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
 
-    <!-- Navigation (模仿 Law SME Header) -->
-    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent text-gray-600">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
-                    <div id="nav-logo-bg" class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <span id="nav-brand-text" class="font-bold text-xl tracking-wide text-primary transition-colors duration-300">實證媒合平台</span>
-                </div>
-
-                <div class="hidden md:flex items-center space-x-2">
-                    <a href="index.html" class="px-4 py-2 rounded-full bg-black/10 text-primary font-bold transition-all duration-300">首頁</a>
-                    <a href="challenges.html" class="px-4 py-2 rounded-full text-gray-600 hover:bg-black/5 hover:text-primary transition-all duration-300 font-medium">尋找挑戰</a>
-                    <a href="calendar.html" class="px-4 py-2 rounded-full text-gray-600 hover:bg-black/5 hover:text-primary transition-all duration-300 font-medium">計畫時程</a>
-                    <a href="#" class="px-4 py-2 rounded-full text-gray-600 hover:bg-black/5 hover:text-primary transition-all duration-300 font-medium">關於我們</a>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="hidden md:flex items-center gap-3">
-                    <a href="#" class="px-5 py-2.5 rounded-full border-2 border-primary text-primary font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2">
-                        <i class="fa-regular fa-paper-plane"></i> 提交提案
-                    </a>
-                    <a href="#" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
-                        <i class="fa-solid fa-user"></i> 會員登入
-                    </a>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button class="text-gray-600 hover:text-primary focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Reusable Header Placeholder -->
+    <div id="navbar-placeholder" data-theme="light"></div>
 
     <!-- Hero Section -->
     <div class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
@@ -408,63 +372,8 @@
         </div>
     </footer>
 
-    <script>
-        // Scroll effect for navigation bar
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('main-nav');
-            const navLogoBg = document.getElementById('nav-logo-bg');
-            const navBrandText = document.getElementById('nav-brand-text');
-            
-            // Initial state for index.html is actually light background (white body), so logo should be primary colored initially
-            // Wait, looking at index.html, it has a hero section with white background?
-            // Checking line 51: <body class="font-sans text-gray-700 bg-white ...">
-            // Hero section line 106: <div class="relative pt-32 ...">
-            // It seems index.html has a light background, unlike challenges.html which has a dark header image.
-            // So for index.html, the "transparent" top state should actually have dark text/primary logo.
-            
-            if (window.scrollY > 10) {
-                // Scrolled state (Frosted glass)
-                nav.classList.remove('bg-transparent');
-                nav.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
-                
-                // Nav Links styling for scrolled state
-                const links = nav.querySelectorAll('.hidden.md\\:flex a');
-                links.forEach(link => {
-                    link.classList.remove('hover:bg-black/5', 'bg-black/10'); // Remove top state classes
-                    
-                    if (link.href.includes('index.html') || (link.getAttribute('href') === '#' && window.location.pathname.endsWith('index.html'))) { // Simple check for active
-                         link.classList.add('bg-gray-100', 'text-primary');
-                    } else {
-                         link.classList.add('hover:bg-gray-100', 'hover:text-primary');
-                    }
-                });
-
-            } else {
-                // Top state (Transparent)
-                nav.classList.add('bg-transparent');
-                nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
-                
-                // Nav Links styling for top state (Light background -> Dark text)
-                const links = nav.querySelectorAll('.hidden.md\\:flex a');
-                links.forEach(link => {
-                    link.classList.remove('bg-gray-100', 'text-primary', 'hover:bg-gray-100', 'hover:text-primary'); // Remove scrolled classes
-                    
-                    // Since background is white/light, we want dark text and maybe gray hover
-                    link.classList.add('text-gray-600');
-                    
-                    if (link.href.includes('index.html')) {
-                        link.classList.add('bg-black/10', 'text-primary');
-                    } else {
-                        link.classList.add('hover:bg-black/5', 'hover:text-primary');
-                    }
-                });
-            }
-        });
-        
-        // Trigger once on load to set initial state
-        window.dispatchEvent(new Event('scroll'));
-    </script>
+    <!-- Load Header Script -->
+    <script src="js/header.js"></script>
 
 </body>
 </html>
-

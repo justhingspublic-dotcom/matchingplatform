@@ -47,11 +47,11 @@
                     </div>
                     <span id="nav-brand-text" class="font-bold text-xl tracking-wide text-white transition-colors duration-300">實證媒合平台</span>
                 </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="hover:text-secondary font-medium transition-colors">首頁</a>
-                    <a href="challenges.html" class="font-bold transition-colors">尋找挑戰</a>
-                    <a href="calendar.html" class="hover:text-secondary font-medium transition-colors">計畫時程</a>
-                    <a href="#" class="hover:text-secondary font-medium transition-colors">關於我們</a>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300 font-medium">首頁</a>
+                    <a href="challenges.html" class="px-4 py-2 rounded-full bg-white/20 font-bold transition-all duration-300 backdrop-blur-sm shadow-inner">尋找挑戰</a>
+                    <a href="calendar.html" class="px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300 font-medium">計畫時程</a>
+                    <a href="#" class="px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300 font-medium">關於我們</a>
                 </div>
                 <div class="hidden md:flex items-center gap-3">
                     <a href="#" class="px-5 py-2.5 rounded-full bg-white text-primary font-medium hover:bg-gray-100 transition-all shadow-md">
@@ -307,9 +307,21 @@
                 navBrandText.classList.remove('text-white');
                 navBrandText.classList.add('text-primary');
 
-                // Button styling would need more specific targeting if it wasn't hardcoded in HTML as white/primary
-                // But for simplicity in this static demo, let's keep the button as is or we'd need to swap its classes too.
-                // Actually, let's swap the button classes for better visibility
+                // Nav Links styling for scrolled state (Darker text, different hover bg)
+                const links = nav.querySelectorAll('.hidden.md\\:flex a');
+                links.forEach(link => {
+                    // Reset classes that might conflict
+                    link.classList.remove('hover:bg-white/10', 'bg-white/20'); 
+                    
+                    // Add scrolled state classes
+                    if (link.href.includes('challenges.html')) {
+                        link.classList.add('bg-gray-100', 'text-primary');
+                    } else {
+                        link.classList.add('hover:bg-gray-100', 'hover:text-primary');
+                    }
+                });
+
+                // Button styling
                 const loginBtn = nav.querySelector('a[href="#"]'); // The login button
                 if(loginBtn) {
                      loginBtn.classList.remove('bg-white', 'text-primary', 'hover:bg-gray-100');
@@ -317,7 +329,7 @@
                 }
 
             } else {
-                // Top state (Transparent background, White text for contrast against dark header)
+                // Top state (Transparent background, White text)
                 nav.classList.add('bg-transparent', 'text-white');
                 nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'text-gray-600');
                 
@@ -326,6 +338,20 @@
                 navLogoBg.classList.remove('bg-primary', 'text-white');
                 navBrandText.classList.add('text-white');
                 navBrandText.classList.remove('text-primary');
+
+                // Nav Links styling restoration for top state
+                const links = nav.querySelectorAll('.hidden.md\\:flex a');
+                links.forEach(link => {
+                    // Remove scrolled state classes
+                    link.classList.remove('bg-gray-100', 'text-primary', 'hover:bg-gray-100', 'hover:text-primary');
+                    
+                    // Add top state classes
+                    if (link.href.includes('challenges.html')) {
+                        link.classList.add('bg-white/20');
+                    } else {
+                        link.classList.add('hover:bg-white/10');
+                    }
+                });
 
                 // Button restoration
                 const loginBtn = nav.querySelector('a[href="#"]');

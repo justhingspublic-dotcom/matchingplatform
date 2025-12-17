@@ -38,23 +38,23 @@
 <body class="font-sans text-gray-700 bg-gray-50 antialiased">
 
     <!-- Navbar -->
-    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-300 bg-transparent text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md">
+                    <div id="nav-logo-bg" class="w-10 h-10 bg-white text-primary rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300">
                         <i class="fa-solid fa-lightbulb"></i>
                     </div>
-                    <span class="font-bold text-xl tracking-wide text-primary">實證媒合平台</span>
+                    <span id="nav-brand-text" class="font-bold text-xl tracking-wide text-white transition-colors duration-300">實證媒合平台</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-primary font-medium transition-colors">首頁</a>
-                    <a href="challenges.html" class="text-primary font-bold transition-colors">尋找挑戰</a>
-                    <a href="calendar.html" class="text-gray-600 hover:text-primary font-medium transition-colors">計畫時程</a>
-                    <a href="#" class="text-gray-600 hover:text-primary font-medium transition-colors">關於我們</a>
+                    <a href="index.html" class="hover:text-secondary font-medium transition-colors">首頁</a>
+                    <a href="challenges.html" class="font-bold transition-colors">尋找挑戰</a>
+                    <a href="calendar.html" class="hover:text-secondary font-medium transition-colors">計畫時程</a>
+                    <a href="#" class="hover:text-secondary font-medium transition-colors">關於我們</a>
                 </div>
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="#" class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all">
+                    <a href="#" class="px-5 py-2.5 rounded-full bg-white text-primary font-medium hover:bg-gray-100 transition-all shadow-md">
                         <i class="fa-solid fa-user mr-2"></i> 會員登入
                     </a>
                 </div>
@@ -292,12 +292,47 @@
         // Scroll effect for navigation bar
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('main-nav');
+            const navLogoBg = document.getElementById('nav-logo-bg');
+            const navBrandText = document.getElementById('nav-brand-text');
+            const navLinks = nav.querySelectorAll('a:not(.flex-shrink-0):not([href="#"])'); // Select nav links but exclude logo and button
+            
             if (window.scrollY > 10) {
-                nav.classList.remove('bg-transparent');
-                nav.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+                // Scrolled state (Light background, Dark text)
+                nav.classList.remove('bg-transparent', 'text-white');
+                nav.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'text-gray-600');
+                
+                // Logo & Brand
+                navLogoBg.classList.remove('bg-white', 'text-primary');
+                navLogoBg.classList.add('bg-primary', 'text-white');
+                navBrandText.classList.remove('text-white');
+                navBrandText.classList.add('text-primary');
+
+                // Button styling would need more specific targeting if it wasn't hardcoded in HTML as white/primary
+                // But for simplicity in this static demo, let's keep the button as is or we'd need to swap its classes too.
+                // Actually, let's swap the button classes for better visibility
+                const loginBtn = nav.querySelector('a[href="#"]'); // The login button
+                if(loginBtn) {
+                     loginBtn.classList.remove('bg-white', 'text-primary', 'hover:bg-gray-100');
+                     loginBtn.classList.add('bg-primary', 'text-white', 'hover:bg-blue-800');
+                }
+
             } else {
-                nav.classList.add('bg-transparent');
-                nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm');
+                // Top state (Transparent background, White text for contrast against dark header)
+                nav.classList.add('bg-transparent', 'text-white');
+                nav.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'text-gray-600');
+                
+                // Logo & Brand
+                navLogoBg.classList.add('bg-white', 'text-primary');
+                navLogoBg.classList.remove('bg-primary', 'text-white');
+                navBrandText.classList.add('text-white');
+                navBrandText.classList.remove('text-primary');
+
+                // Button restoration
+                const loginBtn = nav.querySelector('a[href="#"]');
+                if(loginBtn) {
+                     loginBtn.classList.add('bg-white', 'text-primary', 'hover:bg-gray-100');
+                     loginBtn.classList.remove('bg-primary', 'text-white', 'hover:bg-blue-800');
+                }
             }
         });
     </script>

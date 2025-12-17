@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計畫時程 - 實證媒合平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005a87',
+                        secondary: '#4facfe',
+                        accent: '#00f2fe',
+                        'bg-light': '#f8f9fa',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blob-shape {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wide text-primary">實證媒合平台</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary font-medium transition-colors">首頁</a>
+                    <a href="challenges.html" class="text-gray-600 hover:text-primary font-medium transition-colors">尋找挑戰</a>
+                    <a href="calendar.html" class="text-primary font-bold transition-colors relative group">
+                        計畫時程
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-primary font-medium transition-colors">關於我們</a>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#" class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                        <i class="fa-solid fa-user mr-2"></i> 會員登入
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header (Lighter Style) -->
+    <header class="pt-32 pb-20 relative">
+        <!-- Background Blobs -->
+        <div class="blob-shape bg-blue-100 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2" style="position: fixed; z-index: -1;"></div>
+        <div class="blob-shape bg-cyan-100 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3" style="position: fixed; z-index: -1;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">TIMELINE</span>
+            <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">計畫時程互動指南</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                點擊日曆上的關鍵事件，即可查看所有詳細資訊。<br>
+                掌握 2025 年新創採購補助計畫的每一個重要時刻。
+            </p>
+        </div>
+    </header>
+
+    <!-- Calendar Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-20">
+        
+        <!-- Phase 1: May (Main Calendar Card) -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-12 border border-gray-100 relative overflow-hidden">
+            <!-- Decorative accent -->
+            
+            <div class="flex items-center gap-6 mb-8 border-b border-gray-100 pb-6">
+                <div class="w-20 h-20 rounded-2xl bg-blue-50 text-primary flex flex-col items-center justify-center shadow-inner">
+                    <span class="text-xs font-bold uppercase tracking-wider opacity-70">Month</span>
+                    <span class="text-4xl font-bold">5</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-1">提案與審查階段</h2>
+                    <div class="flex items-center gap-2 text-gray-500">
+                        <span class="px-2 py-0.5 bg-gray-100 rounded text-xs font-medium text-gray-600">Phase 1</span>
+                        <span>申請與書面審查</span>
+                    </div>
+                </div>
+                <div class="ml-auto hidden md:block">
+                    <button class="text-gray-400 hover:text-primary transition-colors"><i class="fa-solid fa-chevron-left text-xl"></i></button>
+                    <span class="mx-4 font-bold text-gray-700">2025 年 5 月</span>
+                    <button class="text-gray-400 hover:text-primary transition-colors"><i class="fa-solid fa-chevron-right text-xl"></i></button>
+                </div>
+            </div>
+            
+            <!-- Weekday Headers -->
+            <div class="grid grid-cols-7 gap-4 mb-4 text-center">
+                <div class="text-xs font-bold text-red-400 uppercase tracking-widest">Sun</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Mon</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Tue</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Wed</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Thu</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Fri</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Sat</div>
+            </div>
+            
+            <!-- Calendar Grid -->
+            <div class="grid grid-cols-7 gap-4">
+                <!-- Empty/Past days -->
+                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">27</div>
+                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">28</div>
+                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">29</div>
+                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">30</div>
+                
+                <!-- Days 1-14 -->
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">1</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">2</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">3</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">4</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">5</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">6</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">7</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">8</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">9</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">10</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">11</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">12</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">13</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">14</span>
+                </div>
+
+                <!-- Key Date: 15 -->
+                <div class="aspect-square p-1 bg-gradient-to-br from-red-50 to-white border-2 border-red-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <div class="h-full flex flex-col items-center justify-center">
+                        <span class="text-2xl font-bold text-red-600">15</span>
+                        <div class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold mt-1">申請截止</div>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-56 bg-gray-800 text-white text-xs rounded-xl p-4 hidden group-hover:block z-20 shadow-xl">
+                        <div class="font-bold text-sm mb-1 text-red-300">申請文件截止</div>
+                        <p class="leading-relaxed opacity-90">請務必於今日 17:00 前備妥計畫書與相關文件，完成線上提交。</p>
+                        <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
+                    </div>
+                </div>
+
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">16</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">17</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">18</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">19</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">20</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">21</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">22</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">23</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">24</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">25</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">26</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">27</span>
+                </div>
+
+                <!-- Key Date: 28 -->
+                <div class="aspect-square p-1 bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="h-full flex flex-col items-center justify-center">
+                        <span class="text-2xl font-bold text-blue-600">28</span>
+                        <div class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-[10px] font-bold mt-1">簡報繳交</div>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-48 bg-gray-800 text-white text-xs rounded-xl p-3 hidden group-hover:block z-20 shadow-xl">
+                        <div class="font-bold mb-1 text-blue-300">繳交審查簡報</div>
+                        請上傳 PDF 格式之簡報檔。
+                        <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
+                    </div>
+                </div>
+
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">29</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">30</span>
+                </div>
+                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">31</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Phases Summary (Improved Cards) -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-green-50 text-green-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-green-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-signature"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 2</div>
+                        <h3 class="font-bold text-lg text-gray-800">簽約與啟動</h3>
+                    </div>
+                </div>
+                <ul class="space-y-4 text-sm text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">6/10</div>
+                        <span>審查會議</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">6/25</div>
+                        <span>公告審查結果</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">7/10</div>
+                        <span>簽約文件截止</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">7/30</div>
+                        <span>撥付第一期款</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 3</div>
+                        <h3 class="font-bold text-lg text-gray-800">執行與管考</h3>
+                    </div>
+                </div>
+                <ul class="space-y-4 text-sm text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5"><i class="fa-solid fa-repeat text-[10px]"></i></div>
+                        <span>每月10號 繳交工作紀錄</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">9/15</div>
+                        <span>期中審查會議</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/10</div>
+                        <span>期末報告初稿</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 4</div>
+                        <h3 class="font-bold text-lg text-gray-800">結案與驗收</h3>
+                    </div>
+                </div>
+                <ul class="space-y-4 text-sm text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/20</div>
+                        <span>期末審查(驗收)</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/30</div>
+                        <span>結案文件截止</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">12/20</div>
+                        <span>撥付第二期款</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2025 Innovation Matchmaking Platform.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

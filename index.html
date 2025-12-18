@@ -79,7 +79,7 @@
                     
                     <!-- Feature Cards (Like the 'Online Question' / 'Reserve' buttons in reference) -->
                     <div class="grid sm:grid-cols-2 gap-4 pt-4">
-                        <a href="challenges.html" class="group p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                        <a href="challenges.html" class="group p-6 bg-white rounded-xl shadow-lg shadow-blue-100/50 border border-gray-100 hover:border-primary hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 relative overflow-hidden">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                             <div class="relative z-10 flex flex-col h-full">
                                 <div class="w-12 h-12 bg-blue-100 text-primary rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
@@ -93,7 +93,7 @@
                             </div>
                         </a>
 
-                        <a href="#" class="group p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-teal-400/30 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                        <a href="#" class="group p-6 bg-white rounded-xl shadow-lg shadow-teal-100/50 border border-gray-100 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300 relative overflow-hidden">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                             <div class="relative z-10 flex flex-col h-full">
                                 <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
@@ -111,8 +111,8 @@
 
                 <!-- Hero Image -->
                 <div class="relative hidden lg:block">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-10 rounded-3xl transform rotate-3 scale-105"></div>
-                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=max&w=1000&q=80" alt="Innovation" class="relative rounded-2xl shadow-2xl object-cover h-[500px] w-full transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-10 rounded-xl transform rotate-3 scale-105"></div>
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=max&w=1000&q=80" alt="Innovation" class="relative rounded-xl shadow-2xl object-cover h-[500px] w-full transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                     
                     <!-- Floating Badge -->
                     <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md px-6 py-4 rounded-full shadow-xl border border-white/40 flex items-center gap-4 transition-transform hover:scale-105 duration-300">
@@ -128,6 +128,55 @@
             </div>
         </div>
     </div>
+
+    <!-- Opportunities Section -->
+    <section class="py-16 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">您想尋找哪種合作機會？</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <!-- Card 1 -->
+                <a href="challenges.html" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                        <i class="fa-solid fa-magnifying-glass text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">尋找挑戰</span>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                        <i class="fa-solid fa-vials text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">技術驗證</span>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                        <i class="fa-solid fa-sack-dollar text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">尋求資金</span>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                        <i class="fa-solid fa-handshake text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">商機媒合</span>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
+                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                        <i class="fa-solid fa-landmark text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">政策參與</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Process Section -->
     <section class="py-24 relative bg-white">
@@ -147,7 +196,7 @@
                 
                 <!-- Step 1 -->
                 <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-primary mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(0,90,135,0.4)]">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-primary mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(0,90,135,0.4)]">
                         <i class="fa-regular fa-compass"></i>
                         <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-primary to-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">1</div>
                     </div>
@@ -157,7 +206,7 @@
                 
                 <!-- Step 2 -->
                 <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-secondary mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(79,172,254,0.4)]">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-secondary mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(79,172,254,0.4)]">
                         <i class="fa-regular fa-file-lines"></i>
                         <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-secondary to-blue-400 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">2</div>
                     </div>
@@ -167,7 +216,7 @@
 
                 <!-- Step 3 -->
                 <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-purple-500 mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-purple-500 mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
                         <i class="fa-solid fa-clipboard-check"></i>
                         <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">3</div>
                     </div>
@@ -177,7 +226,7 @@
 
                 <!-- Step 4 -->
                 <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-green-500 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-green-500 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]">
                         <i class="fa-solid fa-handshake-simple"></i>
                         <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">4</div>
                     </div>
@@ -278,7 +327,7 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Case Card 1 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-blue-200/60 hover:border-primary/50 transition-all duration-300 relative">
                     <div class="relative h-48 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart City" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-primary/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">智慧城市</span>
@@ -287,14 +336,14 @@
                         <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Sep. 11, 2023</div>
                         <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">新創 A 公司以 AI 改善停車場管理效率</h3>
                         <p class="text-gray-500 text-sm line-clamp-2 mb-4">導入市府大樓實證，透過影像辨識技術提升車位周轉率30%，解決長時間占用問題。</p>
-                        <a href="#" class="inline-flex items-center text-primary font-bold text-sm hover:underline">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        <a href="#" class="inline-flex items-center text-primary font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
+                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Case Card 2 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-green-200/60 hover:border-green-500/50 transition-all duration-300 relative">
                     <div class="relative h-48 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Net Zero" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-green-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">淨零轉型</span>
@@ -303,14 +352,14 @@
                         <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Jul. 08, 2023</div>
                         <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">開發儲能系統獲台電採用</h3>
                         <p class="text-gray-500 text-sm line-clamp-2 mb-4">結合物聯網與區塊鏈，新創 B 公司開發之儲能系統有效調節尖峰用電，降低成本。</p>
-                        <a href="#" class="inline-flex items-center text-green-600 font-bold text-sm hover:underline">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        <a href="#" class="inline-flex items-center text-green-600 font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
+                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Case Card 3 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-purple-200/60 hover:border-purple-500/50 transition-all duration-300 relative">
                     <div class="relative h-48 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Curation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-purple-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">數位策展</span>
@@ -319,8 +368,8 @@
                         <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Oct. 28, 2023</div>
                         <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">故宮博物院攜手新創打造 AR 導覽</h3>
                         <p class="text-gray-500 text-sm line-clamp-2 mb-4">C 公司打造沉浸式 AR 國寶導覽體驗，讓文物活起來，吸引年輕族群入館。</p>
-                        <a href="#" class="inline-flex items-center text-purple-600 font-bold text-sm hover:underline">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        <a href="#" class="inline-flex items-center text-purple-600 font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
+                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>

@@ -14,16 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const logoBgClasses = initialTheme === 'dark' ? "bg-white text-primary" : "bg-primary text-white";
     const brandTextClasses = initialTheme === 'dark' ? "text-white" : "text-primary";
 
-    // Button colors (Member Login)
+    // Button colors (Contact Us - using same style as primary button)
     const btnClasses = initialTheme === 'dark' 
         ? "bg-white text-primary hover:bg-gray-100" 
         : "bg-primary text-white hover:bg-blue-800";
-
-    // Proposal Button colors (Submit Proposal)
-    // Using arbitrary values to ensure transparency works with CDN
-    const proposalBtnClasses = initialTheme === 'dark'
-        ? "bg-white/20 text-white border border-white/30 hover:bg-white hover:text-[#005a87]"
-        : "bg-[rgba(0,90,135,0.2)] text-[#005a87] border-transparent hover:bg-[#005a87] hover:text-white";
 
     // Nav Link Helper to generate initial classes
     const getLinkClass = (page) => {
@@ -68,16 +62,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     <a href="index.html" class="${getLinkClass('index.html')}">首頁</a>
                     <a href="challenges.html" class="${getLinkClass('challenges.html')}">尋找挑戰</a>
                     <a href="calendar.html" class="${getLinkClass('calendar.html')}">計畫時程</a>
+                    <a href="#" class="${getLinkClass('#')}">成功案例</a>
                     <a href="#" class="${getLinkClass('about.html')}">關於我們</a>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="#" id="nav-proposal-btn" class="px-5 py-2.5 rounded-full ${proposalBtnClasses} font-medium transition-all duration-300 flex items-center gap-2">
-                        <i class="fa-regular fa-paper-plane"></i> 提交提案
-                    </a>
-                    <a href="#" id="nav-login-btn" class="px-5 py-2.5 rounded-full ${btnClasses} font-medium transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
-                        <i class="fa-solid fa-user"></i> 會員登入
+                    <a href="#" id="nav-contact-btn" class="px-5 py-2.5 rounded-full ${btnClasses} font-medium transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> 聯絡我們
                     </a>
                 </div>
                 
@@ -98,8 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const nav = document.getElementById('main-nav');
     const navLogoBg = document.getElementById('nav-logo-bg');
     const navBrandText = document.getElementById('nav-brand-text');
-    const navLoginBtn = document.getElementById('nav-login-btn');
-    const navProposalBtn = document.getElementById('nav-proposal-btn');
+    const navContactBtn = document.getElementById('nav-contact-btn');
     const navLinks = nav.querySelectorAll('.hidden.md\\:flex a');
 
     function updateNavOnScroll() {
@@ -111,12 +102,10 @@ document.addEventListener("DOMContentLoaded", function() {
             navLogoBg.className = "w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
             navBrandText.className = "font-bold text-xl tracking-wide text-primary transition-colors duration-300";
 
-            // Login Button -> Primary Style
-            navLoginBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-
-            // Proposal Button -> Light Primary Capsule Style
-            // Using rgba(0,90,135,0.2) for 20% opacity primary blue
-            navProposalBtn.className = "px-5 py-2.5 rounded-full bg-[rgba(0,90,135,0.2)] text-[#005a87] font-medium hover:bg-[#005a87] hover:text-white transition-all duration-300 flex items-center gap-2";
+            // Contact Button -> Primary Style
+            if (navContactBtn) {
+                navContactBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
+            }
 
             // Links -> Dark Text style
             navLinks.forEach(link => {
@@ -140,8 +129,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Dark Theme (White text, White Logo)
                 navLogoBg.className = "w-10 h-10 bg-white text-primary rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
                 navBrandText.className = "font-bold text-xl tracking-wide text-white transition-colors duration-300";
-                navLoginBtn.className = "px-5 py-2.5 rounded-full bg-white text-primary font-medium hover:bg-gray-100 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-                navProposalBtn.className = "px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/30 font-medium hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2";
+                
+                if (navContactBtn) {
+                    navContactBtn.className = "px-5 py-2.5 rounded-full bg-white text-primary font-medium hover:bg-gray-100 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
+                }
                 
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href');
@@ -160,10 +151,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Light Theme (Dark text, Primary Logo)
                 navLogoBg.className = "w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
                 navBrandText.className = "font-bold text-xl tracking-wide text-primary transition-colors duration-300";
-                navLoginBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
                 
-                // Proposal Button: Initial Light Theme State
-                navProposalBtn.className = "px-5 py-2.5 rounded-full bg-[rgba(0,90,135,0.2)] text-[#005a87] font-medium hover:bg-[#005a87] hover:text-white transition-all duration-300 flex items-center gap-2";
+                if (navContactBtn) {
+                    navContactBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
+                }
 
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href');
@@ -185,4 +176,3 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initial check (in case page is refreshed while scrolled)
     updateNavOnScroll();
 });
-

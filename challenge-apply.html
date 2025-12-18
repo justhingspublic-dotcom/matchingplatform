@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提案申請 - 實證媒合平台</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS (via CDN for static page) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005a87',     /* Law SME dark blue */
+                        secondary: '#4facfe',   /* Lighter blue */
+                        accent: '#00f2fe',      /* Cyan accent */
+                        'primary-dark': '#004a70',
+                        'bg-light': '#f8f9fa',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blob-shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.6;
+        }
+
+        /* File Upload Drop Zone Styles */
+        .file-drop-zone {
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        
+        .file-drop-zone:hover,
+        .file-drop-zone.drag-over {
+            border-color: #005a87;
+            background-color: #f0f9ff;
+        }
+
+        .file-drop-zone input[type="file"] {
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Custom checkbox */
+        input[type="checkbox"]:checked {
+            background-color: #005a87;
+            border-color: #005a87;
+        }
+
+        /* Form label required asterisk */
+        .required::after {
+            content: " *";
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
+
+    <!-- Reusable Header Placeholder -->
+    <div id="navbar-placeholder" data-theme="light"></div>
+
+    <!-- Header / Breadcrumb Section -->
+    <div class="relative pt-32 pb-12 bg-blue-50/50">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+             <div class="blob-shape bg-blue-100 w-[400px] h-[400px] rounded-full top-0 right-0 mix-blend-multiply"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Breadcrumb -->
+            <nav class="flex mb-6" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-primary">
+                            <i class="fa-solid fa-house mr-2"></i>首頁
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <a href="challenges.html" class="ml-1 text-sm font-medium text-gray-500 hover:text-primary md:ml-2">尋找挑戰</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <a href="challenge-detail.html" class="ml-1 text-sm font-medium text-gray-500 hover:text-primary md:ml-2">遠距醫療健康照護方案</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <span class="ml-1 text-sm font-medium text-primary md:ml-2">提案申請</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">提案申請</h1>
+            <p class="text-lg text-gray-600 mt-4">挑戰主題：遠距醫療健康照護方案</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <form id="proposal-form" class="space-y-12">
+            
+            <!-- Section 1: 申請單位資訊 -->
+            <section class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center gap-3 mb-8 pb-4 border-b-2 border-primary/20">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                        <i class="fa-solid fa-building text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">申請單位資訊</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- 公司/團隊名稱 -->
+                    <div>
+                        <label for="company-name" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                            公司／團隊名稱
+                        </label>
+                        <input 
+                            type="text" 
+                            id="company-name" 
+                            name="company-name"
+                            required
+                            placeholder="請輸入完整的公司或團隊名稱"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                        >
+                    </div>
+
+                    <!-- 主要聯絡人 -->
+                    <div>
+                        <label for="contact-name" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                            主要聯絡人
+                        </label>
+                        <input 
+                            type="text" 
+                            id="contact-name" 
+                            name="contact-name"
+                            required
+                            placeholder="請輸入聯絡人姓名"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                        >
+                    </div>
+
+                    <!-- Grid for Email and Phone -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- 聯絡 Email -->
+                        <div>
+                            <label for="contact-email" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                                聯絡 Email
+                            </label>
+                            <input 
+                                type="email" 
+                                id="contact-email" 
+                                name="contact-email"
+                                required
+                                placeholder="example@company.com"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            >
+                        </div>
+
+                        <!-- 聯絡電話 -->
+                        <div>
+                            <label for="contact-phone" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                                聯絡電話
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="contact-phone" 
+                                name="contact-phone"
+                                required
+                                placeholder="0912-345-678"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: 提案內容 -->
+            <section class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center gap-3 mb-8 pb-4 border-b-2 border-secondary/20">
+                    <div class="w-10 h-10 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary">
+                        <i class="fa-solid fa-lightbulb text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">提案內容</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- 提案標題 -->
+                    <div>
+                        <label for="proposal-title" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                            提案標題
+                        </label>
+                        <input 
+                            type="text" 
+                            id="proposal-title" 
+                            name="proposal-title"
+                            required
+                            placeholder="請為您的提案取一個精準的標題"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                        >
+                    </div>
+
+                    <!-- 提案摘要 -->
+                    <div>
+                        <label for="proposal-summary" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                            提案摘要
+                        </label>
+                        <textarea 
+                            id="proposal-summary" 
+                            name="proposal-summary"
+                            required
+                            rows="5"
+                            placeholder="請簡要說明您的解決方案核心概念與預期成效（建議 200-500 字）"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none"
+                        ></textarea>
+                        <p class="text-xs text-gray-400 mt-2">建議字數：200-500 字</p>
+                    </div>
+
+                    <!-- 團隊介紹 -->
+                    <div>
+                        <label for="team-intro" class="block text-sm font-semibold text-gray-700 mb-2 required">
+                            團隊介紹
+                        </label>
+                        <textarea 
+                            id="team-intro" 
+                            name="team-intro"
+                            required
+                            rows="5"
+                            placeholder="請介紹您的團隊成員背景、專長與過往相關經驗"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none"
+                        ></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: 上傳附件 -->
+            <section class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center gap-3 mb-8 pb-4 border-b-2 border-green-500/20">
+                    <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center text-green-600">
+                        <i class="fa-solid fa-file-arrow-up text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">上傳附件</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-3 required">
+                        詳細計畫書
+                    </label>
+                    
+                    <!-- File Drop Zone -->
+                    <div class="file-drop-zone relative bg-gray-50 rounded-xl p-12 text-center cursor-pointer hover:bg-blue-50/50 transition-colors">
+                        <input 
+                            type="file" 
+                            id="proposal-file" 
+                            name="proposal-file"
+                            accept=".pdf,.doc,.docx"
+                            class="hidden"
+                        >
+                        <label for="proposal-file" class="cursor-pointer block">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-primary"></i>
+                                </div>
+                                <p class="text-gray-700 font-medium mb-2">點擊此處或拖曳檔案至此上傳</p>
+                                <p class="text-sm text-gray-500">
+                                    （限 PDF、DOC、DOCX 格式，檔案大小不超過 10MB）
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- File Name Display (Hidden Initially) -->
+                    <div id="file-info" class="hidden mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-red-500 text-2xl"></i>
+                                <div>
+                                    <p id="file-name" class="font-medium text-gray-800"></p>
+                                    <p id="file-size" class="text-xs text-gray-500"></p>
+                                </div>
+                            </div>
+                            <button type="button" id="remove-file" class="text-red-500 hover:text-red-700 transition-colors">
+                                <i class="fa-solid fa-xmark text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: 服務條款同意 -->
+            <section class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-start gap-4">
+                    <input 
+                        type="checkbox" 
+                        id="terms-agreement" 
+                        name="terms-agreement"
+                        required
+                        class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                    >
+                    <label for="terms-agreement" class="text-sm text-gray-600 leading-relaxed cursor-pointer">
+                        我已閱讀並同意本平台的
+                        <a href="#" class="text-primary font-medium hover:underline">服務條款</a>
+                        與
+                        <a href="#" class="text-primary font-medium hover:underline">隱私權政策</a>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center pt-4">
+                <button 
+                    type="submit"
+                    class="group px-12 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-3"
+                >
+                    <i class="fa-regular fa-paper-plane"></i>
+                    確認送出提案
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+            <!-- Help Text -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-gray-800 mb-2">提案注意事項</h3>
+                        <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                            <li>提案送出後將進入審查程序，預計於 2 週內回覆審查結果</li>
+                            <li>請確認所填資訊正確無誤，送出後將無法修改</li>
+                            <li>如有疑問，請洽詢專線：02-2366-0812</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-lightbulb text-2xl"></i>
+                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        政府出題，新創解題。<br>
+                        一站式場域實證與商機媒合中心。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">資源中心</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>02-2366-0812</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>service@spp.org.tw</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>台北市大安區羅斯福路二段95號</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">隱私權政策</a>
+                    <a href="#" class="hover:text-white">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Header Script -->
+    <script src="js/header.js?v=2"></script>
+
+    <!-- Form Interaction Script -->
+    <script>
+        // File Upload Handling
+        const fileInput = document.getElementById('proposal-file');
+        const fileInfo = document.getElementById('file-info');
+        const fileName = document.getElementById('file-name');
+        const fileSize = document.getElementById('file-size');
+        const removeFileBtn = document.getElementById('remove-file');
+        const dropZone = document.querySelector('.file-drop-zone');
+
+        fileInput.addEventListener('change', handleFileSelect);
+        removeFileBtn.addEventListener('click', clearFile);
+
+        // Drag and Drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileSelect();
+            }
+        });
+
+        function handleFileSelect() {
+            const file = fileInput.files[0];
+            if (file) {
+                // Validate file type
+                const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                if (!validTypes.includes(file.type)) {
+                    alert('請上傳 PDF、DOC 或 DOCX 格式的檔案');
+                    clearFile();
+                    return;
+                }
+
+                // Validate file size (10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('檔案大小不能超過 10MB');
+                    clearFile();
+                    return;
+                }
+
+                // Display file info
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileInfo.classList.remove('hidden');
+            }
+        }
+
+        function clearFile() {
+            fileInput.value = '';
+            fileInfo.classList.add('hidden');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Form Submission
+        document.getElementById('proposal-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validate all required fields
+            const form = e.target;
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Check if file is uploaded
+            if (!fileInput.files.length) {
+                alert('請上傳詳細計畫書');
+                return;
+            }
+
+            // Check terms agreement
+            if (!document.getElementById('terms-agreement').checked) {
+                alert('請閱讀並同意服務條款與隱私權政策');
+                return;
+            }
+
+            // Show success message (in real implementation, this would send data to server)
+            alert('✅ 提案已成功送出！\n\n我們將於 2 週內審查您的提案並回覆結果。\n感謝您的參與！');
+            
+            // Optionally redirect to a success page
+            // window.location.href = 'proposal-success.html';
+        });
+
+        // Smooth scroll on page load
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    </script>
+
+</body>
+</html>
+

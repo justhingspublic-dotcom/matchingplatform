@@ -36,13 +36,42 @@
         /* Sticky Navigation */
         .sticky-nav {
             position: sticky;
-            top: 100px;
+            top: 120px;
+        }
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #005a87;
+            background-color: #f8fafc;
+            border-left-color: #cbd5e1;
         }
         .nav-link.active {
             color: #005a87;
             font-weight: 700;
-            border-left: 3px solid #005a87;
-            background-color: #f0f9ff;
+            border-left: 4px solid #005a87;
+            background: linear-gradient(to right, rgba(0, 90, 135, 0.05), transparent);
+        }
+        /* Add a small circle indicator for active state */
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: -5px; /* Half of width (8px) + half of border (4px) = roughly centered on line? No, just overlap */
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border: 2px solid #005a87;
+            border-radius: 50%;
+            z-index: 10;
         }
     </style>
 </head>
@@ -314,12 +343,12 @@
             
             <!-- Sticky Sidebar Navigation -->
             <div class="hidden lg:block lg:col-span-1">
-                <nav class="sticky-nav space-y-1">
-                    <a href="#phase1" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all active">階段一：申請與提案</a>
-                    <a href="#phase2" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段二：審查會議</a>
-                    <a href="#phase3" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段三：簽約與請款</a>
-                    <a href="#phase4" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段四：執行與管考</a>
-                    <a href="#phase5" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段五：結案與驗收</a>
+                <nav class="sticky-nav space-y-0">
+                    <a href="#phase1" class="nav-link text-sm">階段一：申請與提案</a>
+                    <a href="#phase2" class="nav-link text-sm">階段二：審查會議</a>
+                    <a href="#phase3" class="nav-link text-sm">階段三：簽約與請款</a>
+                    <a href="#phase4" class="nav-link text-sm">階段四：執行與管考</a>
+                    <a href="#phase5" class="nav-link text-sm">階段五：結案與驗收</a>
                 </nav>
             </div>
 

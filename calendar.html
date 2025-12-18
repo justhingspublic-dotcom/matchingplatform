@@ -33,6 +33,17 @@
             filter: blur(80px);
             opacity: 0.5;
         }
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 100px;
+        }
+        .nav-link.active {
+            color: #005a87;
+            font-weight: 700;
+            border-left: 3px solid #005a87;
+            background-color: #f0f9ff;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-700 bg-gray-50 antialiased overflow-x-hidden">
@@ -61,8 +72,6 @@
         
         <!-- Phase 1: May (Main Calendar Card) -->
         <div class="bg-white rounded-xl shadow-xl p-8 mb-12 border border-gray-100 relative overflow-hidden">
-            <!-- Decorative accent -->
-            
             <div class="flex items-center gap-6 mb-8 border-b border-gray-100 pb-6">
                 <div class="w-20 h-20 rounded-xl bg-blue-50 text-primary flex flex-col items-center justify-center shadow-inner">
                     <span class="text-xs font-bold uppercase tracking-wider opacity-70">Month</span>
@@ -146,7 +155,7 @@
                 </div>
 
                 <!-- Key Date: 15 -->
-                <div class="aspect-square p-1 bg-gradient-to-br from-red-50 to-white border-2 border-red-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
+                <a href="#phase1" class="aspect-square p-1 bg-gradient-to-br from-red-50 to-white border-2 border-red-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
                     <div class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                     <div class="h-full flex flex-col items-center justify-center">
                         <span class="text-2xl font-bold text-red-600">15</span>
@@ -158,7 +167,7 @@
                         <p class="leading-relaxed opacity-90">請務必於今日 17:00 前備妥計畫書與相關文件，完成線上提交。</p>
                         <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
                     </div>
-                </div>
+                </a>
 
                 <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
                     <span class="text-sm font-medium text-gray-700 group-hover:text-primary">16</span>
@@ -198,7 +207,7 @@
                 </div>
 
                 <!-- Key Date: 28 -->
-                <div class="aspect-square p-1 bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
+                <a href="#phase2" class="aspect-square p-1 bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl relative group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all">
                     <div class="h-full flex flex-col items-center justify-center">
                         <span class="text-2xl font-bold text-blue-600">28</span>
                         <div class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-[10px] font-bold mt-1">簡報繳交</div>
@@ -209,7 +218,7 @@
                         請上傳 PDF 格式之簡報檔。
                         <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
                     </div>
-                </div>
+                </a>
 
                 <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group">
                     <span class="text-sm font-medium text-gray-700 group-hover:text-primary">29</span>
@@ -225,99 +234,411 @@
 
         <!-- Upcoming Phases Summary (Improved Cards) -->
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <a href="#phase2" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl bg-green-50 text-green-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-green-500 group-hover:text-white transition-colors">
                         <i class="fa-solid fa-signature"></i>
                     </div>
                     <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 2</div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 2-3</div>
                         <h3 class="font-bold text-lg text-gray-800">簽約與啟動</h3>
                     </div>
                 </div>
                 <ul class="space-y-4 text-sm text-gray-600">
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">6/10</div>
+                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">6/10</div>
                         <span>審查會議</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">6/25</div>
+                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">6/25</div>
                         <span>公告審查結果</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">7/10</div>
+                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">7/10</div>
                         <span>簽約文件截止</span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">7/30</div>
-                        <span>撥付第一期款</span>
-                    </li>
                 </ul>
-            </div>
+            </a>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <a href="#phase4" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-yellow-500 group-hover:text-white transition-colors">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 3</div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 4</div>
                         <h3 class="font-bold text-lg text-gray-800">執行與管考</h3>
                     </div>
                 </div>
                 <ul class="space-y-4 text-sm text-gray-600">
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5"><i class="fa-solid fa-repeat text-[10px]"></i></div>
+                        <div class="w-10 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold"><i class="fa-solid fa-repeat text-[10px]"></i></div>
                         <span>每月10號 繳交工作紀錄</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">9/15</div>
+                        <div class="w-10 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">9/15</div>
                         <span>期中審查會議</span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/10</div>
-                        <span>期末報告初稿</span>
-                    </li>
                 </ul>
-            </div>
+            </a>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <a href="#phase5" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-500 flex items-center justify-center text-xl shadow-sm group-hover:bg-purple-500 group-hover:text-white transition-colors">
                         <i class="fa-solid fa-flag-checkered"></i>
                     </div>
                     <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 4</div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 5</div>
                         <h3 class="font-bold text-lg text-gray-800">結案與驗收</h3>
                     </div>
                 </div>
                 <ul class="space-y-4 text-sm text-gray-600">
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/20</div>
+                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">11/20</div>
                         <span>期末審查(驗收)</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">11/30</div>
+                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">11/30</div>
                         <span>結案文件截止</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">12/20</div>
+                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">12/20</div>
                         <span>撥付第二期款</span>
                     </li>
                 </ul>
+            </a>
+        </div>
+
+        <!-- Detailed Guide Section -->
+        <div class="mt-24 grid lg:grid-cols-4 gap-12">
+            
+            <!-- Sticky Sidebar Navigation -->
+            <div class="hidden lg:block lg:col-span-1">
+                <nav class="sticky-nav space-y-1">
+                    <a href="#phase1" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all active">階段一：申請與提案</a>
+                    <a href="#phase2" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段二：審查會議</a>
+                    <a href="#phase3" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段三：簽約與請款</a>
+                    <a href="#phase4" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段四：執行與管考</a>
+                    <a href="#phase5" class="nav-link block px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all">階段五：結案與驗收</a>
+                </nav>
+            </div>
+
+            <!-- Content Area -->
+            <div class="lg:col-span-3 space-y-20">
+                
+                <!-- Phase 1 Content -->
+                <section id="phase1" class="scroll-mt-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold text-gray-200">01</div>
+                        <h2 class="text-2xl font-bold text-primary">階段一：申請與提案</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-gray-800">
+                            <i class="fa-regular fa-clock text-red-500"></i> 關鍵時程：申請文件繳交
+                        </h3>
+                        <p class="text-gray-600 mb-6 bg-red-50 border-l-4 border-red-400 p-4 rounded-r">
+                            請於 <span class="font-bold text-red-600">114年5月15日</span> 前，備妥所有文件並完成寄送。
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">我是否符合申請資格？</h4>
+                                <ul class="list-disc list-outside ml-5 text-sm text-gray-600 space-y-2">
+                                    <li>依我國法規設立之公司或機構。</li>
+                                    <li>成立8年內（以申請日為準）。</li>
+                                    <li>非屬銀行拒絕往來戶。</li>
+                                    <li>(如適用) 老人福利機構、長照機構需附設立許可書影本及評鑑甲等證明。</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">申請應備文件清單</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
+                                        <span><i class="fa-solid fa-file-lines text-gray-400 mr-2"></i> 基本資料申請表 (附件一)</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
+                                    </li>
+                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
+                                        <span><i class="fa-solid fa-file-contract text-gray-400 mr-2"></i> 登記或設立證明影本</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
+                                    </li>
+                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
+                                        <span><i class="fa-solid fa-file-invoice-dollar text-gray-400 mr-2"></i> 納稅證明影本</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
+                                    </li>
+                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
+                                        <span><i class="fa-solid fa-book text-gray-400 mr-2"></i> 計畫書 (附件二)</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">10份</span>
+                                    </li>
+                                </ul>
+                                <button class="mt-4 w-full py-2 bg-primary/10 text-primary rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-colors">
+                                    <i class="fa-solid fa-download mr-2"></i> 下載計畫書範本
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 2 Content -->
+                <section id="phase2" class="scroll-mt-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold text-gray-200">02</div>
+                        <h2 class="text-2xl font-bold text-primary">階段二：審查會議</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">關鍵時程</h3>
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">5月28日 (三)</div>
+                                <div class="flex-1 text-sm text-gray-700">17:00 前繳交審查簡報電子檔。</div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">6月10日 (暫定)</div>
+                                <div class="flex-1 text-sm text-gray-700">補助申請審查會議。</div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">6月25日 (暫定)</div>
+                                <div class="flex-1 text-sm text-gray-700">公告審查結果。</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                            <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-chalkboard-user mr-2 text-primary"></i>簡報架構說明 (10分鐘，約10頁)</h4>
+                            <div class="grid md:grid-cols-3 gap-4 text-sm">
+                                <div>
+                                    <strong class="block text-primary mb-1">1. 議題前瞻性</strong>
+                                    <p class="text-gray-500">開創性、可用性、潛力與影響力。</p>
+                                </div>
+                                <div>
+                                    <strong class="block text-primary mb-1">2. 構想可行性</strong>
+                                    <p class="text-gray-500">解題構想、技術/法規可行性、期程規劃。</p>
+                                </div>
+                                <div>
+                                    <strong class="block text-primary mb-1">3. 場域與協處</strong>
+                                    <p class="text-gray-500">確保場域可實施、人力與數據協助完善度。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 3 Content -->
+                <section id="phase3" class="scroll-mt-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold text-gray-200">03</div>
+                        <h2 class="text-2xl font-bold text-primary">階段三：簽約與請款</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <div class="mb-6">
+                            <p class="text-gray-600">
+                                請於 <span class="font-bold text-primary">7月10日前</span> 將所有「契約書」及「第一期款請款文件」一併備妥寄出。
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                                <h4 class="font-bold text-green-800 mb-3">契約書製作要點</h4>
+                                <ul class="list-decimal list-outside ml-5 text-sm text-green-700 space-y-2">
+                                    <li>需準備 <strong>膠裝契約書正本 2 份</strong>。</li>
+                                    <li><strong>契約本文：</strong>填入公司名、計畫名、經費、專戶資料。</li>
+                                    <li><strong>MOU：</strong>與出題機關簽訂後，置入影本。</li>
+                                    <li><strong>修正計畫書：</strong>含審查意見回覆對照表。</li>
+                                    <li><strong>騎縫章：</strong>每頁均需蓋公司大小章及負責人小章。</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">文件清單</h4>
+                                <ul class="grid grid-cols-2 gap-3">
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">1. 函文 (範本)</li>
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">2. 膠裝契約書 (2本)</li>
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">3. 請款申請書</li>
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">4. 第一期款收據 (30%)</li>
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">5. 專戶存摺影本</li>
+                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">6. 單獨契約影本</li>
+                                </ul>
+                                <button class="mt-4 w-full py-2 bg-green-600 text-white rounded-lg text-sm font-bold hover:bg-green-700 transition-colors shadow-md shadow-green-100">
+                                    <i class="fa-solid fa-download mr-2"></i> 下載簽約文件包
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 4 Content -->
+                <section id="phase4" class="scroll-mt-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold text-gray-200">04</div>
+                        <h2 class="text-2xl font-bold text-primary">階段四：執行與管考</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="text-primary font-bold text-lg mb-1">每月 10 日前</div>
+                                <div class="text-xs text-gray-500">繳交上月工作紀錄</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="text-primary font-bold text-lg mb-1">9月15日 (暫定)</div>
+                                <div class="text-xs text-gray-500">期中審查會議</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="text-primary font-bold text-lg mb-1">會計核銷</div>
+                                <div class="text-xs text-gray-500">保留所有單據</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">契約變更指南</h4>
+                                <p class="text-sm text-gray-600 mb-2">若發生人員異動或不可抗力之規格變更，請務必提出申請。需備妥變更申請公文函、變更對照表及修訂後計畫書。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">會計經費提醒</h4>
+                                <ul class="list-disc list-outside ml-5 text-sm text-gray-600 space-y-1">
+                                    <li><strong>可編列科目：</strong>人事費、差旅費、消耗性器材費、設備使用及維護費等。</li>
+                                    <li><strong>工時紀錄：</strong>請假時數不得列入；加班需有簽核紀錄。</li>
+                                    <li><strong>會計師查核：</strong>期末需繳交會計師查核報告，請預先尋找合格會計師。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 5 Content -->
+                <section id="phase5" class="scroll-mt-32">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold text-gray-200">05</div>
+                        <h2 class="text-2xl font-bold text-primary">階段五：結案與驗收</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-4 text-gray-800">最後一哩路</h3>
+                                <ul class="space-y-4 relative border-l-2 border-gray-100 pl-6 ml-2">
+                                    <li class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
+                                        <div class="text-sm font-bold text-purple-600">11月10日前</div>
+                                        <div class="text-sm text-gray-600">繳交期末報告初稿、經費動支報告。</div>
+                                    </li>
+                                    <li class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
+                                        <div class="text-sm font-bold text-purple-600">11月20日 (暫定)</div>
+                                        <div class="text-sm text-gray-600">期末審查會議 (結案驗收)。</div>
+                                    </li>
+                                    <li class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
+                                        <div class="text-sm font-bold text-purple-600">11月30日前</div>
+                                        <div class="text-sm text-gray-600">繳交所有第二期款請款資料，完成結案。</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="w-full md:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">第二期款請款文件總清單</h4>
+                                <div class="grid grid-cols-1 gap-2 text-sm text-gray-600">
+                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 最終版結案報告</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 會計師查核報告</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 會計核銷表格 & 支出證明</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 成果影片</label>
+                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 第二期款收據 & 申請書</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-10">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2025 Innovation Matchmaking Platform.</p>
+    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-lightbulb text-2xl"></i>
+                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        政府出題，新創解題。<br>
+                        一站式場域實證與商機媒合中心。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">資源中心</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>02-2366-0812</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>service@spp.org.tw</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>台北市大安區羅斯福路二段95號</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">隱私權政策</a>
+                    <a href="#" class="hover:text-white">使用條款</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
+    <script>
+        // Simple scrollspy for sticky nav
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id^="phase"]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新創 A 公司以 AI 改善停車場管理效率 - 成功案例</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS (via CDN for static page) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005a87',     /* Law SME dark blue */
+                        secondary: '#4facfe',   /* Lighter blue */
+                        accent: '#00f2fe',      /* Cyan accent */
+                        'primary-dark': '#004a70',
+                        'bg-light': '#f8f9fa',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blob-shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
+
+    <!-- Reusable Header Placeholder -->
+    <div id="navbar-placeholder" data-theme="light"></div>
+
+    <!-- Header / Breadcrumb Section -->
+    <div class="relative pt-32 pb-12 bg-gray-50">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+             <div class="blob-shape bg-blue-100 w-[400px] h-[400px] rounded-full top-0 right-0 mix-blend-multiply"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Breadcrumb -->
+            <nav class="flex mb-6" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-primary">
+                            <i class="fa-solid fa-house mr-2"></i>首頁
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <a href="index.html#cases" class="ml-1 text-sm font-medium text-gray-500 hover:text-primary md:ml-2">成功案例</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <span class="ml-1 text-sm font-medium text-primary md:ml-2">智慧城市停車管理</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
+            <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4 border border-primary/20">智慧城市</span>
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">新創 A 公司以 AI 改善停車場管理效率</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid lg:grid-cols-3 gap-12">
+            
+            <!-- Left Column: Main Content -->
+            <div class="lg:col-span-2 space-y-12">
+                
+                <!-- Main Image -->
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Smart City Parking" class="w-full h-auto object-cover">
+                </div>
+
+                <!-- Challenge Summary -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-primary pl-4">挑戰摘要</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        市府行政大樓附屬停車場長期面臨尖峰時段一位難求、離峰時段空位過多的問題。傳統的人力管理與感應線圈系統無法提供即時的車位資訊，導致洽公民眾耗費大量時間尋找車位，不僅降低了服務滿意度，也造成周邊交通的額外負擔。
+                    </p>
+                </section>
+
+                <!-- Solution -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-primary pl-4">解決方案</h2>
+                    <p class="text-gray-600 leading-relaxed mb-6">透過本平台的媒合，新創 A 公司為市府大樓停車場導入了其創新的 AI 影像辨識解決方案。該方案包含以下核心技術：</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">高解析度攝影機</h3>
+                            <p class="text-sm text-gray-600">在停車場出入口及各車道安裝攝影機，取代傳統感應器。</p>
+                        </div>
+                        <div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">AI 車位辨識模型</h3>
+                            <p class="text-sm text-gray-600">透過深度學習模型，系統能 24 小時即時辨識每個車位的佔用狀態，準確率高達 99%。</p>
+                        </div>
+                        <div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">數據可視化儀表板</h3>
+                            <p class="text-sm text-gray-600">提供管理者一個即時儀表板，顯示車位使用率、周轉率、尖離峰時段分析等數據。</p>
+                        </div>
+                        <div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800 mb-2">市民引導 App</h3>
+                            <p class="text-sm text-gray-600">結合停車場數據，提供市民一個手機 App，能即時查詢剩餘車位，並導航至空位最多的區域。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-primary pl-4">實證成果</h2>
+                    <p class="text-gray-600 leading-relaxed mb-8">經過為期半年的場域實證，此解決方案取得了顯著的成效，成功驗證了其商業價值與社會效益。</p>
+                    
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <div class="text-3xl font-bold text-primary mb-2">-30%</div>
+                            <div class="text-sm text-gray-500 font-medium">平均尋找車位時間</div>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <div class="text-3xl font-bold text-green-500 mb-2">+15%</div>
+                            <div class="text-sm text-gray-500 font-medium">停車場使用率</div>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <div class="text-3xl font-bold text-purple-500 mb-2">+25%</div>
+                            <div class="text-sm text-gray-500 font-medium">車位周轉率</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-primary pl-4">合作夥伴感言</h2>
+                    <div class="grid gap-6">
+                        <div class="bg-gray-50 p-8 rounded-2xl relative">
+                            <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-4 left-4"></i>
+                            <p class="text-gray-700 italic relative z-10 mb-6 pl-2">「透過與新創 A 公司的合作，我們不僅解決了長久以來的停車管理問題，更看到了數據驅動決策的巨大潛力。這個平台是連結公部門需求與新創技術的最佳橋樑。」</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-lg">張</div>
+                                <div>
+                                    <div class="font-bold text-gray-800">張先生</div>
+                                    <div class="text-sm text-gray-500">市府秘書處 處長</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-8 rounded-2xl relative">
+                            <i class="fa-solid fa-quote-left text-4xl text-blue-100 absolute top-4 left-4"></i>
+                            <p class="text-gray-700 italic relative z-10 mb-6 pl-2">「政府提供的真實場域，是我們產品驗證和優化的關鍵。這次合作讓我們獲得了寶貴的數據和使用者回饋，加速了我們的商業化進程。」</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center text-primary font-bold text-lg">林</div>
+                                <div>
+                                    <div class="font-bold text-gray-800">林小姐</div>
+                                    <div class="text-sm text-gray-500">新創 A 公司 創辦人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Sidebar -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Project Info Card -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
+                    <h3 class="text-lg font-bold text-gray-800 mb-6 border-b pb-4">專案總覽</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">新創團隊</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-solid fa-users-gear text-primary w-5"></i> 新創 A 公司
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">出題機關</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-solid fa-building-columns text-primary w-5"></i> 市府秘書處
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">核心技術</div>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">AI 影像辨識</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">數據分析</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">實證期間</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-regular fa-calendar text-primary w-5"></i> 2023.03 - 2023.09
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">專案狀態</div>
+                            <div class="font-bold text-green-600 flex items-center gap-2">
+                                <i class="fa-solid fa-check-circle w-5"></i> 已完成，進入商業化洽談
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                         <div class="text-center">
+                            <p class="text-sm text-gray-500 mb-3">對智慧城市主題感興趣嗎？</p>
+                            <a href="challenges.html" class="block w-full py-3 bg-primary text-white rounded-lg font-bold hover:bg-blue-800 transition-colors text-center shadow-md hover:shadow-lg">
+                                探索更多智慧城市挑戰
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-lightbulb text-2xl"></i>
+                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        政府出題，新創解題。<br>
+                        一站式場域實證與商機媒合中心。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">資源中心</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>02-2366-0812</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>service@spp.org.tw</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>台北市大安區羅斯福路二段95號</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">隱私權政策</a>
+                    <a href="#" class="hover:text-white">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Header Script -->
+    <script src="js/header.js?v=2"></script>
+
+</body>
+</html>
+

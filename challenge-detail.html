@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠距醫療健康照護方案 - 尋找挑戰</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS (via CDN for static page) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005a87',     /* Law SME dark blue */
+                        secondary: '#4facfe',   /* Lighter blue */
+                        accent: '#00f2fe',      /* Cyan accent */
+                        'primary-dark': '#004a70',
+                        'bg-light': '#f8f9fa',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blob-shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
+
+    <!-- Reusable Header Placeholder -->
+    <div id="navbar-placeholder" data-theme="light"></div>
+
+    <!-- Header / Breadcrumb Section -->
+    <div class="relative pt-32 pb-12 bg-pink-50/50">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+             <div class="blob-shape bg-pink-100 w-[400px] h-[400px] rounded-full top-0 right-0 mix-blend-multiply"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Breadcrumb -->
+            <nav class="flex mb-6" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-primary">
+                            <i class="fa-solid fa-house mr-2"></i>首頁
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <a href="challenges.html" class="ml-1 text-sm font-medium text-gray-500 hover:text-primary md:ml-2">尋找挑戰</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-chevron-right text-gray-400 mx-1"></i>
+                            <span class="ml-1 text-sm font-medium text-primary md:ml-2">遠距醫療健康照護方案</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
+            <div class="flex gap-2 mb-4 flex-wrap">
+                <span class="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-semibold border border-pink-200">醫療健康</span>
+                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-semibold border border-gray-200">IoT</span>
+                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-semibold border border-gray-200">高齡照護</span>
+                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-semibold border border-gray-200">數位轉型</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">遠距醫療健康照護方案</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid lg:grid-cols-3 gap-12">
+            
+            <!-- Left Column: Main Content -->
+            <div class="lg:col-span-2 space-y-12">
+                
+                <!-- Main Image -->
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-64 md:h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Telemedicine" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+                        <div class="p-8 text-white">
+                            <p class="text-lg font-medium opacity-90"><i class="fa-solid fa-location-dot mr-2"></i>屏東縣滿州鄉衛生所 及周邊社區</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Background -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-l-4 border-pink-500 pl-4">挑戰背景</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        隨著台灣邁入超高齡社會，偏鄉地區與行動不便長者的醫療照護需求日益迫切。傳統醫療模式受限於地理距離與交通不便，難以提供即時且持續性的健康管理。本挑戰旨在利用資通訊技術 (ICT)，開發創新的遠距醫療與健康照護解決方案，打破時空限制，提升長者健康福祉與生活品質。
+                    </p>
+                </section>
+
+                <!-- Goals -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-pink-500 pl-4">主要目標</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700">開發一套整合生理數據監測、線上視訊問診、用藥提醒及緊急通報功能的平台。</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700">設計友善易用的使用者介面(UI/UX)，讓不熟悉科技產品的長者也能輕鬆操作。</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700">建立可持續的服務模式，串連在地社區衛生所、照護機構與家屬，形成完整的照護網絡。</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700">在指定實證場域進行為期半年的驗證，收集真實數據以評估方案成效與使用者回饋。</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Technical Requirements -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-pink-500 pl-4">技術與功能需求</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-pink-300 transition-colors">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-heart-pulse text-pink-500"></i> 生理數據監測
+                            </h3>
+                            <p class="text-sm text-gray-600">需能整合市面上常見的智慧穿戴裝置或藍牙醫療設備 (如血壓計、血糖機、血氧儀)，自動上傳數據至雲端平台。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-pink-300 transition-colors">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-video text-pink-500"></i> 視訊診療功能
+                            </h3>
+                            <p class="text-sm text-gray-600">提供穩定、高畫質且符合資訊安全規範的視訊通話功能，供醫師與個案進行遠距問診。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-pink-300 transition-colors">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-user-doctor text-pink-500"></i> 個人化健康管理
+                            </h3>
+                            <p class="text-sm text-gray-600">系統能根據個案數據設定警示值，並提供個人化的健康衛教資訊。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-pink-300 transition-colors">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-comments text-pink-500"></i> 多方溝通管道
+                            </h3>
+                            <p class="text-sm text-gray-600">平台應支援個案、家屬、醫師、個管師等多方角色的溝通與資訊共享。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-pink-300 transition-colors md:col-span-2">
+                            <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-pink-500"></i> 數據分析與視覺化
+                            </h3>
+                            <p class="text-sm text-gray-600">將收集到的數據以圖表呈現，輔助醫療人員判斷個案健康趨勢。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Criteria -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-pink-500 pl-4">評選標準</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-24 text-right font-bold text-gray-500">30%</div>
+                            <div class="flex-grow bg-gray-100 rounded-full h-4 overflow-hidden">
+                                <div class="bg-pink-500 h-full rounded-full" style="width: 30%"></div>
+                            </div>
+                            <div class="w-1/3 text-sm font-medium text-gray-700">技術創新性</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-24 text-right font-bold text-gray-500">25%</div>
+                            <div class="flex-grow bg-gray-100 rounded-full h-4 overflow-hidden">
+                                <div class="bg-blue-400 h-full rounded-full" style="width: 25%"></div>
+                            </div>
+                            <div class="w-1/3 text-sm font-medium text-gray-700">使用者體驗</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-24 text-right font-bold text-gray-500">20%</div>
+                            <div class="flex-grow bg-gray-100 rounded-full h-4 overflow-hidden">
+                                <div class="bg-green-400 h-full rounded-full" style="width: 20%"></div>
+                            </div>
+                            <div class="w-1/3 text-sm font-medium text-gray-700">場域契合度</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-24 text-right font-bold text-gray-500">15%</div>
+                            <div class="flex-grow bg-gray-100 rounded-full h-4 overflow-hidden">
+                                <div class="bg-yellow-400 h-full rounded-full" style="width: 15%"></div>
+                            </div>
+                            <div class="w-1/3 text-sm font-medium text-gray-700">商業潛力</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-24 text-right font-bold text-gray-500">10%</div>
+                            <div class="flex-grow bg-gray-100 rounded-full h-4 overflow-hidden">
+                                <div class="bg-purple-400 h-full rounded-full" style="width: 10%"></div>
+                            </div>
+                            <div class="w-1/3 text-sm font-medium text-gray-700">團隊執行力</div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Sidebar -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Info Card -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 sticky top-24">
+                    <h3 class="text-lg font-bold text-gray-800 mb-6 border-b pb-4">挑戰資訊總覽</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">出題機關</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-solid fa-building-columns text-primary w-5"></i> 衛生福利部 國民健康署
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">專案獎金</div>
+                            <div class="font-bold text-primary text-xl">NT$ 80-200 萬</div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">徵件期間</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-regular fa-clock text-primary w-5"></i> 2024.09.01 - 2024.12.31
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">實證場域</div>
+                            <div class="font-medium text-gray-800 flex items-center gap-2">
+                                <i class="fa-solid fa-map-location-dot text-primary w-5"></i> 屏東縣滿州鄉衛生所
+                            </div>
+                        </div>
+
+                         <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider mb-2">提供資源</div>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> 提供去識別化使用者數據</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> 銜接現有長照 2.0 計畫</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> 在地醫療與社工人員協作</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> 專業領域業師輔導</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> 協助商業模式驗證與媒合</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <a href="#" class="block w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-blue-800 transition-colors text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mb-3">
+                            立即提案 <i class="fa-regular fa-paper-plane ml-2"></i>
+                        </a>
+                        <p class="text-xs text-center text-gray-400">截止倒數：36 天</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6 text-white">
+                        <i class="fa-solid fa-lightbulb text-2xl"></i>
+                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        政府出題，新創解題。<br>
+                        一站式場域實證與商機媒合中心。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">資源中心</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1"></i>
+                            <span>02-2366-0812</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1"></i>
+                            <span>service@spp.org.tw</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1"></i>
+                            <span>台北市大安區羅斯福路二段95號</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">隱私權政策</a>
+                    <a href="#" class="hover:text-white">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Header Script -->
+    <script src="js/header.js?v=2"></script>
+
+</body>
+</html>
+

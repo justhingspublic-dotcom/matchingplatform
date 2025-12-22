@@ -31,6 +31,26 @@
         }
     </script>
     <style>
+        .form-section-header {
+            background-color: #005a87;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 700;
+            border-radius: 4px 4px 0 0;
+        }
+        .section-label {
+            background-color: #f3f4f6; /* Gray-100 */
+            color: #374151; /* Gray-700 */
+            padding: 20px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 4px solid #005a87; /* Primary blue left border */
+        }
         .data-table th {
             background-color: #f3f4f6;
             color: #374151;
@@ -47,18 +67,6 @@
             color: #1f2937;
             line-height: 1.6;
             font-size: 14px;
-        }
-        .section-label {
-            background-color: #008c95;
-            color: white;
-            padding: 24px 20px;
-            font-weight: 700;
-            font-size: 16px;
-            text-align: center;
-            min-width: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
@@ -83,15 +91,13 @@
             <p class="text-sm text-gray-500">(此為廠商投遞之標準格式提案資料，請詳閱後進行審查)</p>
         </div>
 
-        <!-- Submission Header -->
-        <div class="bg-teal-gov text-white py-4 px-6 rounded-t-md shadow-sm mb-0">
-            <p class="text-base font-bold">
-                提案編號：114-T058-003 | 智通科技股份有限公司
-            </p>
-        </div>
+        <!-- Submission Header - Removed, will add inside card -->
 
         <!-- Data Table Card -->
-        <div class="bg-white border border-gray-200 shadow-sm overflow-hidden mb-8">
+        <div class="bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden mb-8">
+            <div class="form-section-header flex items-center gap-2">
+                <i class="fa-solid fa-file-lines"></i> 提案編號：114-T058-003 | 智通科技股份有限公司
+            </div>
             <!-- Basic Info Section -->
             <div class="flex border-b-4 border-gray-200">
                 <div class="section-label shrink-0">

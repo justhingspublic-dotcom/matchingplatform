@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>計畫時程 - 實證媒合平台</title>
+    <title>計畫時程查詢 - 實證媒合平台</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#005a87',
-                        secondary: '#4facfe',
-                        accent: '#00f2fe',
-                        'bg-light': '#f8f9fa',
+                        primary: '#005a87',     /* Law SME dark blue */
+                        secondary: '#4facfe',   /* Lighter blue */
+                        accent: '#ffb400',      /* Yellow accent */
+                        'primary-dark': '#003d5c',
+                        'bg-light': '#f3f4f6',
                     },
                     fontFamily: {
                         sans: ['Noto Sans TC', 'sans-serif'],
@@ -27,619 +31,369 @@
         }
     </script>
     <style>
-        .blob-shape {
-            position: fixed;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
+        .gov-table th {
+            background-color: #005a87;
+            color: white;
+            font-weight: 500;
+            text-align: center;
+            padding: 12px 8px;
+            font-size: 14px;
         }
-        /* Sticky Navigation */
-        .sticky-nav {
-            position: sticky;
-            top: 120px;
+        .gov-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
         }
-        .nav-link {
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            color: #64748b;
-            border-left: 2px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
+        .filter-radio input:checked + label {
             color: #005a87;
-            background-color: #f8fafc;
-            border-left-color: #cbd5e1;
+            font-weight: bold;
         }
-        .nav-link.active {
-            color: #005a87;
-            font-weight: 700;
-            border-left: 4px solid #005a87;
-            background: linear-gradient(to right, rgba(0, 90, 135, 0.05), transparent);
-        }
-        /* Add a small circle indicator for active state */
-        .nav-link.active::before {
-            content: '';
-            position: absolute;
-            left: -5px; /* Half of width (8px) + half of border (4px) = roughly centered on line? No, just overlap */
-            left: -6px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background-color: #fff;
-            border: 2px solid #005a87;
-            border-radius: 50%;
-            z-index: 10;
+        .filter-radio input:checked + label::before {
+            border-color: #005a87;
+            background-color: #005a87;
+            box-shadow: inset 0 0 0 3px white;
         }
     </style>
 </head>
-<body class="font-sans text-gray-700 bg-gray-50 antialiased overflow-x-hidden">
+<body class="font-sans text-gray-800 bg-gray-50 antialiased">
 
     <!-- Reusable Header Placeholder -->
-    <div id="navbar-placeholder" data-theme="light"></div>
+    <div id="navbar-placeholder"></div>
 
-    <!-- Header (Lighter Style) -->
-    <header class="pt-32 pb-20 relative">
-        <!-- Background Blobs -->
-        <div class="blob-shape bg-blue-100 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2" style="position: fixed; z-index: -1;"></div>
-        <div class="blob-shape bg-cyan-100 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3" style="position: fixed; z-index: -1;"></div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Breadcrumbs -->
+        <nav class="flex text-xs text-gray-400 mb-6 gap-2 items-center">
+            <a href="index.html" class="hover:text-primary">首頁</a>
+            <span>></span>
+            <a href="#" class="hover:text-primary">計畫時程</a>
+            <span>></span>
+            <span class="text-gray-600">時程查詢</span>
+        </nav>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">TIMELINE</span>
-            <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">計畫時程互動指南</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                點擊日曆上的關鍵事件，即可查看所有詳細資訊。<br>
-                掌握 2025 年新創採購補助計畫的每一個重要時刻。
-            </p>
-        </div>
-    </header>
-
-    <!-- Calendar Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-20">
-        
-        <!-- Phase 1: May (Main Calendar Card) -->
-        <div class="bg-white rounded-xl p-8 mb-12 border border-gray-100 relative overflow-hidden">
-            <div class="flex items-center gap-6 mb-8 border-b border-gray-100 pb-6">
-                <div class="w-20 h-20 rounded-xl bg-blue-50 text-primary flex flex-col items-center justify-center">
-                    <span class="text-xs font-bold uppercase tracking-wider opacity-70">Month</span>
-                    <span class="text-4xl font-bold">5</span>
-                </div>
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-1">提案與審查階段</h2>
-                    <div class="flex items-center gap-2 text-gray-500">
-                        <span class="px-2 py-0.5 bg-gray-100 rounded text-xs font-medium text-gray-600">Phase 1</span>
-                        <span>申請與書面審查</span>
-                    </div>
-                </div>
-                <div class="ml-auto hidden md:block">
-                    <button class="text-gray-400 hover:text-primary transition-colors"><i class="fa-solid fa-chevron-left text-xl"></i></button>
-                    <span class="mx-4 font-bold text-gray-700">2025 年 5 月</span>
-                    <button class="text-gray-400 hover:text-primary transition-colors"><i class="fa-solid fa-chevron-right text-xl"></i></button>
-                </div>
-            </div>
-            
-            <!-- Weekday Headers -->
-            <div class="grid grid-cols-7 gap-4 mb-4 text-center">
-                <div class="text-xs font-bold text-red-400 uppercase tracking-widest">Sun</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Mon</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Tue</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Wed</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Thu</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Fri</div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Sat</div>
-            </div>
-            
-            <!-- Calendar Grid -->
-            <div class="grid grid-cols-7 gap-4">
-                <!-- Empty/Past days -->
-                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">27</div>
-                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">28</div>
-                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">29</div>
-                <div class="aspect-square p-2 bg-gray-50/50 rounded-xl text-gray-300 flex items-start justify-end text-sm">30</div>
-                
-                <!-- Days 1-14 -->
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">1</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">2</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">3</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">4</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">5</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">6</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">7</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">8</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">9</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">10</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">11</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">12</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">13</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">14</span>
-                </div>
-
-                <!-- Key Date: 15 -->
-                <a href="#phase1" class="aspect-square p-1 bg-gradient-to-br from-red-50 to-white border-2 border-red-200 rounded-xl relative group cursor-pointer hover:-translate-y-1 transition-all">
-                    <div class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <div class="h-full flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-red-600">15</span>
-                        <div class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold mt-1">申請截止</div>
-                    </div>
-                    <!-- Tooltip -->
-                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-56 bg-gray-800 text-white text-xs rounded-xl p-4 hidden group-hover:block z-20">
-                        <div class="font-bold text-sm mb-1 text-red-300">申請文件截止</div>
-                        <p class="leading-relaxed opacity-90">請務必於今日 17:00 前備妥計畫書與相關文件，完成線上提交。</p>
-                        <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
-                    </div>
-                </a>
-
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">16</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">17</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">18</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">19</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">20</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">21</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">22</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">23</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">24</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">25</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">26</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">27</span>
-                </div>
-
-                <!-- Key Date: 28 -->
-                <a href="#phase2" class="aspect-square p-1 bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl relative group cursor-pointer hover:-translate-y-1 transition-all">
-                    <div class="h-full flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-blue-600">28</span>
-                        <div class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-[10px] font-bold mt-1">簡報繳交</div>
-                    </div>
-                    <!-- Tooltip -->
-                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-48 bg-gray-800 text-white text-xs rounded-xl p-3 hidden group-hover:block z-20 shadow-xl">
-                        <div class="font-bold mb-1 text-blue-300">繳交審查簡報</div>
-                        請上傳 PDF 格式之簡報檔。
-                        <div class="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
-                    </div>
-                </a>
-
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">29</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">30</span>
-                </div>
-                <div class="aspect-square p-3 border border-gray-100 rounded-xl hover:border-primary/30 transition-all cursor-pointer flex flex-col justify-between group">
-                    <span class="text-sm font-medium text-gray-700 group-hover:text-primary">31</span>
-                </div>
-            </div>
+        <!-- Page Title -->
+        <div class="flex items-center gap-3 mb-8">
+            <i class="fa-solid fa-calendar-days text-2xl text-gray-700"></i>
+            <h1 class="text-2xl font-bold text-gray-800">計畫時程查詢</h1>
         </div>
 
-        <!-- Upcoming Phases Summary (Improved Cards) -->
-        <div class="grid md:grid-cols-3 gap-8">
-            <a href="#phase2" class="bg-white rounded-xl border border-gray-100 p-8 transition-all duration-300 hover:-translate-y-1 group">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-green-50 text-green-500 flex items-center justify-center text-xl group-hover:bg-green-500 group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-signature"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 2-3</div>
-                        <h3 class="font-bold text-lg text-gray-800">簽約與啟動</h3>
+        <div class="grid lg:grid-cols-4 gap-8 items-stretch">
+            <!-- Sidebar (Filters) -->
+            <aside class="lg:col-span-1 flex flex-col">
+                <div class="flex justify-end mb-3 opacity-0">
+                    <p class="text-[10px]">&nbsp;</p> <!-- Spacer to align with right side -->
+                </div>
+                <div class="bg-white rounded-md border border-gray-200 p-6 shadow-sm relative overflow-hidden flex-grow">
+                    <h2 class="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-magnifying-glass"></i> 時程查詢條件
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Year Filter -->
+                        <div>
+                            <p class="font-bold text-sm mb-3">計畫年度：</p>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="y114" name="year" class="hidden" checked>
+                                    <label for="y114" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        114年 (2025)
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="y113" name="year" class="hidden">
+                                    <label for="y113" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        113年 (2024)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase Filter -->
+                        <div>
+                            <p class="font-bold text-sm mb-3">執行階段：</p>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="p-all" name="phase" class="hidden" checked>
+                                    <label for="p-all" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        全部
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="p1" name="phase" class="hidden">
+                                    <label for="p1" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        申請與審查
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="p2" name="phase" class="hidden">
+                                    <label for="p2" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        簽約與啟動
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="p3" name="phase" class="hidden">
+                                    <label for="p3" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        執行與管考
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-2 filter-radio">
+                                    <input type="radio" id="p4" name="phase" class="hidden">
+                                    <label for="p4" class="flex items-center gap-2 cursor-pointer text-gray-600">
+                                        <span class="w-4 h-4 rounded-full border border-gray-300 flex-shrink-0 relative"></span>
+                                        結案與驗收
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Keyword Filter -->
+                        <div>
+                            <p class="font-bold text-sm mb-3">關鍵字：</p>
+                            <input type="text" placeholder="例：說明會、繳件..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded text-sm focus:outline-none focus:border-primary">
+                        </div>
+
+                        <!-- Date Filter -->
+                        <div>
+                            <p class="font-bold text-sm mb-3">日期區間：</p>
+                            <div class="space-y-2">
+                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-primary">
+                                <p class="text-center text-xs text-gray-400">至</p>
+                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-primary">
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-primary text-white py-2.5 rounded text-sm font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+                            <i class="fa-solid fa-magnifying-glass"></i> 查詢
+                        </button>
                     </div>
                 </div>
-                <ul class="space-y-4 text-sm text-gray-600">
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">6/10</div>
-                        <span>審查會議</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">6/25</div>
-                        <span>公告審查結果</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">7/10</div>
-                        <span>簽約文件截止</span>
-                    </li>
-                </ul>
-            </a>
+            </aside>
 
-            <a href="#phase4" class="bg-white rounded-xl border border-gray-100 p-8 transition-all duration-300 hover:-translate-y-1 group">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-500 flex items-center justify-center text-xl group-hover:bg-yellow-500 group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-chart-line"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 4</div>
-                        <h3 class="font-bold text-lg text-gray-800">執行與管考</h3>
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <div class="flex justify-end mb-3">
+                    <p class="text-[10px] text-gray-400">
+                        <i class="fa-regular fa-clock"></i> 資料更新時間：每日 00:00 (Updated Time: 00:00)
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-md shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full gov-table border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="w-20">功能 <i class="fa-solid fa-sort text-[10px]"></i></th>
+                                <th class="w-32">日期 <i class="fa-solid fa-sort text-[10px]"></i></th>
+                                <th class="text-left">事項名稱 <i class="fa-solid fa-sort text-[10px]"></i></th>
+                                <th class="w-32">階段分類 <i class="fa-solid fa-sort text-[10px]"></i></th>
+                                <th class="w-24">狀態 <i class="fa-solid fa-sort text-[10px]"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/06/06</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">備妥並提交申請文件截止 (Application Deadline)</td>
+                                <td class="text-center text-gray-600">申請審查</td>
+                                <td class="text-center">
+                                    <span class="px-2 py-0.5 border border-red-500 text-red-500 rounded-full text-xs font-medium">即將截止</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/06/10</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">審查會議 (Review Meeting)</td>
+                                <td class="text-center text-gray-600">申請審查</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/06/25</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">公告審查結果與獲選名單</td>
+                                <td class="text-center text-gray-600">申請審查</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/07/10</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">簽約文件繳交截止 (MOU & Contract)</td>
+                                <td class="text-center text-gray-600">簽約啟動</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/07/30</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">第一期款撥付 (30%)</td>
+                                <td class="text-center text-gray-600">簽約啟動</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                </td>
+                                <td class="text-center text-gray-600">每月 10 號</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">例行工作紀錄繳交 (Monthly Log)</td>
+                                <td class="text-center text-gray-600">執行管考</td>
+                                <td class="text-center text-gray-600">常態性</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/09/15</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">期中審查會議 (Mid-term Review)</td>
+                                <td class="text-center text-gray-600">執行管考</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/11/10</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">期末報告初稿繳交截止</td>
+                                <td class="text-center text-gray-600">結案驗收</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
+                                <td class="text-center">
+                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                </td>
+                                <td class="text-center text-gray-600">2025/11/30</td>
+                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">結案文件與請款單據繳交截止</td>
+                                <td class="text-center text-gray-600">結案驗收</td>
+                                <td class="text-center text-gray-400">未開始</td>
+                            </tr>
+                            <tr class="bg-gray-50/50 cursor-not-allowed">
+                                <td class="text-center">
+                                    <button class="bg-gray-300 text-gray-500 px-3 py-1 rounded text-xs font-medium cursor-not-allowed">結束</button>
+                                </td>
+                                <td class="text-center text-gray-400 italic">2025/05/15</td>
+                                <td class="text-gray-400 font-medium line-through">計畫徵案說明會 (線上辦理)</td>
+                                <td class="text-center text-gray-400">申請審查</td>
+                                <td class="text-center text-gray-400">已結束</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-t border-gray-100">
+                        <p class="text-sm font-bold text-gray-700">合計 10 筆</p>
+                        
+                        <div class="flex items-center gap-1 text-sm">
+                            <button class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">最前頁</button>
+                            <button class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">上一頁</button>
+                            <div class="flex items-center gap-1 px-4">
+                                <span class="text-gray-500">第</span>
+                                <select class="bg-white border border-gray-300 rounded px-2 py-1 focus:outline-none">
+                                    <option>1</option>
+                                </select>
+                                <span class="text-gray-500">頁</span>
+                            </div>
+                            <button class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">下一頁</button>
+                            <button class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">最後頁</button>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-gray-500">顯示</span>
+                            <select class="bg-white border border-gray-300 rounded px-2 py-1 focus:outline-none">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                            <span class="text-gray-500">筆</span>
+                        </div>
                     </div>
                 </div>
-                <ul class="space-y-4 text-sm text-gray-600">
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold"><i class="fa-solid fa-repeat text-[10px]"></i></div>
-                        <span>每月10號 繳交工作紀錄</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">9/15</div>
-                        <span>期中審查會議</span>
-                    </li>
-                </ul>
-            </a>
-
-            <a href="#phase5" class="bg-white rounded-xl border border-gray-100 p-8 transition-all duration-300 hover:-translate-y-1 group">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-500 flex items-center justify-center text-xl group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-flag-checkered"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Phase 5</div>
-                        <h3 class="font-bold text-lg text-gray-800">結案與驗收</h3>
-                    </div>
-                </div>
-                <ul class="space-y-4 text-sm text-gray-600">
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">11/20</div>
-                        <span>期末審查(驗收)</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">11/30</div>
-                        <span>結案文件截止</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-10 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-bold">12/20</div>
-                        <span>撥付第二期款</span>
-                    </li>
-                </ul>
-            </a>
-        </div>
-
-        <!-- Detailed Guide Section -->
-        <div class="mt-24 grid lg:grid-cols-4 gap-12">
-            
-            <!-- Sticky Sidebar Navigation -->
-            <div class="hidden lg:block lg:col-span-1">
-                <nav class="sticky-nav space-y-0">
-                    <a href="#phase1" class="nav-link text-sm">階段一：申請與提案</a>
-                    <a href="#phase2" class="nav-link text-sm">階段二：審查會議</a>
-                    <a href="#phase3" class="nav-link text-sm">階段三：簽約與請款</a>
-                    <a href="#phase4" class="nav-link text-sm">階段四：執行與管考</a>
-                    <a href="#phase5" class="nav-link text-sm">階段五：結案與驗收</a>
-                </nav>
-            </div>
-
-            <!-- Content Area -->
-            <div class="lg:col-span-3 space-y-20">
-                
-                <!-- Phase 1 Content -->
-                <section id="phase1" class="scroll-mt-32">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-4xl font-bold text-gray-200">01</div>
-                        <h2 class="text-2xl font-bold text-primary">階段一：申請與提案</h2>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border border-gray-100">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-gray-800">
-                            <i class="fa-regular fa-clock text-red-500"></i> 關鍵時程：申請文件繳交
-                        </h3>
-                        <p class="text-gray-600 mb-6 bg-red-50 border-l-4 border-red-400 p-4 rounded-r">
-                            請於 <span class="font-bold text-red-600">114年5月15日</span> 前，備妥所有文件並完成寄送。
-                        </p>
-
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div>
-                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">我是否符合申請資格？</h4>
-                                <ul class="list-disc list-outside ml-5 text-sm text-gray-600 space-y-2">
-                                    <li>依我國法規設立之公司或機構。</li>
-                                    <li>成立8年內（以申請日為準）。</li>
-                                    <li>非屬銀行拒絕往來戶。</li>
-                                    <li>(如適用) 老人福利機構、長照機構需附設立許可書影本及評鑑甲等證明。</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">申請應備文件清單</h4>
-                                <ul class="space-y-2 text-sm text-gray-600">
-                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
-                                        <span><i class="fa-solid fa-file-lines text-gray-400 mr-2"></i> 基本資料申請表 (附件一)</span>
-                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
-                                    </li>
-                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
-                                        <span><i class="fa-solid fa-file-contract text-gray-400 mr-2"></i> 登記或設立證明影本</span>
-                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
-                                    </li>
-                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
-                                        <span><i class="fa-solid fa-file-invoice-dollar text-gray-400 mr-2"></i> 納稅證明影本</span>
-                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">1份</span>
-                                    </li>
-                                    <li class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100">
-                                        <span><i class="fa-solid fa-book text-gray-400 mr-2"></i> 計畫書 (附件二)</span>
-                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded">10份</span>
-                                    </li>
-                                </ul>
-                                <button class="mt-4 w-full py-2 bg-primary/10 text-primary rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-colors">
-                                    <i class="fa-solid fa-download mr-2"></i> 下載計畫書範本
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 2 Content -->
-                <section id="phase2" class="scroll-mt-32">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-4xl font-bold text-gray-200">02</div>
-                        <h2 class="text-2xl font-bold text-primary">階段二：審查會議</h2>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border border-gray-100">
-                        <h3 class="font-bold text-lg mb-4 text-gray-800">關鍵時程</h3>
-                        <div class="space-y-3 mb-8">
-                            <div class="flex items-start gap-4">
-                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">5月28日 (三)</div>
-                                <div class="flex-1 text-sm text-gray-700">17:00 前繳交審查簡報電子檔。</div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">6月10日 (暫定)</div>
-                                <div class="flex-1 text-sm text-gray-700">補助申請審查會議。</div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-32 font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded text-center text-sm">6月25日 (暫定)</div>
-                                <div class="flex-1 text-sm text-gray-700">公告審查結果。</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                            <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-chalkboard-user mr-2 text-primary"></i>簡報架構說明 (10分鐘，約10頁)</h4>
-                            <div class="grid md:grid-cols-3 gap-4 text-sm">
-                                <div>
-                                    <strong class="block text-primary mb-1">1. 議題前瞻性</strong>
-                                    <p class="text-gray-500">開創性、可用性、潛力與影響力。</p>
-                                </div>
-                                <div>
-                                    <strong class="block text-primary mb-1">2. 構想可行性</strong>
-                                    <p class="text-gray-500">解題構想、技術/法規可行性、期程規劃。</p>
-                                </div>
-                                <div>
-                                    <strong class="block text-primary mb-1">3. 場域與協處</strong>
-                                    <p class="text-gray-500">確保場域可實施、人力與數據協助完善度。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 3 Content -->
-                <section id="phase3" class="scroll-mt-32">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-4xl font-bold text-gray-200">03</div>
-                        <h2 class="text-2xl font-bold text-primary">階段三：簽約與請款</h2>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border border-gray-100">
-                        <div class="mb-6">
-                            <p class="text-gray-600">
-                                請於 <span class="font-bold text-primary">7月10日前</span> 將所有「契約書」及「第一期款請款文件」一併備妥寄出。
-                            </p>
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="bg-green-50 p-6 rounded-xl border border-green-100">
-                                <h4 class="font-bold text-green-800 mb-3">契約書製作要點</h4>
-                                <ul class="list-decimal list-outside ml-5 text-sm text-green-700 space-y-2">
-                                    <li>需準備 <strong>膠裝契約書正本 2 份</strong>。</li>
-                                    <li><strong>契約本文：</strong>填入公司名、計畫名、經費、專戶資料。</li>
-                                    <li><strong>MOU：</strong>與出題機關簽訂後，置入影本。</li>
-                                    <li><strong>修正計畫書：</strong>含審查意見回覆對照表。</li>
-                                    <li><strong>騎縫章：</strong>每頁均需蓋公司大小章及負責人小章。</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-700 mb-3 border-b pb-2">文件清單</h4>
-                                <ul class="grid grid-cols-2 gap-3">
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">1. 函文 (範本)</li>
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">2. 膠裝契約書 (2本)</li>
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">3. 請款申請書</li>
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">4. 第一期款收據 (30%)</li>
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">5. 專戶存摺影本</li>
-                                    <li class="text-sm bg-gray-50 p-2 rounded text-gray-600 border border-gray-100">6. 單獨契約影本</li>
-                                </ul>
-                                <button class="mt-4 w-full py-2 bg-green-600 text-white rounded-lg text-sm font-bold hover:bg-green-700 transition-colors">
-                                    <i class="fa-solid fa-download mr-2"></i> 下載簽約文件包
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 4 Content -->
-                <section id="phase4" class="scroll-mt-32">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-4xl font-bold text-gray-200">04</div>
-                        <h2 class="text-2xl font-bold text-primary">階段四：執行與管考</h2>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border border-gray-100">
-                        <div class="grid md:grid-cols-3 gap-6 mb-8">
-                            <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                <div class="text-primary font-bold text-lg mb-1">每月 10 日前</div>
-                                <div class="text-xs text-gray-500">繳交上月工作紀錄</div>
-                            </div>
-                            <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                <div class="text-primary font-bold text-lg mb-1">9月15日 (暫定)</div>
-                                <div class="text-xs text-gray-500">期中審查會議</div>
-                            </div>
-                            <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                <div class="text-primary font-bold text-lg mb-1">會計核銷</div>
-                                <div class="text-xs text-gray-500">保留所有單據</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">契約變更指南</h4>
-                                <p class="text-sm text-gray-600 mb-2">若發生人員異動或不可抗力之規格變更，請務必提出申請。需備妥變更申請公文函、變更對照表及修訂後計畫書。</p>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">會計經費提醒</h4>
-                                <ul class="list-disc list-outside ml-5 text-sm text-gray-600 space-y-1">
-                                    <li><strong>可編列科目：</strong>人事費、差旅費、消耗性器材費、設備使用及維護費等。</li>
-                                    <li><strong>工時紀錄：</strong>請假時數不得列入；加班需有簽核紀錄。</li>
-                                    <li><strong>會計師查核：</strong>期末需繳交會計師查核報告，請預先尋找合格會計師。</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Phase 5 Content -->
-                <section id="phase5" class="scroll-mt-32">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="text-4xl font-bold text-gray-200">05</div>
-                        <h2 class="text-2xl font-bold text-primary">階段五：結案與驗收</h2>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border border-gray-100">
-                        <div class="flex flex-col md:flex-row gap-8 items-start">
-                            <div class="flex-1">
-                                <h3 class="font-bold text-lg mb-4 text-gray-800">最後一哩路</h3>
-                                <ul class="space-y-4 relative border-l-2 border-gray-100 pl-6 ml-2">
-                                    <li class="relative">
-                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
-                                        <div class="text-sm font-bold text-purple-600">11月10日前</div>
-                                        <div class="text-sm text-gray-600">繳交期末報告初稿、經費動支報告。</div>
-                                    </li>
-                                    <li class="relative">
-                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
-                                        <div class="text-sm font-bold text-purple-600">11月20日 (暫定)</div>
-                                        <div class="text-sm text-gray-600">期末審查會議 (結案驗收)。</div>
-                                    </li>
-                                    <li class="relative">
-                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white"></div>
-                                        <div class="text-sm font-bold text-purple-600">11月30日前</div>
-                                        <div class="text-sm text-gray-600">繳交所有第二期款請款資料，完成結案。</div>
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div class="w-full md:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-200">
-                                <h4 class="font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">第二期款請款文件總清單</h4>
-                                <div class="grid grid-cols-1 gap-2 text-sm text-gray-600">
-                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 最終版結案報告</label>
-                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 會計師查核報告</label>
-                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 會計核銷表格 & 支出證明</label>
-                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 成果影片</label>
-                                    <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-primary focus:ring-0"> 第二期款收據 & 申請書</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-12">
+    <footer class="bg-[#2d2d2d] text-gray-400 py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6 text-white">
-                        <i class="fa-solid fa-lightbulb text-2xl"></i>
-                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#2d2d2d] text-lg font-bold">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">實證媒合平台</span>
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                        政府出題，新創解題。<br>
-                        一站式場域實證與商機媒合中心。
+                    <p class="text-xs leading-relaxed mb-4">
+                        政府出題，企業解題。我們致力於連結公部門需求與民間創新能量，共同解決社會痛點。
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-line"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">快速連結</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">尋找挑戰</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">關於我們</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-white transition-colors">計畫緣起</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">服務條款</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">隱私權政策</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">資訊安全政策</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">資源中心</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">計畫資源</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">資源下載</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">網站導覽</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
-                    <ul class="space-y-3 text-sm text-gray-400">
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
+                    <ul class="space-y-3 text-xs">
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-phone mt-1"></i>
-                            <span>02-2366-0812</span>
+                            <i class="fa-solid fa-phone text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">客服專線</p>
+                                <p>0800-000-123</p>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-envelope mt-1"></i>
-                            <span>service@spp.org.tw</span>
+                            <i class="fa-solid fa-clock text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">服務時間</p>
+                                <p>週一至週五 09:00-18:00</p>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-location-dot mt-1"></i>
-                            <span>台北市大安區羅斯福路二段95號</span>
+                            <i class="fa-solid fa-envelope text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">電子信箱</p>
+                                <p>service@innovation.gov.tw</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white">隱私權政策</a>
-                    <a href="#" class="hover:text-white">使用條款</a>
-                </div>
+            
+            <div class="border-t border-white/5 mt-8 pt-4 text-center text-[10px] text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. 版權所有</p>
             </div>
         </div>
     </footer>
@@ -647,27 +401,27 @@
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
     <script>
-        // Simple scrollspy for sticky nav
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id^="phase"]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                if (window.scrollY > 10) {
+                    nav.classList.add('shadow-md');
+                } else {
+                    nav.classList.remove('shadow-md');
                 }
-            });
+            }
+        });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
+        // Filter Radio Logic (Custom Style)
+        const labels = document.querySelectorAll('.filter-radio label');
+        labels.forEach(label => {
+            const input = document.getElementById(label.getAttribute('for'));
+            input.addEventListener('change', () => {
+                // Since they are native radios, only the checked one fires 'change' in most cases
+                // but we might need to handle the sibling labels if needed.
             });
         });
     </script>
-
 </body>
 </html>

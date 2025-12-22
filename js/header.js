@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex items-center space-x-6">
                         <a href="challenges.html" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors ${currentPage === 'challenges.html' ? 'text-primary border-b-2 border-primary' : ''}">尋找挑戰</a>
+                        <a href="calendar.html" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors ${currentPage === 'calendar.html' ? 'text-primary border-b-2 border-primary' : ''}">計畫時程</a>
                         <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">計畫資源</a>
                         <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">成功案例</a>
                         <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">關於我們</a>

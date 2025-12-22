@@ -2,177 +2,63 @@ document.addEventListener("DOMContentLoaded", function() {
     const placeholder = document.getElementById('navbar-placeholder');
     if (!placeholder) return;
 
-    const initialTheme = placeholder.getAttribute('data-theme') || 'light'; // 'light' (dark text) or 'dark' (white text)
-    // Get current filename, default to index.html if empty (root)
+    const initialTheme = placeholder.getAttribute('data-theme') || 'light';
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
-    // Base classes
-    const navClasses = "fixed w-full z-50 transition-all duration-300 bg-transparent";
-    const textClasses = initialTheme === 'dark' ? "text-white" : "text-gray-600";
-    
-    // Logo colors
-    const logoBgClasses = initialTheme === 'dark' ? "bg-white text-primary" : "bg-primary text-white";
-    const brandTextClasses = initialTheme === 'dark' ? "text-white" : "text-primary";
-
-    // Button colors (Contact Us - using same style as primary button)
-    const btnClasses = initialTheme === 'dark' 
-        ? "bg-white text-primary hover:bg-gray-100" 
-        : "bg-primary text-white hover:bg-blue-800";
-
-    // Nav Link Helper to generate initial classes
-    const getLinkClass = (page) => {
-        // Simple check: active if href matches current page filename
-        const isActive = (currentPage === page) || (page === 'index.html' && currentPage === ''); 
-        
-        let classes = "px-4 py-2 rounded-full font-medium transition-all duration-300 ";
-        
-        if (isActive) {
-            // Active state
-            classes += "font-bold shadow-inner ";
-            if (initialTheme === 'dark') {
-                classes += "bg-white/20 text-white "; 
-            } else {
-                classes += "bg-black/10 text-primary ";
-            }
-        } else {
-            // Inactive state hover
-            if (initialTheme === 'dark') {
-                classes += "hover:bg-white/10 ";
-            } else {
-                classes += "hover:bg-black/5 hover:text-primary ";
-            }
-        }
-        return classes;
-    };
-
     const navHTML = `
-    <nav id="main-nav" class="${navClasses} ${textClasses}">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
-                    <div id="nav-logo-bg" class="w-10 h-10 ${logoBgClasses} rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <span id="nav-brand-text" class="font-bold text-xl tracking-wide ${brandTextClasses} transition-colors duration-300">實證媒合平台</span>
-                </a>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-2">
-                    <a href="index.html" class="${getLinkClass('index.html')}">首頁</a>
-                    <a href="challenges.html" class="${getLinkClass('challenges.html')}">尋找挑戰</a>
-                    <a href="calendar.html" class="${getLinkClass('calendar.html')}">計畫時程</a>
-                    <a href="#" class="${getLinkClass('#')}">成功案例</a>
-                    <a href="#" class="${getLinkClass('about.html')}">關於我們</a>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="hidden md:flex items-center gap-3">
-                    <a href="#" id="nav-contact-btn" class="px-5 py-2.5 rounded-full ${btnClasses} font-medium transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
-                        <i class="fa-solid fa-envelope"></i> 聯絡我們
-                    </a>
-                </div>
-                
-                <!-- Mobile Menu Button (Placeholder) -->
-                <div class="md:hidden flex items-center">
-                     <button class="focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
+    <div class="fixed top-0 left-0 w-full z-50">
+        <!-- Utility Top Bar -->
+        <div class="bg-primary/90 backdrop-blur-sm py-1 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 flex justify-end items-center gap-6 text-[11px] text-white/90">
+                <a href="#" class="hover:text-white transition-colors">網站導覽</a>
+                <span class="text-white/30">|</span>
+                <a href="#" class="hover:text-white transition-colors bg-white/10 px-2 rounded">常見問答</a>
+                <span class="text-white/30">|</span>
+                <a href="#" class="hover:text-white transition-colors font-medium">English</a>
+                <span class="text-white/30">|</span>
+                <div class="flex gap-3 text-xs">
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-line"></i></a>
                 </div>
             </div>
         </div>
-    </nav>
+
+        <!-- Main Navigation -->
+        <nav id="main-nav" class="bg-white/95 backdrop-blur-sm border-b border-gray-100 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Brand Name (No Logo) -->
+                    <a href="index.html" class="flex items-center gap-4 cursor-pointer">
+                        <div class="flex flex-col">
+                            <span class="text-xl font-bold text-primary tracking-tight">實證媒合平台</span>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest -mt-1">Innovation Matchmaking Platform</span>
+                        </div>
+                    </a>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden lg:flex items-center space-x-6">
+                        <a href="challenges.html" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors ${currentPage === 'challenges.html' ? 'text-primary border-b-2 border-primary' : ''}">尋找挑戰</a>
+                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">計畫資源</a>
+                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">成功案例</a>
+                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">關於我們</a>
+                        <a href="#" class="flex items-center gap-1.5 text-primary text-sm font-bold hover:text-primary-dark transition-colors">
+                            <i class="fa-solid fa-user-circle text-lg"></i> 會員登入
+                        </a>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <div class="lg:hidden flex items-center">
+                         <button class="text-gray-500 focus:outline-none">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="h-[88px] hidden md:block"></div> <!-- Spacer for fixed header -->
+    <div class="h-[64px] md:hidden"></div>
     `;
 
     placeholder.innerHTML = navHTML;
-
-    // --- SCROLL EFFECT LOGIC ---
-    const nav = document.getElementById('main-nav');
-    const navLogoBg = document.getElementById('nav-logo-bg');
-    const navBrandText = document.getElementById('nav-brand-text');
-    const navContactBtn = document.getElementById('nav-contact-btn');
-    const navLinks = nav.querySelectorAll('.hidden.md\\:flex a');
-
-    function updateNavOnScroll() {
-        if (window.scrollY > 10) {
-            // === SCROLLED STATE (Common for all pages: Light Frosted Glass) ===
-            nav.className = "fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md shadow-sm text-gray-600";
-
-            // Logo -> Primary Style
-            navLogoBg.className = "w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
-            navBrandText.className = "font-bold text-xl tracking-wide text-primary transition-colors duration-300";
-
-            // Contact Button -> Primary Style
-            if (navContactBtn) {
-                navContactBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-            }
-
-            // Links -> Dark Text style
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                const isPageActive = (currentPage === href) || (href === 'index.html' && currentPage === '');
-                
-                let classes = "px-4 py-2 rounded-full font-medium transition-all duration-300 ";
-                if(isPageActive) {
-                    classes += "bg-gray-100 text-primary font-bold shadow-inner";
-                } else {
-                    classes += "text-gray-600 hover:bg-gray-100 hover:text-primary";
-                }
-                link.className = classes;
-            });
-
-        } else {
-            // === TOP STATE (Depends on Initial Theme) ===
-            nav.className = `fixed w-full z-50 transition-all duration-300 bg-transparent ${initialTheme === 'dark' ? 'text-white' : 'text-gray-600'}`;
-            
-            if (initialTheme === 'dark') {
-                // Dark Theme (White text, White Logo)
-                navLogoBg.className = "w-10 h-10 bg-white text-primary rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
-                navBrandText.className = "font-bold text-xl tracking-wide text-white transition-colors duration-300";
-                
-                if (navContactBtn) {
-                    navContactBtn.className = "px-5 py-2.5 rounded-full bg-white text-primary font-medium hover:bg-gray-100 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-                }
-                
-                navLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    const isPageActive = (currentPage === href) || (href === 'index.html' && currentPage === '');
-                    
-                    let classes = "px-4 py-2 rounded-full font-medium transition-all duration-300 ";
-                    if(isPageActive) {
-                        classes += "bg-white/20 text-white font-bold shadow-inner";
-                    } else {
-                        classes += "hover:bg-white/10";
-                    }
-                    link.className = classes;
-                });
-
-            } else {
-                // Light Theme (Dark text, Primary Logo)
-                navLogoBg.className = "w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center text-xl shadow-md transition-colors duration-300";
-                navBrandText.className = "font-bold text-xl tracking-wide text-primary transition-colors duration-300";
-                
-                if (navContactBtn) {
-                    navContactBtn.className = "px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2";
-                }
-
-                navLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    const isPageActive = (currentPage === href) || (href === 'index.html' && currentPage === '');
-                    
-                    let classes = "px-4 py-2 rounded-full font-medium transition-all duration-300 ";
-                    if(isPageActive) {
-                        classes += "bg-black/10 text-primary font-bold shadow-inner";
-                    } else {
-                        classes += "hover:bg-black/5 hover:text-primary";
-                    }
-                    link.className = classes;
-                });
-            }
-        }
-    }
-
-    window.addEventListener('scroll', updateNavOnScroll);
-    // Initial check (in case page is refreshed while scrolled)
-    updateNavOnScroll();
 });

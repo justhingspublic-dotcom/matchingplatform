@@ -19,358 +19,319 @@
                     colors: {
                         primary: '#005a87',     /* Law SME dark blue */
                         secondary: '#4facfe',   /* Lighter blue */
-                        accent: '#00f2fe',      /* Cyan accent */
-                        'primary-dark': '#004a70',
-                        'bg-light': '#f8f9fa',
+                        accent: '#ffb400',      /* Yellow accent */
+                        'primary-dark': '#003d5c',
+                        'bg-light': '#f3f4f6',
                     },
                     fontFamily: {
                         sans: ['Noto Sans TC', 'sans-serif'],
                     },
                     borderRadius: {
-                        'xl': '1rem',
-                        '2xl': '1.5rem',
-                        '3xl': '2rem',
+                        'none': '0',
+                        'sm': '0.125rem',
+                        'DEFAULT': '0.25rem',
+                        'md': '0.375rem',
+                        'lg': '0.5rem',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom styles that act like the Law SME "blobs" */
-        .blob-shape {
-            position: absolute;
-            z-index: -1;
-            filter: blur(120px);
-            opacity: 0.6;
-        }
         .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .gov-box-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
     </style>
 </head>
-<body class="font-sans text-gray-700 bg-white antialiased overflow-x-hidden">
+<body class="font-sans text-gray-800 bg-gray-50 antialiased">
 
     <!-- Reusable Header Placeholder -->
-    <div id="navbar-placeholder" data-theme="light"></div>
+    <div id="navbar-placeholder"></div>
 
     <!-- Hero Section -->
-    <div class="relative min-h-screen flex items-center pt-20 pb-20">
-        <!-- Decorative Background Blobs Wrapper -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="blob-shape bg-cyan-200 w-[600px] h-[600px] rounded-full -top-40 -right-20 mix-blend-multiply animate-pulse"></div>
-            <div class="blob-shape bg-blue-200 w-[600px] h-[600px] rounded-full -bottom-40 -left-20 mix-blend-multiply animate-pulse delay-700"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Text Content -->
-                <div class="space-y-8">
-                    <div class="inline-block px-4 py-1.5 bg-blue-50 text-primary font-semibold rounded-full text-sm border border-blue-100">
-                        2025 年度計畫開跑中 🚀
-                    </div>
-                    <h1 class="text-4xl lg:text-6xl font-bold leading-tight text-gray-900">
-                        政府出題 <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">新創解題</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 leading-relaxed max-w-lg">
-                        一站式場域實證與商機媒合中心。<br>
-                        Connecting Public Needs with Private Innovation
-                    </p>
-                    
-                    <!-- Feature Cards (Like the 'Online Question' / 'Reserve' buttons in reference) -->
-                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
-                        <a href="challenges.html" class="group p-6 bg-white rounded-xl shadow-lg shadow-blue-100/50 border border-gray-100 hover:border-primary hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-                            <div class="relative z-10 flex flex-col h-full">
-                                <div class="w-12 h-12 bg-blue-100 text-primary rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-1">尋找挑戰</h3>
-                                <p class="text-sm text-gray-500 mb-4">瀏覽機關實證題目</p>
-                                <span class="text-primary font-medium text-sm mt-auto flex items-center">
-                                    立即前往 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                                </span>
-                            </div>
-                        </a>
-
-                        <a href="#" class="group p-6 bg-white rounded-xl shadow-lg shadow-teal-100/50 border border-gray-100 hover:border-teal-500 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-24 h-24 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-                            <div class="relative z-10 flex flex-col h-full">
-                                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-rocket"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-1">技術驗證</h3>
-                                <p class="text-sm text-gray-500 mb-4">提交解決方案</p>
-                                <span class="text-teal-600 font-medium text-sm mt-auto flex items-center">
-                                    立即前往 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Hero Image -->
-                <div class="relative hidden lg:block">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-10 rounded-xl transform rotate-3 scale-105"></div>
-                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=max&w=1000&q=80" alt="Innovation" class="relative rounded-xl shadow-2xl object-cover h-[500px] w-full transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-                    
-                    <!-- Floating Badge -->
-                    <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md px-6 py-4 rounded-full shadow-xl border border-white/40 flex items-center gap-4 transition-transform hover:scale-105 duration-300">
-                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                            <i class="fa-solid fa-check text-lg"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-0.5">已成功媒合</p>
-                            <p class="text-lg font-bold text-gray-800 leading-none">120+ <span class="text-xs text-gray-500 font-medium">團隊</span></p>
-                        </div>
-                    </div>
+    <section class="hero-gradient min-h-[400px] flex items-center relative">
+        <div class="max-w-7xl mx-auto px-4 w-full py-12">
+            <div class="bg-primary/90 backdrop-blur-sm p-8 md:p-12 max-w-xl text-center md:text-left text-white rounded-md shadow-2xl border border-white/10 mx-auto md:mx-0">
+                <h1 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">
+                    114年度 創新場域實證計畫 <br>
+                    徵案開跑
+                </h1>
+                <p class="text-base md:text-lg mb-6 opacity-90 font-light">
+                    總獎金高達 5,000 萬，開放 20+ 政府場域，等你來挑戰！
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                    <a href="#" class="bg-accent hover:bg-yellow-500 text-primary-dark font-bold px-6 py-2.5 rounded-md text-center transition-all shadow-lg">
+                        立即報名
+                    </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="max-w-4xl mx-auto px-4 -mt-8 relative z-10">
+        <div class="bg-white p-1.5 rounded-md shadow-lg flex items-center border border-gray-200">
+            <div class="flex bg-primary rounded-l-md overflow-hidden">
+                <button class="px-5 py-2.5 text-white text-sm font-bold whitespace-nowrap bg-primary-dark">找挑戰</button>
+            </div>
+            <input type="text" placeholder="請輸入關鍵字 (例：AI、淨零碳排...)" class="flex-grow px-4 py-2 bg-transparent focus:outline-none text-gray-600 text-sm">
+            <button class="bg-accent text-primary-dark w-10 h-10 rounded-md flex items-center justify-center hover:bg-yellow-500 transition-colors">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+        <div class="mt-3 flex flex-wrap justify-center gap-3 text-xs text-gray-500">
+            <span>熱門關鍵字：</span>
+            <a href="#" class="text-primary hover:underline">#生成式AI</a>
+            <a href="#" class="text-primary hover:underline">#ESG淨零</a>
+            <a href="#" class="text-primary hover:underline">#長照科技</a>
+            <a href="#" class="text-primary hover:underline">#無人機</a>
         </div>
     </div>
 
-    <!-- Opportunities Section -->
-    <section class="py-16 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-12">您想尋找哪種合作機會？</h2>
-            
+    <!-- Quick Links (Circular Icons) -->
+    <section class="py-10 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <!-- Card 1 -->
-                <a href="challenges.html" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
-                        <i class="fa-solid fa-magnifying-glass text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                <a href="challenges.html" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
+                        <i class="fa-solid fa-rocket text-primary text-xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">尋找挑戰</span>
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">尋找挑戰</span>
                 </a>
-
-                <!-- Card 2 -->
-                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
-                        <i class="fa-solid fa-vials text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
+                        <i class="fa-solid fa-city text-primary text-xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">技術驗證</span>
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">機關出題</span>
                 </a>
-
-                <!-- Card 3 -->
-                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
-                        <i class="fa-solid fa-sack-dollar text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
+                        <i class="fa-solid fa-calendar-check text-primary text-xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">尋求資金</span>
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">活動時程</span>
                 </a>
-
-                <!-- Card 4 -->
-                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
-                        <i class="fa-solid fa-handshake text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
+                        <i class="fa-solid fa-trophy text-primary text-xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">商機媒合</span>
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">成功案例</span>
                 </a>
-
-                <!-- Card 5 -->
-                <a href="#" class="group bg-white rounded-xl border border-gray-200 p-8 flex flex-col items-center hover:shadow-xl hover:border-primary transition-all duration-300">
-                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
-                        <i class="fa-solid fa-landmark text-3xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
+                        <i class="fa-solid fa-file-arrow-down text-primary text-xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="font-bold text-gray-800 text-lg group-hover:text-primary transition-colors">政策參與</span>
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">資源下載</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="py-24 relative bg-white">
-        <!-- Soft Radial Gradient Blob (Moved further up and reduced size) -->
-        <div class="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-[radial-gradient(circle,rgba(219,234,254,0.15)_0%,transparent_70%)] pointer-events-none mix-blend-multiply"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-20">
-                <span class="text-primary font-bold tracking-widest uppercase text-sm bg-blue-50 px-3 py-1 rounded-full">PROCESS</span>
-                <h2 class="text-4xl font-bold mt-4 mb-4 text-gray-800">如何參與挑戰？</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">簡單四步驟，開啟您的創新實證之旅</p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8 relative">
-                <!-- Dashed Line behind -->
-                <div class="hidden md:block absolute top-10 left-[12%] right-[12%] h-0.5 border-t-2 border-dashed border-gray-200 -z-10"></div>
-                
-                <!-- Step 1 -->
-                <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-primary mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(0,90,135,0.4)]">
-                        <i class="fa-regular fa-compass"></i>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-primary to-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">1</div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">探索主題</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed px-4">瀏覽來自各機關、國營事業的多元實證題目，尋找合適機會。</p>
-                </div>
-                
-                <!-- Step 2 -->
-                <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-secondary mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(79,172,254,0.4)]">
-                        <i class="fa-regular fa-file-lines"></i>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-secondary to-blue-400 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">2</div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-secondary transition-colors">提交提案</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed px-4">鎖定符合您技術的挑戰，線上提交完整的解決方案計畫書。</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-purple-500 mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">3</div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-500 transition-colors">審查評選</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed px-4">您的提案將由專業評委進行書面與會議審查，爭取入選機會。</p>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="group text-center relative">
-                    <div class="w-20 h-20 mx-auto bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-3xl text-green-500 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]">
-                        <i class="fa-solid fa-handshake-simple"></i>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm">4</div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-green-500 transition-colors">實證合作</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed px-4">與出題機關攜手，在真實場域驗證您的技術，加速商業化進程。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Timeline Section (Law SME 'News' Style List) -->
-    <section class="py-20 relative overflow-hidden bg-white">
-         <!-- Blob decoration -->
-         <div class="blob-shape bg-blue-50 w-[500px] h-[500px] rounded-full bottom-[-100px] right-[-100px]"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div>
-                    <span class="text-primary font-bold tracking-widest uppercase text-sm">TIMELINE</span>
-                    <h2 class="text-3xl font-bold mt-2 text-gray-800">計畫重要時程</h2>
-                </div>
-                <a href="calendar.html" class="mt-4 md:mt-0 inline-flex items-center text-primary font-medium hover:text-secondary transition-colors">
-                    查看完整時程 <i class="fa-solid fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-
-            <div class="space-y-4">
-                <!-- Timeline Item 1 -->
-                <div class="group bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-6 cursor-pointer">
-                    <div class="hidden sm:flex flex-col items-center justify-center w-20 h-20 bg-blue-50 rounded-xl text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="text-sm font-medium opacity-70">May</span>
-                        <span class="text-2xl font-bold">15</span>
+    <!-- Entry Points -->
+    <section class="pb-10 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Startup Box -->
+                <div class="bg-white border-l-4 border-primary rounded-md shadow-sm p-6 flex items-center gap-6 group border border-gray-200">
+                    <div class="hidden sm:flex w-16 h-16 bg-primary/10 text-primary items-center justify-center rounded text-2xl group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
                     <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-1">
-                            <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">申請階段</span>
-                            <span class="text-sm text-gray-400">2025</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition-colors">申請文件截止</h3>
-                        <p class="text-gray-500 text-sm mt-1">備妥計畫書與相關文件，完成線上提交。</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">我是新創/團隊</h3>
+                        <p class="text-xs text-gray-500">尋找政府場域實證機會，獲取補助資源。</p>
                     </div>
-                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <div class="shrink-0 self-end">
+                        <a href="#" class="inline-flex items-center gap-2 px-6 py-2 bg-primary/20 text-primary text-sm font-bold rounded-full hover:bg-primary hover:text-white transition-all whitespace-nowrap">
+                            找尋挑戰機會 <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Timeline Item 2 -->
-                <div class="group bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-6 cursor-pointer">
-                    <div class="hidden sm:flex flex-col items-center justify-center w-20 h-20 bg-blue-50 rounded-xl text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="text-sm font-medium opacity-70">Jun</span>
-                        <span class="text-2xl font-bold">25</span>
+                <!-- Enterprise Box -->
+                <div class="bg-white rounded-md shadow-sm p-6 flex items-center gap-6 group border border-accent border-l-4">
+                    <div class="hidden sm:flex w-16 h-16 bg-accent/10 text-accent items-center justify-center rounded text-2xl group-hover:bg-accent group-hover:text-white transition-colors shrink-0">
+                        <i class="fa-solid fa-building-columns"></i>
                     </div>
                     <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-1">
-                            <span class="px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800">審查階段</span>
-                            <span class="text-sm text-gray-400">2025</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition-colors">審查結果公告</h3>
-                        <p class="text-gray-500 text-sm mt-1">審查結果將於平台公告，並個別通知獲選團隊。</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">我是機關/企業</h3>
+                        <p class="text-xs text-gray-500">提出痛點需求，媒合創新解決方案。</p>
                     </div>
-                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-
-                <!-- Timeline Item 3 -->
-                <div class="group bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-6 cursor-pointer">
-                    <div class="hidden sm:flex flex-col items-center justify-center w-20 h-20 bg-blue-50 rounded-xl text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="text-sm font-medium opacity-70">Jul</span>
-                        <span class="text-2xl font-bold">10</span>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-1">
-                            <span class="px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-800">簽約階段</span>
-                            <span class="text-sm text-gray-400">2025</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-primary transition-colors">簽約啟動</h3>
-                        <p class="text-gray-500 text-sm mt-1">獲選團隊需完成簽約及第一期款請領程序。</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <div class="shrink-0 self-end">
+                        <a href="#" class="inline-flex items-center gap-2 px-6 py-2 bg-accent/20 text-accent text-sm font-bold rounded-full hover:bg-accent hover:text-white transition-all whitespace-nowrap">
+                            發布出題需求 <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Cases Section (Grid) -->
-    <section id="cases" class="py-20 bg-white relative">
-        <!-- Subtle gradient overlay -->
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(219,234,254,0.1)_0%,transparent_50%)] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <span class="text-primary font-bold tracking-widest uppercase text-sm">CASES</span>
-                <h2 class="text-3xl font-bold mt-2 mb-4 text-gray-800">成功案例</h2>
-                <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+    <!-- News & Guide Section -->
+    <section class="py-10 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Latest News (Width ratio 2) -->
+                <div class="lg:col-span-2 bg-white rounded-md shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+                    <div class="flex justify-between items-end mb-6 border-b border-gray-100 pb-3">
+                        <h2 class="text-xl font-bold text-primary flex items-center gap-2">
+                            <span class="w-1 h-5 bg-primary"></span> 最新公告
+                        </h2>
+                        <a href="#" class="text-gray-400 text-xs hover:text-primary transition-colors">查看更多 ></a>
+                    </div>
+                    <div class="divide-y divide-gray-100 flex-grow">
+                        <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
+                            <span class="px-2 py-0.5 bg-primary text-white text-xs font-bold w-fit rounded">公告</span>
+                            <span class="text-gray-700 text-base font-medium group-hover:text-primary transition-colors flex-grow">114年度「智慧城鄉生活應用補助計畫」徵案說明會開放報名</span>
+                            <span class="text-gray-400 text-sm">2025/12/17</span>
+                        </a>
+                        <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
+                            <span class="px-2 py-0.5 bg-secondary text-white text-xs font-bold w-fit rounded">快訊</span>
+                            <span class="text-gray-700 text-base font-medium group-hover:text-primary transition-colors flex-grow">恭喜！第三屆綠能科技黑客松 獲選團隊名單公布</span>
+                            <span class="text-gray-400 text-sm">2025/12/16</span>
+                        </a>
+                        <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
+                            <span class="px-2 py-0.5 bg-green-500 text-white text-xs font-bold w-fit rounded">活動</span>
+                            <span class="text-gray-700 text-base font-medium group-hover:text-primary transition-colors flex-grow">「創新沙盒」場域實證工作坊 - 高雄場 議程更新</span>
+                            <span class="text-gray-400 text-sm">2025/12/15</span>
+                        </a>
+                        <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
+                            <span class="px-2 py-0.5 bg-gray-500 text-white text-xs font-bold w-fit rounded">重要</span>
+                            <span class="text-gray-700 text-base font-medium group-hover:text-primary transition-colors flex-grow">【重要通知】實證平台系統升級維護公告 (12/20)</span>
+                            <span class="text-gray-400 text-sm">2025/12/14</span>
+                        </a>
+                        <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
+                            <span class="px-2 py-0.5 bg-primary text-white text-xs font-bold w-fit rounded">公告</span>
+                            <span class="text-gray-700 text-base font-medium group-hover:text-primary transition-colors flex-grow">113年度 成果發表會 精華回顧影片已上線</span>
+                            <span class="text-gray-400 text-sm">2025/12/13</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newbie Guide (Width ratio 1) -->
+                <div class="bg-white rounded-md shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+                    <div class="flex justify-between items-end mb-6 border-b border-gray-100 pb-3">
+                        <h2 class="text-xl font-bold text-secondary flex items-center gap-2">
+                            <span class="w-1 h-5 bg-secondary"></span> 新手上路
+                        </h2>
+                    </div>
+                    <div class="space-y-4 flex-grow">
+                        <a href="#" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200 rounded group">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">如何提案報名？</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200 rounded group">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">計畫申請懶人包</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200 rounded group">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">線上說明會回放</span>
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Case Card 1 -->
-                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-blue-200/60 hover:border-primary/50 transition-all duration-300 relative">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart City" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-primary/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">智慧城市</span>
+    <!-- Popular Domains -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-10 relative">
+                熱門實證領域
+                <span class="block w-16 h-0.5 bg-primary mx-auto mt-3"></span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- AI -->
+                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
+                    <div class="text-3xl text-primary mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-robot"></i>
                     </div>
-                    <div class="p-6">
-                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Sep. 11, 2023</div>
-                        <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">新創 A 公司以 AI 改善停車場管理效率</h3>
-                        <p class="text-gray-500 text-sm line-clamp-2 mb-4">導入市府大樓實證，透過影像辨識技術提升車位周轉率30%，解決長時間占用問題。</p>
-                        <a href="case1.html" class="inline-flex items-center text-primary font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                    <h3 class="text-lg font-bold text-center mb-4">AI 與 數據分析</h3>
+                    <ul class="text-xs text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> 生成式 AI 應用</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> 大數據預測模型</li>
+                    </ul>
+                </div>
+                <!-- ESG -->
+                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
+                    <div class="text-3xl text-green-600 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-4">淨零碳排 (ESG)</h3>
+                    <ul class="text-xs text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-green-600 rounded-full"></span> 能源管理系統</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-green-600 rounded-full"></span> 循環經濟模式</li>
+                    </ul>
+                </div>
+                <!-- Transport -->
+                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
+                    <div class="text-3xl text-blue-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-4">智慧交通</h3>
+                    <ul class="text-xs text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> 智慧號誌控制</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> 無人載具物流</li>
+                    </ul>
+                </div>
+                <!-- Health -->
+                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
+                    <div class="text-3xl text-red-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-4">智慧醫療</h3>
+                    <ul class="text-xs text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-red-500 rounded-full"></span> 遠距照護平台</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-red-500 rounded-full"></span> 穿戴式裝置</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video & Case Interview -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Video Card -->
+                <div class="space-y-4">
+                    <div class="relative aspect-video rounded-md overflow-hidden shadow-lg group">
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Video" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
+                            <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-primary text-xl shadow-lg group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded">Video</div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">【影音專區】如何撰寫完美的提案計畫書？</h3>
+                        <p class="text-gray-500 text-sm">掌握這 5 個關鍵要素，讓你的實證提案脫穎而出。</p>
                     </div>
                 </div>
 
-                <!-- Case Card 2 -->
-                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-green-200/60 hover:border-green-500/50 transition-all duration-300 relative">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Net Zero" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-green-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">淨零轉型</span>
+                <!-- Case Card -->
+                <div class="space-y-4">
+                    <div class="relative aspect-video rounded-md overflow-hidden shadow-lg group">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Case" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded">Case</div>
                     </div>
-                    <div class="p-6">
-                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Jul. 08, 2023</div>
-                        <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">開發儲能系統獲台電採用</h3>
-                        <p class="text-gray-500 text-sm line-clamp-2 mb-4">結合物聯網與區塊鏈，新創 B 公司開發之儲能系統有效調節尖峰用電，降低成本。</p>
-                        <a href="#" class="inline-flex items-center text-green-600 font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Case Card 3 -->
-                <div class="group bg-white rounded-xl overflow-hidden shadow-lg shadow-gray-200/50 border border-gray-100 hover:shadow-xl hover:shadow-purple-200/60 hover:border-purple-500/50 transition-all duration-300 relative">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Curation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-purple-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm">數位策展</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Oct. 28, 2023</div>
-                        <h3 class="font-bold text-lg text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">故宮博物院攜手新創打造 AR 導覽</h3>
-                        <p class="text-gray-500 text-sm line-clamp-2 mb-4">C 公司打造沉浸式 AR 國寶導覽體驗，讓文物活起來，吸引年輕族群入館。</p>
-                        <a href="#" class="inline-flex items-center text-purple-600 font-bold text-sm hover:underline before:absolute before:inset-0 before:z-10">
-                            閱讀更多 <i class="fa-solid fa-arrow-right ml-1 text-xs group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">【企業專訪】智新科技：從實證到商轉的旅程</h3>
+                        <p class="text-gray-500 text-sm">透過本平台媒合，成功將 AI 巡檢系統導入捷運局。</p>
                     </div>
                 </div>
             </div>
@@ -378,73 +339,94 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-16 border-t border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-12">
+    <footer class="bg-[#2d2d2d] text-gray-400 py-7">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6 text-white">
-                        <i class="fa-solid fa-lightbulb text-2xl"></i>
-                        <span class="font-bold text-xl tracking-wide">實證媒合平台</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#2d2d2d] text-lg font-bold">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white tracking-tight">實證媒合平台</span>
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
-                        政府出題，新創解題。<br>
-                        一站式場域實證與商機媒合中心。
+                    <p class="text-xs leading-relaxed mb-4">
+                        政府出題，企業解題。我們致力於連結公部門需求與民間創新能量，共同解決社會痛點。
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-line"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 hover:text-white transition-all text-xs"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">快速連結</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">尋找挑戰</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">技術驗證</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">商機媒合</a></li>
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">關於我們</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-white transition-colors">計畫緣起</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">服務條款</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">隱私權政策</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">資訊安全政策</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">資源中心</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="calendar.html" class="hover:text-white transition-colors">活動看板</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">文件下載</a></li>
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">計畫資源</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">資源下載</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">網站導覽</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6">聯絡我們</h4>
-                    <ul class="space-y-3 text-sm text-gray-400">
+                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
+                    <ul class="space-y-2 text-xs">
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-phone mt-1"></i>
-                            <span>02-2366-0812</span>
+                            <i class="fa-solid fa-phone text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">客服專線</p>
+                                <p>0800-000-123</p>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-envelope mt-1"></i>
-                            <span>service@spp.org.tw</span>
+                            <i class="fa-solid fa-clock text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">服務時間</p>
+                                <p>週一至週五 09:00-18:00</p>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-location-dot mt-1"></i>
-                            <span>台北市大安區羅斯福路二段95號</span>
+                            <i class="fa-solid fa-envelope text-gray-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-gray-300 font-medium text-[10px]">電子信箱</p>
+                                <p>service@innovation.gov.tw</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-                <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white">隱私權政策</a>
-                    <a href="#" class="hover:text-white">使用條款</a>
-                </div>
+            
+            <div class="border-t border-white/5 mt-8 pt-4 text-center text-[10px] text-gray-500">
+                <p>&copy; 2025 Innovation Matchmaking Platform. 版權所有</p>
             </div>
         </div>
     </footer>
 
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
-
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                if (window.scrollY > 10) {
+                    nav.classList.add('shadow-md');
+                } else {
+                    nav.classList.remove('shadow-md');
+                }
+            }
+        });
+    </script>
 </body>
 </html>

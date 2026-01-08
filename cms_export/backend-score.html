@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政府場域實證 - 統計報表系統</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00796b;
+            --secondary-bg: #f4f7f6;
+            --text-main: #333;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --warning-color: #ff9800;
+            --danger-color: #d32f2f;
+            --info-color: #1976d2;
+            --excel-header: #f8f9fa;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: var(--secondary-bg);
+            color: var(--text-main);
+        }
+
+        /* 左側導覽列 */
+        .sidebar {
+            width: 240px;
+            background-color: #fff;
+            height: 100vh;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            color: #555;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .menu-item i { width: 25px; margin-right: 10px; }
+        .menu-item:hover, .menu-item.active {
+            background-color: #e0f2f1;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* 主要內容區 */
+        .main-content {
+            margin-left: 240px;
+            width: calc(100% - 240px);
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .report-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        /* 表格樣式 */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 1200px; /* 確保寬度足以容納多欄位 */
+        }
+
+        .data-table th {
+            background: var(--excel-header);
+            color: #555;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table td {
+            padding: 8px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+
+        .text-left { text-align: left !important; }
+        
+        .row-group-header {
+            background-color: #e8f5e9;
+            font-weight: bold;
+            text-align: left !important;
+            color: #2e7d32;
+        }
+
+        /* 統計概況卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stats-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .stats-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .highlight-win { background-color: #fff9c4; font-weight: bold; }
+        .check-mark { color: var(--success-color); font-weight: bold; }
+        
+        .rank-top { color: #d32f2f; font-weight: bold; }
+
+        .btn-export {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+		/* --- 即時評分專用樣式 --- */
+.score-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.score-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,121,107,0.2);
+}
+.score-input.error {
+    border-color: var(--danger-color);
+    background-color: #fff0f0;
+}
+.weighted-score {
+    font-weight: bold;
+    color: var(--info-color);
+}
+.scoring-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f4f8;
+    border-radius: 8px;
+    border: 1px solid #d1d9e0;
+}
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">計畫管理平台</div>
+        <a href="backend-menu.html" class="menu-item"><i class="fa-solid fa-house"></i> 首頁總覽</a>
+        <a href="index.html" class="menu-item"><i class="fa-solid fa-folder-open"></i> 實證案件管理</a>
+        <a href="backend-score.html" class="menu-item active"><i class="fa-solid fa-file-contract"></i> 評分記錄</a>
+        <a href="backend-statistical-reports.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> 統計報表</a>
+        <a href="backend-setting.html" class="menu-item"><i class="fa-solid fa-gear"></i> 系統設定</a>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <div style="color: #666; font-size: 0.9rem;">統計報表 > 7/9 統計彙整報表</div>
+            <button class="btn-export"><i class="fa-solid fa-file-excel"></i> 匯出 Excel 報表</button>
+        </header>
+
+        <!-- 區塊一：獲選案件概況分析 -->
+        <div class="report-section">
+            <div class="section-title">獲選案件概況分析 (篩選案件數: 12)</div>
+            <div class="stats-grid">
+                <!-- 單位類型 -->
+                <div class="stats-card">
+                    <h4>單位類型分佈</h4>
+                    <div class="stats-item"><span>中央單位</span><span>3</span></div>
+                    <div class="stats-item"><span>公營事業</span><span>4</span></div>
+                    <div class="stats-item"><span>地方政府</span><span>5</span></div>
+                    <div class="stats-item"><span>照護機構</span><span>0</span></div>
+                </div>
+                <!-- 所在行政區 -->
+                <div class="stats-card">
+                    <h4>所在行政區分佈</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px;">
+                        <div class="stats-item"><span>臺北市</span><span>2</span></div>
+                        <div class="stats-item"><span>新北市</span><span>2</span></div>
+                        <div class="stats-item"><span>桃園市</span><span>1</span></div>
+                        <div class="stats-item"><span>高雄市</span><span>2</span></div>
+                        <div class="stats-item"><span>嘉義市</span><span>2</span></div>
+                        <div class="stats-item"><span>花蓮縣</span><span>1</span></div>
+                        <div class="stats-item"><span>宜蘭縣</span><span>1</span></div>
+                        <div class="stats-item"><span>金門縣</span><span>1</span></div>
+                    </div>
+                </div>
+                <!-- 應用領域 -->
+                <div class="stats-card">
+                    <h4>應用領域分佈</h4>
+                    <div class="stats-item"><span>環境保護與能源</span><span>4</span></div>
+                    <div class="stats-item"><span>農業與漁業</span><span>2</span></div>
+                    <div class="stats-item"><span>交通監理與運輸</span><span>2</span></div>
+                    <div class="stats-item"><span>醫療照護與長照</span><span>2</span></div>
+                    <div class="stats-item"><span>公共安全與防災</span><span>1</span></div>
+                    <div class="stats-item"><span>產業應用</span><span>1</span></div>
+                </div>
+            </div>
+        </div>
+		<!-- 即時評分介面開始 -->
+<div class="scoring-container">
+    <h4 style="margin-top:0; color: var(--primary-color); display: flex; justify-content: space-between;">
+        <span><i class="fa-solid fa-pen-nib"></i> 委員即時評分工作台</span>
+        <span id="save-status" style="font-size: 0.8rem; color: #666; font-weight: normal;">
+            <i class="fa-solid fa-cloud-check"></i> 待輸入...
+        </span>
+    </h4>
+    
+    <table class="data-table" style="background: white;">
+        <thead>
+            <tr style="background: #f8f9fa;">
+                <th width="150">評選項目</th>
+                <th>評分標準</th>
+                <th width="80">權重</th>
+                <th width="100">原始分數</th>
+                <th width="100">加權得分</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="criteria-row">
+                <td><b>技術創新性</b></td>
+                <td class="text-left" style="font-size: 0.8rem; color: #666;">技術領先程度、AI 應用深度。</td>
+                <td class="weight">40%</td>
+                <td><input type="number" class="score-input" data-max="100" data-weight="0.4" placeholder="0-100"></td>
+                <td class="weighted-score">0.0</td>
+            </tr>
+            <tr class="criteria-row">
+                <td><b>場域可行性</b></td>
+                <td class="text-left" style="font-size: 0.8rem; color: #666;">佈署便捷性、環境適應力。</td>
+                <td class="weight">60%</td>
+                <td><input type="number" class="score-input" data-max="100" data-weight="0.6" placeholder="0-100"></td>
+                <td class="weighted-score">0.0</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr style="background: #fff9c4; font-weight: bold;">
+                <td colspan="4" style="text-align: right;">即時計算總分：</td>
+                <td id="grand-total" style="color: #d32f2f; font-size: 1.1rem;">0.0</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div style="margin-top: 15px;">
+        <label style="display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.85rem;">委員綜合意見：</label>
+        <textarea id="comment-area" style="width: 100%; height: 60px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" placeholder="請輸入評語..."></textarea>
+    </div>
+</div>
+<!-- 即時評分介面結束 -->
+
+        <!-- 區塊二：審查案件評分明細 -->
+        <div class="report-section">
+            <div class="section-title">審查案件評分彙整表</div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>案號</th>
+                            <th width="200">計畫名稱(出題單位)</th>
+                            <th>單位類型</th>
+                            <th>行政區</th>
+                            <th>應用領域</th>
+                            <th width="150">新創提案廠商</th>
+                            <th>委A</th>
+                            <th>委B</th>
+                            <th>委C</th>
+                            <th>委D</th>
+                            <th>委E</th>
+                            <th>總分</th>
+                            <th>平均</th>
+                            <th>總排名</th>
+                            <th>組排名</th>
+                            <th>第1名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 7/7 審查 -->
+                        <tr><td colspan="16" class="row-group-header">7/7 審查案件</td></tr>
+                        <tr>
+                            <td>1-1</td><td class="text-left">創新 Face AI 非接觸式量測健康管理</td><td>照護</td><td>新北市</td><td>醫療照護</td><td class="text-left">XX健康</td>
+                            <td>69</td><td>0</td><td>84</td><td>80</td><td>84</td><td>317</td><td>79.25</td><td>20</td><td class="rank-top">1</td><td>16</td>
+                        </tr>
+                        <tr>
+                            <td>1-2</td><td class="text-left"> (同上) </td><td>照護</td><td>新北市</td><td>醫療照護</td><td class="text-left">XX國際</td>
+                            <td>68</td><td>0</td><td>85</td><td>81</td><td>80</td><td>314</td><td>78.50</td><td>23</td><td>2</td><td>-</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>2-1</td><td class="text-left">輕軌轉轍器智慧預知維護系統</td><td>公營</td><td>新北市</td><td>交通監理</td><td class="text-left">XX智能</td>
+                            <td>76</td><td>0</td><td>88</td><td>85</td><td>83</td><td>332</td><td>83.00</td><td>6</td><td class="rank-top">1</td><td>6</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>3-1</td><td class="text-left">智能割草機及草地品質偵測系統</td><td>中央</td><td>臺北市</td><td>農業漁業</td><td class="text-left">XX機器人</td>
+                            <td>82</td><td>0</td><td>86.5</td><td>84</td><td>78</td><td>330.5</td><td>82.63</td><td>9</td><td class="rank-top">1</td><td>9</td>
+                        </tr>
+                        <tr>
+                            <td>4-1</td><td class="text-left">監理檢驗動態影像 AI 辨識</td><td>中央</td><td>高雄市</td><td>交通監理</td><td class="text-left">XX科技</td>
+                            <td>76</td><td>0</td><td>84.5</td><td>80</td><td>75</td><td>315.5</td><td>78.88</td><td>22</td><td>3</td><td>-</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>4-2</td><td class="text-left"> (同上) </td><td>中央</td><td>高雄市</td><td>交通監理</td><td class="text-left">XX股份</td>
+                            <td>80</td><td>0</td><td>89</td><td>86</td><td>81</td><td>336</td><td>84.00</td><td>2</td><td class="rank-top">1</td><td>2</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>6-1</td><td class="text-left">高粱酒瓶品質檢測 AI 系統</td><td>公營</td><td>金門縣</td><td>產業應用</td><td class="text-left">XX科技</td>
+                            <td>0</td><td>0</td><td>85</td><td>82</td><td>81</td><td>248</td><td>82.67</td><td>8</td><td class="rank-top">1</td><td>8</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>7-1</td><td class="text-left">微型水力發電效益評估與機組驗證</td><td>地方</td><td>花蓮縣</td><td>環保能源</td><td class="text-left">XX綠能</td>
+                            <td>0</td><td>0</td><td>85</td><td>84</td><td>82</td><td>251</td><td>83.67</td><td>4</td><td class="rank-top">1</td><td>4</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>8-1</td><td class="text-left">防制交通事故-AI 辨速專案</td><td>地方</td><td>高雄市</td><td>公共安全</td><td class="text-left">XX科技</td>
+                            <td>0</td><td>0</td><td>87</td><td>80</td><td>84</td><td>251</td><td>83.67</td><td>4</td><td class="rank-top">1</td><td>4</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>9-4</td><td class="text-left">孤獨長者 AI 社交陪伴系統</td><td>地方</td><td>嘉義市</td><td>醫療照護</td><td class="text-left">XX股份</td>
+                            <td>80</td><td>0</td><td>85</td><td>86</td><td>76</td><td>327</td><td>81.75</td><td>10</td><td class="rank-top">1</td><td>10</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>11-1</td><td class="text-left">智慧化白蝦養殖管理系統</td><td>中央</td><td>嘉義市</td><td>農業漁業</td><td class="text-left">XX國際</td>
+                            <td>86</td><td>0</td><td>85</td><td>84</td><td>82</td><td>337</td><td>84.25</td><td class="rank-top">1</td><td class="rank-top">1</td><td>1</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>12-1</td><td class="text-left">無標記運動捕捉與智慧步態評估</td><td>地方</td><td>臺北市</td><td>醫療照護</td><td class="text-left">XX科技</td>
+                            <td>86</td><td>0</td><td>86</td><td>80</td><td>84</td><td>336</td><td>84.00</td><td>2</td><td class="rank-top">1</td><td>2</td>
+                        </tr>
+
+                        <!-- 7/9 審查 -->
+                        <tr><td colspan="16" class="row-group-header">7/9 審查案件</td></tr>
+                        <tr class="highlight-win">
+                            <td>13-1</td><td class="text-left">AI Lar原水急毒性快速偵測</td><td>公營</td><td>新北市</td><td>環保能源</td><td class="text-left">XX科技</td>
+                            <td>79</td><td>81</td><td>0</td><td>82</td><td>84</td><td>326</td><td>81.50</td><td>11</td><td class="rank-top">1</td><td>11</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>14-3</td><td class="text-left">樂天桃園球場循環杯回收計畫</td><td>地方</td><td>桃園市</td><td>環保能源</td><td class="text-left">XX股份</td>
+                            <td>79</td><td>81</td><td>0</td><td>86</td><td>85</td><td>331</td><td>82.75</td><td>7</td><td class="rank-top">1</td><td>7</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>15-1</td><td class="text-left">遠距照護數據轉譯與行動輔助</td><td>照護</td><td>臺南市</td><td>醫療照護</td><td class="text-left">XX醫電</td>
+                            <td>80</td><td>81</td><td>0</td><td>82</td><td>80</td><td>323</td><td>80.75</td><td>14</td><td class="rank-top">1</td><td>13</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>16-1</td><td class="text-left">AI 助理功能工程管理系統</td><td>公營</td><td>宜蘭縣</td><td>行政效能</td><td class="text-left">XX科技</td>
+                            <td>80</td><td>81</td><td>0</td><td>81</td><td>82</td><td>324</td><td>81.00</td><td>13</td><td class="rank-top">1</td><td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 區塊三：優選廠商決選矩陣 -->
+        <div class="report-section">
+            <div class="section-title">優選廠商決選矩陣 (選10~選15 篩選結果)</div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>案號</th>
+                            <th width="250">出題單位 (計畫名稱)</th>
+                            <th>單位類型</th>
+                            <th>所在行政區</th>
+                            <th>應用領域</th>
+                            <th>選10</th>
+                            <th>選11</th>
+                            <th>選12</th>
+                            <th>選13</th>
+                            <th>選14</th>
+                            <th>選15</th>
+                            <th width="180">優選廠商</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td><td>翠柏新村-FaceAI健康管理</td><td>照護</td><td>新北市</td><td>醫療照護</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td>XX健康股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>2</td><td>新北捷運-輕軌轉轍器預知維護</td><td>公營</td><td>新北市</td><td>交通監理</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX智能股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>3</td><td>臺大農藝-智能割草機品質偵測</td><td>中央</td><td>臺北市</td><td>農業漁業</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX機器人股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>4</td><td>公路局高市監理-監理影像AI辨識</td><td>中央</td><td>高雄市</td><td>交通監理</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX股份有限公司</td>
+                        </tr>
+                        <tr>
+                            <td>5</td><td>公路局高雄監理-小客車外觀檢驗</td><td>中央</td><td>高雄市</td><td>交通監理</td>
+                            <td></td><td></td><td></td><td class="check-mark">✓</td><td class="check-mark">✓</td><td></td><td>XX股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>6</td><td>金門酒廠-高粱酒瓶AI品檢</td><td>公營</td><td>金門縣</td><td>產業應用</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX科技股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>7</td><td>花蓮觀光處-微型水力發電評估</td><td>地方</td><td>花蓮縣</td><td>環保能源</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX綠能股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>8</td><td>高市交大-AI辨速專案</td><td>地方</td><td>高雄市</td><td>公共安全</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX科技有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>9</td><td>嘉市社會處-孤獨長者AI社交陪伴</td><td>地方</td><td>嘉義市</td><td>醫療照護</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>11</td><td>嘉大-智慧白蝦養殖管理</td><td>中央</td><td>嘉義市</td><td>農業漁業</td>
+                            <td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX國際股份有限公司</td>
+                        </tr>
+                        <tr class="highlight-win">
+                            <td>13</td><td>台水十二區-AI原水急毒偵測</td><td>公營</td><td>新北市</td><td>環保能源</td>
+                            <td></td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td class="check-mark">✓</td><td>XX科技有限公司</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">* 註：✓ 表示該案件在該篩選標準下獲得推薦進入下一階段。</p>
+        </div>
+    </main>
+	    <!-- JavaScript 邏輯區 -->
+    <script>
+        // 1. 展開/收合功能
+        function toggleDetails(id) {
+            const row = document.getElementById(id);
+            row.classList.toggle('hidden-row');
+            row.classList.toggle('expanded');
+        }
+
+        // 2. 編輯廠商資料功能
+        function toggleEditMode(rowId) {
+            const container = document.getElementById(rowId);
+            const btn = document.getElementById('edit-btn-1');
+            const fields = container.querySelectorAll('.detail-value');
+            const isEditing = btn.getAttribute('data-editing') === 'true';
+
+            if (!isEditing) {
+                fields.forEach(f => { f.contentEditable = true; f.classList.add('editing'); });
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> 儲存資料';
+                btn.style.backgroundColor = 'var(--success-color)';
+                btn.setAttribute('data-editing', 'true');
+            } else {
+                fields.forEach(f => { f.contentEditable = false; f.classList.remove('editing'); });
+                btn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> 編輯資料';
+                btn.style.backgroundColor = '';
+                btn.setAttribute('data-editing', 'false');
+                alert('基本資料已暫存！');
+            }
+        }
+
+        // 3. 即時評分計算邏輯
+        // 初始化評分監聽器
+document.addEventListener('input', function(e) {
+    // 檢查是否為評分輸入框
+    if (e.target.classList.contains('score-input')) {
+        calculateScores();
+        triggerAutoSave();
+    }
+    // 檢查是否為評語區
+    if (e.target.id === 'comment-area') {
+        triggerAutoSave();
+    }
+});
+
+function calculateScores() {
+    let grandTotal = 0;
+    const rows = document.querySelectorAll('.criteria-row');
+
+    rows.forEach(row => {
+        const input = row.querySelector('.score-input');
+        const weightedCol = row.querySelector('.weighted-score');
+        const weight = parseFloat(input.dataset.weight);
+        let val = parseFloat(input.value) || 0;
+
+        if (val > 100) {
+            input.classList.add('error');
+            val = 0;
+        } else {
+            input.classList.remove('error');
+        }
+
+        const weighted = (val * weight).toFixed(1);
+        weightedCol.innerText = weighted;
+        grandTotal += parseFloat(weighted);
+    });
+
+    document.getElementById('grand-total').innerText = grandTotal.toFixed(1);
+}
+
+let saveTimer;
+function triggerAutoSave() {
+    const statusLabel = document.getElementById('save-status');
+    statusLabel.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 同步中...';
+    
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+        statusLabel.innerHTML = '<i class="fa-solid fa-cloud-check" style="color:var(--success-color)"></i> 已自動暫存';
+    }, 800); 
+}
+    </script>
+
+</body>
+</html>

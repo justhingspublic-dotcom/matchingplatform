@@ -8,116 +8,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card {
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .logo-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
         }
     </style>
 </head>
-<body class="antialiased">
-    <div class="container mx-auto px-4">
-        <!-- Header -->
-        <div class="text-center mb-16">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-6">
-                <i class="fa-solid fa-lightbulb text-purple-600 text-3xl"></i>
-            </div>
-            <h1 class="text-5xl font-bold text-white mb-4">實證媒合平台</h1>
-            <p class="text-xl text-white/90 font-light">Innovation Matchmaking Platform</p>
-            <p class="text-sm text-white/70 mt-3">政府出題 • 企業解題 • 創新媒合</p>
-        </div>
+<body class="bg-gray-50 h-screen flex flex-col items-center justify-center">
 
-        <!-- Selection Cards -->
-        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <!-- Frontend Card -->
-            <a href="frontend/home.html" class="card block bg-white rounded-2xl shadow-xl overflow-hidden group">
-                <div class="p-10 text-center">
-                    <div class="logo-icon text-blue-500 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">前台系統</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        提供新創團隊與企業瀏覽挑戰、提交提案、查詢時程等功能
-                    </p>
-                    <div class="space-y-3 text-left mb-8">
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>尋找場域實證挑戰</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>線上提案申請與追蹤</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>計畫時程與活動查詢</span>
-                        </div>
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white font-bold rounded-lg group-hover:bg-blue-600 transition-colors">
-                        進入前台
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Backend CMS Card -->
-            <a href="cms_export/index.html" class="card block bg-white rounded-2xl shadow-xl overflow-hidden group">
-                <div class="p-10 text-center">
-                    <div class="logo-icon text-purple-600 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-gear"></i>
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">後台 CMS</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        提供管理人員進行案件管理、評分審查、數據統計等後台操作
-                    </p>
-                    <div class="space-y-3 text-left mb-8">
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>案件動態管理與編輯</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>評分系統與審查記錄</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <i class="fa-solid fa-check-circle text-green-500"></i>
-                            <span>統計報表與數據分析</span>
-                        </div>
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white font-bold rounded-lg group-hover:bg-purple-700 transition-colors">
-                        進入後台
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- Footer Note -->
-        <div class="text-center mt-16 text-white/60 text-sm">
-            <p class="mb-2">
-                <i class="fa-solid fa-info-circle"></i> 測試環境 - Demo Version
-            </p>
-            <p>&copy; 2025 Innovation Matchmaking Platform. All Rights Reserved.</p>
-        </div>
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">實證媒合平台</h1>
+        <p class="text-gray-500">Innovation Matchmaking Platform</p>
     </div>
+
+    <div class="flex flex-col sm:flex-row gap-6 w-full max-w-md px-6">
+        <a href="frontend/home.html" class="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-6 px-4 rounded-lg shadow-sm hover:shadow-md hover:border-blue-500 hover:text-blue-600 transition-all text-center text-lg">
+            前台系統
+        </a>
+        <a href="cms_export/index.html" class="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-6 px-4 rounded-lg shadow-sm hover:shadow-md hover:border-purple-500 hover:text-purple-600 transition-all text-center text-lg">
+            後台 CMS
+        </a>
+    </div>
+
+    <div class="mt-12 text-center">
+        <p class="text-sm text-gray-400 bg-gray-100 px-4 py-2 rounded-full inline-block">
+            ⚠️ 此頁面僅供 Demo 使用
+        </p>
+    </div>
+
 </body>
 </html>

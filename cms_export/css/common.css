@@ -1,0 +1,123 @@
+:root {
+    --primary-color: #00796b;
+    --secondary-bg: #f4f7f6;
+    --text-main: #333;
+    --border-color: #e0e0e0;
+    --success-color: #28a745;
+    --warning-color: #ff9800;
+    --danger-color: #d32f2f;
+    --info-color: #1976d2;
+    
+    /* 其他變數 */
+    --bg-light: #f8f9fa;
+    --text-dark: #2c3e50;
+    --excel-header: #f8f9fa;
+}
+
+body {
+    font-family: "Microsoft JhengHei", sans-serif;
+    margin: 0;
+    display: flex;
+    background-color: var(--secondary-bg);
+    color: var(--text-main);
+}
+
+/* 左側導覽列 */
+.sidebar {
+    width: 240px;
+    background-color: #fff;
+    height: 100vh;
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.menu-item {
+    padding: 15px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    color: #555;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.menu-item i { width: 25px; margin-right: 10px; }
+.menu-item:hover, .menu-item.active {
+    background-color: #e0f2f1;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* 主要內容區 */
+.main-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 通用表格樣式 */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th {
+    background: #fcfcfc;
+    color: #555;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+/* 通用按鈕樣式 */
+.btn {
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.btn-outline { border: 1px solid #ccc; background: white; color: #555; }
+.btn-primary { background: var(--primary-color); color: white; }
+.btn-danger { background: #fff; color: var(--danger-color); border: 1px solid var(--danger-color); }
+
+/* 通用標籤 */
+.tag { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; background: #eee; }
+.tag-pass { background: #e8f5e9; color: var(--success-color); }
+.tag-review { background: #fff3e0; color: var(--warning-color); }

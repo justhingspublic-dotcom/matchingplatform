@@ -1,0 +1,110 @@
+/* Stepper 進度條 */
+.stepper {
+    display: flex;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.step {
+    text-align: center;
+    min-width: 100px;
+    padding: 15px 10px;
+    color: #ccc;
+    position: relative;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.step:hover { background-color: #f9f9f9; }
+.step.active { color: var(--primary-color); font-weight: bold; background-color: #e0f2f1; }
+.step i.step-icon { font-size: 1.4rem; margin-bottom: 8px; display: block; }
+
+/* 階段刪除按鈕 (右上角懸浮) */
+.step-delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffebee;
+    color: var(--danger-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    opacity: 0; /* 預設隱藏 */
+    transition: 0.2s;
+    border: 1px solid #ffcdd2;
+}
+.step:hover .step-delete-btn { opacity: 1; }
+.step-delete-btn:hover { background: var(--danger-color); color: white; transform: scale(1.1); }
+
+/* 階段編輯按鈕 (文字旁) */
+.step-edit-btn {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    transition: 0.2s;
+    vertical-align: middle;
+}
+.step:hover .step-edit-btn { opacity: 1; color: var(--info-color); }
+
+/* Tabs */
+.tabs { display: flex; margin-bottom: 0px; border-bottom: 1px solid var(--border-color); overflow-x: auto; }
+.tab { 
+    padding: 12px 20px; 
+    cursor: pointer; 
+    border-radius: 8px 8px 0 0; 
+    background: #eee; 
+    margin-right: 4px; 
+    color: #666; 
+    transition: 0.3s; 
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+.tab.active { background: white; color: var(--primary-color); border: 1px solid var(--border-color); border-bottom: 2px solid white; font-weight: bold; }
+
+.add-tab-btn { font-size: 1.2rem; padding: 5px 15px; color: #999; }
+.add-tab-btn:hover { color: var(--primary-color); }
+
+/* 表格與內容區塊 */
+.content-box {
+    background: white;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    min-height: 400px;
+}
+
+/* 特定按鈕樣式 */
+.btn-add { background: var(--primary-color); color: white; }
+.btn-delete { background: #fff; color: var(--danger-color); border: 1px solid #e0e0e0; }
+
+/* 明細版型樣式 */
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr 140px 1fr;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+.detail-label { font-weight: bold; color: #555; background: #eceff1; padding: 6px 10px; border-radius: 3px; text-align: right; display: flex; align-items: center; justify-content: flex-end; }
+.detail-value { padding: 6px 10px; border-bottom: 1px solid #eee; background: #fff; line-height: 1.6; }
+.full-width { grid-column: span 3; }

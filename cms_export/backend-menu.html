@@ -5,183 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>政府場域實證 - 後台案件管理系統 (首頁總覽)</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #00796b;
-            --secondary-bg: #f4f7f6;
-            --text-main: #333;
-            --border-color: #e0e0e0;
-            --success-color: #28a745;
-            --warning-color: #ff9800;
-            --danger-color: #d32f2f;
-            --info-color: #1976d2;
-        }
-
-        body {
-            font-family: "Microsoft JhengHei", sans-serif;
-            margin: 0;
-            display: flex;
-            background-color: var(--secondary-bg);
-            color: var(--text-main);
-        }
-
-        /* 左側導覽列 */
-        .sidebar {
-            width: 240px;
-            background-color: #fff;
-            height: 100vh;
-            border-right: 1px solid var(--border-color);
-            position: fixed;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .menu-item {
-            padding: 15px 20px;
-            cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-            color: #555;
-            transition: 0.2s;
-            text-decoration: none;
-        }
-
-        .menu-item i { width: 25px; margin-right: 10px; }
-        .menu-item:hover, .menu-item.active {
-            background-color: #e0f2f1;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* 主要內容區 */
-        .main-content {
-            margin-left: 240px;
-            width: calc(100% - 240px);
-            padding: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            background: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        /* 統計卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-label { color: #666; font-size: 0.9rem; margin-bottom: 5px; }
-        .stat-value { font-size: 1.8rem; font-weight: bold; color: var(--primary-color); }
-        .stat-trend { font-size: 0.8rem; margin-top: 5px; }
-        .trend-up { color: var(--success-color); }
-
-        /* 階段概覽 */
-        .dashboard-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 4px solid var(--primary-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .stage-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .stage-box {
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            transition: 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .stage-box:hover {
-            border-color: var(--primary-color);
-            background: #f0f8f7;
-            transform: translateY(-3px);
-        }
-
-        .stage-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .stage-name { font-weight: bold; color: #444; }
-        .case-count { background: #eee; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
-
-        .progress-mini {
-            height: 6px;
-            background: #eee;
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .progress-inner { height: 100%; background: var(--primary-color); }
-
-        /* 代辦清單 */
-        .todo-list { list-style: none; padding: 0; margin: 0; }
-        .todo-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .todo-tag {
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-right: 10px;
-            min-width: 60px;
-            text-align: center;
-        }
-        .todo-urgent { background: #ffebee; color: var(--danger-color); }
-        .todo-normal { background: #e3f2fd; color: var(--info-color); }
-        .todo-text { flex: 1; font-size: 0.9rem; }
-        .todo-date { color: #999; font-size: 0.8rem; }
-
-    </style>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/backend-menu.css">
 </head>
 <body>
 
@@ -228,88 +53,88 @@
         </div>
 
         <!-- 計畫階段概覽 -->
-<div class="dashboard-section">
-    <div class="section-title">實證計畫生命週期管理</div>
-    <div class="stage-container">
-        <!-- 1. 出題 -->
-        <a href="index.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-bullhorn"></i> 1. 出題公告階段</span>
-                <span class="case-count">已完成</span>
-            </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 100%; background: var(--success-color);"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>機關出題：15 件</div>
-                <div style="color: var(--primary-color); font-weight: bold;">本月新增出題：3 件</div>
-            </div>
-        </a>
+        <div class="dashboard-section">
+            <div class="section-title">實證計畫生命週期管理</div>
+            <div class="stage-container">
+                <!-- 1. 出題 -->
+                <a href="index.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-bullhorn"></i> 1. 出題公告階段</span>
+                        <span class="case-count">已完成</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 100%; background: var(--success-color);"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>機關出題：15 件</div>
+                        <div style="color: var(--primary-color); font-weight: bold;">本月新增出題：3 件</div>
+                    </div>
+                </a>
 
-        <!-- 2. 徵件 -->
-        <a href="backend-startup-management.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-lightbulb"></i> 2. 解題徵件階段</span>
-                <span class="case-count">已完成</span>
-            </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 100%; background: var(--success-color);"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>入選家數：12 / 投件 42 件</div>
-                <div style="color: var(--primary-color); font-weight: bold;">本月新增解題申請：8 件</div>
-            </div>
-        </a>
+                <!-- 2. 徵件 -->
+                <a href="backend-startup-management.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-lightbulb"></i> 2. 解題徵件階段</span>
+                        <span class="case-count">已完成</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 100%; background: var(--success-color);"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>入選家數：12 / 投件 42 件</div>
+                        <div style="color: var(--primary-color); font-weight: bold;">本月新增解題申請：8 件</div>
+                    </div>
+                </a>
 
-        <!-- 3. 簽約 -->
-        <a href="backend-contract-management.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-file-signature"></i> 3. 評選簽約階段</span>
-                <span class="case-count">進行中</span>
-            </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 85%;"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>契約簽署進度：10 / 12 件</div>
-                <div style="color: var(--info-color);">第一期款撥付完成：8 件</div>
-            </div>
-        </a>
+                <!-- 3. 簽約 -->
+                <a href="backend-contract-management.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-file-signature"></i> 3. 評選簽約階段</span>
+                        <span class="case-count">進行中</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 85%;"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>契約簽署進度：10 / 12 件</div>
+                        <div style="color: var(--info-color);">第一期款撥付完成：8 件</div>
+                    </div>
+                </a>
 
-        <!-- 4. 期中 -->
-        <a href="backend-midterm-management.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-list-check"></i> 4. 期中管考階段</span>
-                <span class="case-count" style="background: var(--warning-color); color: white;">目前重點</span>
-            </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 30%;"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>月份工作紀錄繳交：45 / 60 份</div>
-                <div style="color: var(--danger-color);">期中訪視三方時間敲定：5 / 12 家</div>
-            </div>
-        </a>
+                <!-- 4. 期中 -->
+                <a href="backend-midterm-management.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-list-check"></i> 4. 期中管考階段</span>
+                        <span class="case-count" style="background: var(--warning-color); color: white;">目前重點</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 30%;"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>月份工作紀錄繳交：45 / 60 份</div>
+                        <div style="color: var(--danger-color);">期中訪視三方時間敲定：5 / 12 家</div>
+                    </div>
+                </a>
 
-        <!-- 5. 驗收 -->
-        <a href="backend-acceptance-management.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-clipboard-check"></i> 5. 期末驗收階段</span>
-                <span class="case-count">未開始</span>
-            </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 0%;"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>期末審查預計啟動：2026/10</div>
-                <div style="color: #999;">期末審查三方時間敲定：0 / 12 家</div>
-            </div>
-        </a>
+                <!-- 5. 驗收 -->
+                <a href="backend-acceptance-management.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-clipboard-check"></i> 5. 期末驗收階段</span>
+                        <span class="case-count">未開始</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 0%;"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>期末審查預計啟動：2026/10</div>
+                        <div style="color: #999;">期末審查三方時間敲定：0 / 12 家</div>
+                    </div>
+                </a>
 
-        <!-- 6. 結案 -->
-        <a href="backend-2payment-management.html" class="stage-box">
-            <div class="stage-header">
-                <span class="stage-name"><i class="fa-solid fa-box-archive"></i> 6. 結案請款階段</span>
-                <span class="case-count">未開始</span>
+                <!-- 6. 結案 -->
+                <a href="backend-2payment-management.html" class="stage-box">
+                    <div class="stage-header">
+                        <span class="stage-name"><i class="fa-solid fa-box-archive"></i> 6. 結案請款階段</span>
+                        <span class="case-count">未開始</span>
+                    </div>
+                    <div class="progress-mini"><div class="progress-inner" style="width: 0%;"></div></div>
+                    <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
+                        <div>結案報告/會計查核已完成：0 件</div>
+                        <div style="color: var(--success-color);">第二期款撥付完成：0 件</div>
+                    </div>
+                </a>
             </div>
-            <div class="progress-mini"><div class="progress-inner" style="width: 0%;"></div></div>
-            <div style="font-size: 0.8rem; color: #666; line-height: 1.5;">
-                <div>結案報告/會計查核已完成：0 件</div>
-                <div style="color: var(--success-color);">第二期款撥付完成：0 件</div>
-            </div>
-        </a>
-    </div>
-</div>
+        </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <!-- 代辦提醒 -->

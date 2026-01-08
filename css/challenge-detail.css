@@ -1,0 +1,25 @@
+/* ==========================================
+   挑戰詳情頁樣式 (Challenge Detail Page Styles)
+   ========================================== */
+
+.spec-table th {
+    width: 160px;
+    background-color: #f9fafb;
+    color: #374151;
+    font-weight: 700;
+    text-align: left;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+}
+
+.spec-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.spec-header {
+    background: linear-gradient(to right, #71717a, #3f3f46);
+}

@@ -12,94 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#005a87',     /* SME dark blue */
-                        secondary: '#4facfe',   /* Lighter blue */
-                        accent: '#ffb400',      /* Yellow accent */
-                        'primary-dark': '#003d5c',
-                        'bg-light': '#f3f4f6',
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans TC', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'md': '0.375rem',
-                        'lg': '0.5rem',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .form-section-header {
-            background-color: #005a87;
-            color: white;
-            padding: 12px 20px;
-            font-weight: 700;
-            border-radius: 4px 4px 0 0;
-        }
-        .form-label-side {
-            background-color: #f3f4f6; /* bg-gray-100 */
-            color: #374151; /* text-gray-700 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            font-weight: 700;
-            font-size: 15px;
-            width: 140px;
-            border-left: 4px solid #005a87; /* primary blue left border */
-        }
-        .action-bar-fixed {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            border-top: 1px solid #e5e7eb;
-            padding: 16px 0;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
-            z-index: 50;
-        }
-        .required::after {
-            content: " *";
-            color: #ef4444;
-            margin-left: 2px;
-        }
-        .input-field {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9fafb;
-            outline: none;
-            transition: all 0.2s;
-        }
-        .input-field:focus {
-            border-color: #005a87;
-            background-color: white;
-            box-shadow: 0 0 0 2px rgba(0, 90, 135, 0.1);
-        }
-        .upload-zone {
-            border: 2px dashed #e5e7eb;
-            padding: 30px;
-            text-align: center;
-            border-radius: 4px;
-            background-color: #f9fafb;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .upload-zone:hover {
-            border-color: #005a87; /* Changed from teal-gov to primary blue */
-            background-color: #f0f4f8;
-        }
-    </style>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/challenge-apply.css">
 </head>
 <body class="font-sans text-gray-800 bg-gray-100 antialiased">
 
@@ -278,25 +193,8 @@
 
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
-    <script>
-        document.getElementById('proposal-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Redirect to success page
-            window.location.href = 'proposal-success.html';
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('main-nav');
-            if (nav) {
-                if (window.scrollY > 10) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
-            }
-        });
-    </script>
+    <script src="js/common.js"></script>
+    <script src="js/challenge-apply.js"></script>
 
 </body>
 </html>

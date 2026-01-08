@@ -12,48 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#005a87',     /* Law SME dark blue */
-                        secondary: '#4facfe',   /* Lighter blue */
-                        accent: '#ffb400',      /* Yellow accent */
-                        'primary-dark': '#003d5c',
-                        'bg-light': '#f3f4f6',
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans TC', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .gov-table th {
-            background-color: #005a87;
-            color: white;
-            font-weight: 500;
-            text-align: center;
-            padding: 12px 8px;
-            font-size: 14px;
-        }
-        .gov-table td {
-            padding: 16px 12px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 14px;
-        }
-        .filter-radio input:checked + label {
-            color: #005a87;
-            font-weight: bold;
-        }
-        .filter-radio input:checked + label::before {
-            border-color: #005a87;
-            background-color: #005a87;
-            box-shadow: inset 0 0 0 3px white;
-        }
-    </style>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/calendar.css">
 </head>
 <body class="font-sans text-gray-800 bg-gray-50 antialiased">
 
@@ -400,28 +361,7 @@
 
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('main-nav');
-            if (nav) {
-                if (window.scrollY > 10) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
-            }
-        });
-
-        // Filter Radio Logic (Custom Style)
-        const labels = document.querySelectorAll('.filter-radio label');
-        labels.forEach(label => {
-            const input = document.getElementById(label.getAttribute('for'));
-            input.addEventListener('change', () => {
-                // Since they are native radios, only the checked one fires 'change' in most cases
-                // but we might need to handle the sibling labels if needed.
-            });
-        });
-    </script>
+    <script src="js/common.js"></script>
+    <script src="js/calendar.js"></script>
 </body>
 </html>

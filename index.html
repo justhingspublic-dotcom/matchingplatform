@@ -12,44 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS (via CDN for static page) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#005a87',     /* Law SME dark blue */
-                        secondary: '#4facfe',   /* Lighter blue */
-                        accent: '#ffb400',      /* Yellow accent */
-                        'primary-dark': '#003d5c',
-                        'bg-light': '#f3f4f6',
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans TC', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'none': '0',
-                        'sm': '0.125rem',
-                        'DEFAULT': '0.25rem',
-                        'md': '0.375rem',
-                        'lg': '0.5rem',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .hero-gradient {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .gov-box-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-    </style>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="font-sans text-gray-800 bg-gray-50 antialiased">
 
@@ -415,18 +380,6 @@
 
     <!-- Load Header Script -->
     <script src="js/header.js?v=2"></script>
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('main-nav');
-            if (nav) {
-                if (window.scrollY > 10) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
-            }
-        });
-    </script>
+    <script src="js/common.js"></script>
 </body>
 </html>

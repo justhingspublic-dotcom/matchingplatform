@@ -1,0 +1,26 @@
+/* ==========================================
+   前台共用樣式 (Frontend Common Styles)
+   使用 Tailwind CSS CDN + 自定義樣式
+   ========================================== */
+
+/* Hero Section 共用樣式 */
+.hero-gradient {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.gov-box-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Navbar Scroll Effect */
+#main-nav.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}

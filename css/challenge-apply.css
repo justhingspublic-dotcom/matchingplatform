@@ -1,0 +1,75 @@
+/* ==========================================
+   提案申請頁樣式 (Challenge Apply Page Styles)
+   ========================================== */
+
+.form-section-header {
+    background-color: #005a87;
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    border-radius: 4px 4px 0 0;
+}
+
+.form-label-side {
+    background-color: #f3f4f6;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    width: 140px;
+    border-left: 4px solid #005a87;
+}
+
+.action-bar-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 16px 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+    z-index: 50;
+}
+
+.required::after {
+    content: " *";
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9fafb;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-field:focus {
+    border-color: #005a87;
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(0, 90, 135, 0.1);
+}
+
+.upload-zone {
+    border: 2px dashed #e5e7eb;
+    padding: 30px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.upload-zone:hover {
+    border-color: #005a87;
+    background-color: #f0f4f8;
+}

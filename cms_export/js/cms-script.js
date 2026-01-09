@@ -46,6 +46,7 @@ const DEFAULT_STAGES = [
                             status: "審核通過",
                             statusClass: "tag tag-pass",
                             isPublished: true, // 前台上架狀態
+                            matchingStatus: "matching", // 媒合狀態：matching(媒合中) | matched(已媒合) | signing(簽約中)
                             details: [
                                 { label: "出題單位全銜", value: "臺北市政府交通局" },
                                 { label: "承辦人/職稱", value: "林小明 (專案技正)" },
@@ -73,6 +74,7 @@ const DEFAULT_STAGES = [
                             status: "審核中",
                             statusClass: "tag tag-review",
                             isPublished: false, // 前台上架狀態
+                            matchingStatus: "signing", // 媒合狀態：matching(媒合中) | matched(已媒合) | signing(簽約中)
                             details: [
                                 { label: "出題單位全銜", value: "衛生福利部臺北醫院" },
                                 { label: "承辦人/職稱", value: "張雅婷 (資訊室主任)" },
@@ -681,11 +683,12 @@ function renderTypeList(container, tabData, isLastTab) {
         </div>
     `;
 
-    // 計算總欄位數（基本欄位 + 選擇的詳情欄位 + 前台狀態欄 + 動作欄）
+    // 計算總欄位數（基本欄位 + 選擇的詳情欄位 + 媒合狀態欄(僅機關出題) + 前台狀態欄 + 動作欄）
     const baseColCount = data.headers.length;
-    const totalColCount = baseColCount + selectedDetailCols.length + 2; // +1 for publish status, +1 for action column
+    const matchingStatusColCount = isAgencyList ? 1 : 0; // 機關出題列表才有媒合狀態欄
+    const totalColCount = baseColCount + selectedDetailCols.length + matchingStatusColCount + 2; // +1 for publish status, +1 for action column
 
-    // 生成表頭（基本欄位 + 選擇的詳情欄位 + 前台狀態）
+    // 生成表頭（基本欄位 + 選擇的詳情欄位 + 媒合狀態 + 前台狀態）
     const baseHeadersHtml = data.headers.map((h, idx) => `
         <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
             ${h} ${getSortIcon(idx)}
@@ -697,6 +700,11 @@ function renderTypeList(container, tabData, isLastTab) {
             <i class="fa-solid fa-plus-circle" style="font-size:0.7em; margin-right:4px;"></i>${label}
         </th>
     `).join('');
+    
+    // 媒合狀態欄位標題（僅機關出題列表顯示）
+    const matchingStatusHeaderHtml = isAgencyList ? `
+        <th style="text-align: center;">媒合狀態</th>
+    ` : '';
     
     // 前台狀態欄位標題
     const publishStatusHeaderHtml = `
@@ -717,7 +725,7 @@ function renderTypeList(container, tabData, isLastTab) {
                 </div>
             </div>
             <table class="data-table">
-                <thead><tr>${baseHeadersHtml}${detailHeadersHtml}${publishStatusHeaderHtml}<th width="120">動作</th></tr></thead>
+                <thead><tr>${baseHeadersHtml}${detailHeadersHtml}${matchingStatusHeaderHtml}${publishStatusHeaderHtml}<th width="180" style="text-align: center;">動作</th></tr></thead>
                 <tbody>
     `;
 
@@ -733,10 +741,31 @@ function renderTypeList(container, tabData, isLastTab) {
             <td><span class="${item.statusClass}">${item.status}</span></td>
         `;
         
+        // 媒合狀態下拉選單（僅機關出題列表顯示）
+        const matchingStatus = item.matchingStatus || 'matching';
+        const matchingStatusOptions = [
+            { value: 'matching', label: '媒合中' },
+            { value: 'matched', label: '已媒合' },
+            { value: 'signing', label: '簽約中' }
+        ];
+        
+        const matchingStatusCellHtml = isAgencyList ? `
+            <td style="text-align: center; vertical-align: middle;">
+                <select class="matching-status-select" 
+                        onchange="changeMatchingStatus('${item.id}', this.value)">
+                    ${matchingStatusOptions.map(opt => `
+                        <option value="${opt.value}" ${opt.value === matchingStatus ? 'selected' : ''}>
+                            ${opt.label}
+                        </option>
+                    `).join('')}
+                </select>
+            </td>
+        ` : '';
+        
         // 前台狀態開關
         const isPublished = item.isPublished !== false; // 預設為上架
         const publishStatusCellHtml = `
-            <td style="text-align: center;">
+            <td style="text-align: center; vertical-align: middle;">
                 <div class="publish-toggle-cell">
                     <label class="switch" title="${isPublished ? '目前已上架，點擊下架' : '目前已下架，點擊上架'}">
                         <input type="checkbox" ${isPublished ? 'checked' : ''} onchange="togglePublishStatus('${item.id}', this.checked)">
@@ -758,13 +787,54 @@ function renderTypeList(container, tabData, isLastTab) {
             return `<td style="background: #fafff8; font-size: 0.85rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${value.replace(/"/g, '&quot;').replace(/<[^>]*>/g, '')}">${displayValue}</td>`;
         }).join('');
         
+        // 根據媒合狀態生成操作按鈕
+        let actionButtonsHtml = '';
+        if (isAgencyList) {
+            // 機關出題列表 - 根據媒合狀態顯示不同按鈕
+            switch (matchingStatus) {
+                case 'matching':
+                    // 媒合中：可補件
+                    actionButtonsHtml = `
+                        <button class="btn btn-info" onclick="handleSupplement('${item.id}')" title="要求廠商補件">補件</button>
+                        <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')" title="檢視詳情"><i class="fa-solid fa-eye"></i></button>
+                    `;
+                    break;
+                case 'matched':
+                    // 已媒合：僅檢視
+                    actionButtonsHtml = `
+                        <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')" title="檢視詳情">檢視</button>
+                    `;
+                    break;
+                case 'signing':
+                    // 簽約中：可核定、退件
+                    actionButtonsHtml = `
+                        <button class="btn btn-success" onclick="handleApprove('${item.id}')" title="核定通過">核定</button>
+                        <button class="btn btn-outline" style="color:#e65100; border-color:#e65100;" onclick="handleReject('${item.id}')" title="退件">退件</button>
+                        <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')" title="檢視詳情"><i class="fa-solid fa-eye"></i></button>
+                    `;
+                    break;
+                default:
+                    actionButtonsHtml = `
+                        <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')" title="檢視詳情">詳情</button>
+                    `;
+            }
+        } else {
+            // 非機關出題列表 - 使用預設按鈕
+            actionButtonsHtml = `
+                <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')" title="檢視詳情">詳情</button>
+            `;
+        }
+        
         html += `
             <tr class="${isPublished ? '' : 'row-unpublished'}">
                 ${baseCellsHtml}
                 ${detailCellsHtml}
+                ${matchingStatusCellHtml}
                 ${publishStatusCellHtml}
-                <td>
-                    <button class="btn btn-edit" onclick="toggleDetailRow('${item.id}')"><i class="fa-solid fa-eye"></i> 詳情</button>
+                <td style="vertical-align: middle;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 4px;">
+                        ${actionButtonsHtml}
+                    </div>
                 </td>
             </tr>
             <tr id="${item.id}" class="hidden-row" style="display:none; background:#fafafa;">
@@ -856,6 +926,140 @@ function renderTypeList(container, tabData, isLastTab) {
             toast.style.animation = 'slideOut 0.3s ease';
             setTimeout(() => toast.remove(), 300);
         }, 2500);
+    };
+    
+    // ==========================================
+    // 媒合狀態切換與操作處理
+    // ==========================================
+    
+    // 切換媒合狀態
+    window.changeMatchingStatus = function(id, newStatus) {
+        const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+        const item = currentTab.data.items.find(i => i.id === id);
+        if (item) {
+            const oldStatus = item.matchingStatus || 'matching';
+            item.matchingStatus = newStatus;
+            
+            // 狀態名稱對應
+            const statusLabels = {
+                'matching': '媒合中',
+                'matched': '已媒合',
+                'signing': '簽約中'
+            };
+            
+            // 顯示狀態變更提示
+            showMatchingStatusToast(
+                `${item.col2 || item.col1}`,
+                `狀態已從「${statusLabels[oldStatus]}」變更為「${statusLabels[newStatus]}」`,
+                newStatus
+            );
+            
+            saveState();
+        }
+    };
+    
+    // 補件操作（媒合中狀態）
+    window.handleSupplement = function(id) {
+        const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+        const item = currentTab.data.items.find(i => i.id === id);
+        if (item) {
+            // 這裡可以開啟補件對話框或執行其他邏輯
+            const confirmed = confirm(`確定要對「${item.col2 || item.col1}」發送補件通知？\n\n廠商將收到補件要求通知。`);
+            if (confirmed) {
+                showMatchingStatusToast(
+                    `補件通知已發送`,
+                    `已通知「${item.col2 || item.col1}」進行補件`,
+                    'matching'
+                );
+            }
+        }
+    };
+    
+    // 核定操作（簽約中狀態）
+    window.handleApprove = function(id) {
+        const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+        const item = currentTab.data.items.find(i => i.id === id);
+        if (item) {
+            const confirmed = confirm(`確定要核定「${item.col2 || item.col1}」？\n\n核定後將進入下一階段。`);
+            if (confirmed) {
+                // 可以自動變更狀態或執行其他邏輯
+                showMatchingStatusToast(
+                    `核定成功`,
+                    `「${item.col2 || item.col1}」已核定通過`,
+                    'matched'
+                );
+            }
+        }
+    };
+    
+    // 退件操作（簽約中狀態）
+    window.handleReject = function(id) {
+        const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+        const item = currentTab.data.items.find(i => i.id === id);
+        if (item) {
+            const reason = prompt(`請輸入退件原因：\n\n（「${item.col2 || item.col1}」將收到退件通知）`);
+            if (reason !== null && reason.trim() !== '') {
+                // 退件後可將狀態改回媒合中
+                item.matchingStatus = 'matching';
+                showMatchingStatusToast(
+                    `已退件`,
+                    `「${item.col2 || item.col1}」已退件，狀態變更為「媒合中」`,
+                    'matching'
+                );
+                saveState();
+            }
+        }
+    };
+    
+    // 媒合狀態 Toast 提示
+    window.showMatchingStatusToast = function(title, message, status) {
+        const existingToast = document.getElementById('matching-toast');
+        if (existingToast) existingToast.remove();
+        
+        const colors = {
+            'matching': { bg: '#e3f2fd', border: '#90caf9', text: '#1565c0' },
+            'matched': { bg: '#e8f5e9', border: '#a5d6a7', text: '#2e7d32' },
+            'signing': { bg: '#fff3e0', border: '#ffcc80', text: '#ef6c00' }
+        };
+        const color = colors[status] || colors['matching'];
+        
+        const icons = {
+            'matching': 'fa-spinner',
+            'matched': 'fa-circle-check',
+            'signing': 'fa-file-signature'
+        };
+        
+        const toast = document.createElement('div');
+        toast.id = 'matching-toast';
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: ${color.bg};
+            border: 1px solid ${color.border};
+            color: ${color.text};
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        `;
+        toast.innerHTML = `
+            <i class="fa-solid ${icons[status] || 'fa-info-circle'}" style="font-size: 1.5rem;"></i>
+            <div>
+                <div style="font-weight: bold;">${title}</div>
+                <div style="font-size: 0.85rem; opacity: 0.8;">${message}</div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
     };
 }
 

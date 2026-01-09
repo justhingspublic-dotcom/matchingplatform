@@ -352,3 +352,22 @@ input:checked + .slider:before { transform: translateX(22px); }
         transform: translateX(50px);
     }
 }
+
+/* --- 媒合狀態控制樣式 --- */
+.matching-status-select {
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.matching-status-select:hover {
+    border-color: var(--primary-color);
+}
+
+.matching-status-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}

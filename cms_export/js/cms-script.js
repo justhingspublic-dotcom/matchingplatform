@@ -619,7 +619,6 @@ function renderTypeList(container, tabData, isLastTab) {
     }
 
     const isAgencyList = tabData.name.includes("機關") || tabData.name.includes("出題");
-    const detailTitle = isAgencyList ? `機關需求詳細規格書 (挑戰編號: ${item.col1})` : `廠商提案詳細資料 (提案編號: ${item.col1})`;
     const editBtnText = isAgencyList ? "編輯出題內容" : "編輯提案內容";
     const actionBtnHtml = isAgencyList ? `<button class="btn btn-success"><i class="fa-solid fa-paper-plane"></i> 正式發佈公告</button>` : '';
 
@@ -643,6 +642,7 @@ function renderTypeList(container, tabData, isLastTab) {
     `;
 
     displayItems.forEach((item, idx) => {
+        const detailTitle = isAgencyList ? `機關需求詳細規格書 (挑戰編號: ${item.col1})` : `廠商提案詳細資料 (提案編號: ${item.col1})`;
         html += `
             <tr>
                 <td>${item.col1}</td>
@@ -666,7 +666,7 @@ function renderTypeList(container, tabData, isLastTab) {
                                     ${d.value}
                                 </div>
                         `).join('')}
-                        ${(item.details && item.details.length === 0) ? '<div style="grid-column: span 4; padding: 20px; text-align: center; color: #999;">尚無詳細資料，請點擊編輯新增</div>' : ''}
+                        ${(!item.details || item.details.length === 0) ? '<div style="grid-column: span 4; padding: 20px; text-align: center; color: #999;">尚無詳細資料，請點擊編輯新增</div>' : ''}
                         </div>
                         <div style="margin-top: 15px; text-align: right;">
                             <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')">收合詳情</button>

@@ -15,56 +15,135 @@ const DEFAULT_STAGES = [
         tabs: [
             {
                 id: "tab-1-1",
-                name: "出題公告檢核",
+                name: "出題公告 (1-6)",
                 type: "TypeA", // 版型 A：清單與檢核
                 isFixed: true,
                 data: {
-                    columns: ["工項", "作業內容與日期", "需求文件檢核", "狀態", "說明"],
+                    columns: ["工項", "作業內容與日期", "需求文件檢核 (勾選完成)", "發文狀態", "說明"],
                     items: [
-                        { id: 1, title: "出題須知與公告", date: "2026-01-23", type: "線上", docs: ["(公文)作業手冊公告函", "推動作業手冊"], status: "TRUE", note: "需確認內容定稿" },
-                        { id: 2, title: "機關出題申請說明會", date: "2026-02-20", type: "實體", docs: ["說明簡報", "活動展架"], status: "FALSE", note: "於台大醫進行推廣" },
-                        { id: 3, title: "機關出題收件與審查", date: "2026-02-27", type: "線上", docs: ["出題計畫書"], status: "FALSE", note: "檢核資格" }
+                        { id: 1, title: "出題須知與公告", date: "2026-01-23", type: "線上", docs: ["(公文)114年度作業手冊公告函v1", "研發型補助計畫推動作業手冊", "出題申請公告資料0331"], status: "TRUE", note: "需確認作業手冊及申請須知內容已定稿並完成公文簽核" },
+                        { id: 2, title: "機關出題申請說明會宣傳", date: "2026-01-23 ~ 2026-02-20", type: "實體", docs: ["114採購_新創政府資源說明簡報", "EDM、FB貼文(0602審核稿)", "活動X展架、Web Banner"], status: "FALSE", note: "於台大醫、北醫等場域進行實證推廣說明" },
+                        { id: 3, title: "機關出題收件與資格審查", date: "2026-01-23 ~ 2026-02-27", type: "線上", docs: ["114出題計畫書0425", "113評鑒合格公文證書"], status: "FALSE", note: "檢核申請文件是否齊全及機構資格" },
+                        { id: 4, title: "出題審查會議籌備", date: "2026-03-02 ~ 2026-03-11", type: "實體", docs: ["委員名單說明", "機關出題共識會簡報", "開會通知單、議程"], status: "TRUE", note: "確認外聘委員名單並寄送邀請信" }
                     ]
                 }
             },
             {
                 id: "tab-1-2",
                 name: "機關出題列表",
-                type: "TypeB", // 版型 B：展開明細
+                type: "TypeList", // 改為專用 List 版型
                 isFixed: true,
                 data: {
-                    headers: ["案號", "出題單位", "題目摘要", "預算金額", "狀態"],
+                    headers: ["挑戰編號", "出題單位", "挑戰題目摘要", "預算金額", "狀態"],
                     items: [
                         {
                             id: "issue-1",
-                            col1: "114-T058",
-                            col2: "臺北市政府交通局",
-                            col3: "智慧路口：即時交通影像辨識",
+                            col1: "114-T058-AGCY",
+                            col2: `臺北市政府交通局`,
+                            col2_sub: `智慧運輸科`,
+                            col3: "智慧路口：即時交通影像辨識與分析解決方案",
                             col4: "NT$ 2,500,000",
                             status: "審核通過",
-                            statusClass: "tag-pass",
+                            statusClass: "tag tag-pass",
                             details: [
-                                { label: "承辦人", value: "林小明 (專案技正)" },
-                                { label: "聯繫電話", value: "02-2720-8889" },
-                                { label: "現況痛點", value: "路口回堵嚴重，缺乏車種辨識數據。", fullWidth: true },
-                                { label: "技術規格", value: "日間準確率 > 95%，延遲 < 2秒。", fullWidth: true }
+                                { label: "出題單位全銜", value: "臺北市政府交通局" },
+                                { label: "承辦人/職稱", value: "林小明 (專案技正)" },
+                                { label: "聯繫電話", value: "02-2720-8889 #1234" },
+                                { label: "電子郵件", value: "lin.xm@gov.taipei" },
+                                { label: "挑戰題目", value: "智慧路口：即時交通影像辨識與分析解決方案", fullWidth: true, highlight: true },
+                                { label: "技術領域分類", value: "AI 影像辨識 / 5G IoT" },
+                                { label: "建議實證場域", value: "臺北市信義區 (基隆路與忠孝東路口)" },
+                                { label: "現況問題痛點", value: "目前本市主要幹道於上下班尖峰時刻，常因固定號誌時相無法應對突發性車流，導致路口回堵嚴重。現有之感應線圈維護成本高且數據單一，缺乏車種辨識與人流分析能力，無法作為動態號誌調整之依據。", fullWidth: true },
+                                { label: "技術規格要求", value: "1. 需利用路口現有 CCTV 影像進行分析，不額外架設大型硬體為原則。<br>2. 辨識準確率：日間 > 95%，夜間 > 85% (需包含大客車、小客車、機車、行人)。<br>3. 數據延遲：影像分析數據回傳至中控中心延遲需小於 2 秒。<br>4. 介接規範：需提供標準 RESTful API 介接本局交控中心平台。", fullWidth: true },
+                                { label: "評選與審查標準", value: "技術創新性 (30%)、場域可行性 (30%)、團隊執行力 (20%)、經費編列合理性 (20%)。", fullWidth: true },
+                                { label: "預期實證效益", value: "1. 降低路口尖峰時段平均延滯時間 15% 以上。<br>2. 節省人工車流調查人力成本約 50 萬元/年。<br>3. 建立即時交通戰情儀表板，提供交通決策輔助。", fullWidth: true }
                             ]
                         },
                         {
                             id: "issue-2",
-                            col1: "114-H012",
-                            col2: "衛福部臺北醫院",
-                            col3: "AI輔助急診檢傷分類系統",
+                            col1: "114-H012-AGCY",
+                            col2: `衛生福利部臺北醫院`,
+                            col2_sub: `資訊室`,
+                            col3: "AI輔助急診檢傷分類系統實證",
                             col4: "NT$ 1,800,000",
                             status: "審核中",
-                            statusClass: "tag-review",
+                            statusClass: "tag tag-review",
                             details: [
-                                { label: "承辦人", value: "陳大文 (資訊室主任)" },
-                                { label: "聯繫電話", value: "02-2276-5566" },
-                                { label: "現況痛點", value: "急診檢傷人力不足，判斷標準不一。", fullWidth: true }
+                                { label: "出題單位全銜", value: "衛生福利部臺北醫院" }
                             ]
                         }
                     ]
+                }
+            },
+            {
+                id: "tab-1-3",
+                name: "審查委員名單",
+                type: "TypeCommittee", // 改為專用 Committee 版型
+                isFixed: true,
+                data: {
+                    headers: ["#", "姓名", "服務單位 / 職稱", "專長領域", "聯絡資訊", "邀約狀態"],
+                    items: [
+                        {
+                            id: 1,
+                            isEdit: true, // 設定第一筆為編輯模式
+                            name: "王大明",
+                            org: "國立台灣大學 資訊工程學系",
+                            pos: "特聘教授",
+                            expertise: ["人工智慧", "智慧醫療", "大數據分析"],
+                            phone: "02-3366-XXXX",
+                            email: "dmwang@ntu.edu.tw",
+                            status: "已確認",
+                            statusClass: "status-confirmed"
+                        },
+                        {
+                            id: 2,
+                            name: "李美華",
+                            org: "財團法人資訊工業策進會",
+                            pos: "資深組長",
+                            expertise: ["雲端技術", "物聯網應用"],
+                            phone: "0912-345-678",
+                            email: "mhlee@iii.org.tw",
+                            status: "已確認",
+                            statusClass: "status-confirmed"
+                        },
+                        {
+                            id: 3,
+                            name: "張志強",
+                            org: "台北醫學大學 附設醫院",
+                            pos: "副院長",
+                            expertise: ["臨床試驗", "醫療體系管理"],
+                            phone: "02-2737-XXXX",
+                            email: "strong.c@tmu.edu.tw",
+                            status: "邀約中",
+                            statusClass: "status-pending"
+                        },
+                        {
+                            id: 4,
+                            name: "林小春",
+                            org: "科技部 產學合作小組",
+                            pos: "外部審查委員",
+                            expertise: ["政府補助法規", "技術鑑價"],
+                            phone: "0920-111-222",
+                            email: "spring.lin@most.gov.tw",
+                            status: "已拒絕",
+                            statusClass: "status-declined"
+                        }
+                    ]
+                }
+            },
+            {
+                id: "tab-1-4",
+                name: "前台展示預覽與發佈",
+                type: "TypePreview",
+                isFixed: true,
+                data: {
+                    title: "智慧路口：即時交通影像辨識與分析解決方案",
+                    agency: "臺北市政府交通局",
+                    date: "115/01/30 (剩餘 42 天)",
+                    money: "新台幣 2,500,000 元 (含稅)",
+                    timeline: "決標後 6 個月內完成 POC 驗證",
+                    req: "本計畫旨在解決尖峰時刻路口壅塞問題，徵求具備邊緣運算能力之 AI 影像辨識方案。\n<ul>\n  <li><b>辨識標題：</b>需能自動區分大客車、小客車、機車、自行車及行人。</li>\n  <li><b>辨識準確率：</b>日間辨識率需達 95% 以上，夜間需達 90% 以上。</li>\n  <li><b>系統介接：</b>需提供標準 RESTful API 介接本局交控中心戰情室。</li>\n  <li><b>環境適應：</b>需能耐受戶外高溫、降雨等氣候環境。</li>\n</ul>",
+                    location: "主要實證場域：臺北市信義區基隆路與忠孝東路交叉口。\n備用實證場域：內湖科學園區瑞光路沿線主要路口。"
                 }
             }
         ]
@@ -77,38 +156,117 @@ const DEFAULT_STAGES = [
         tabs: [
             {
                 id: "tab-2-1",
-                name: "徵件作業檢核",
+                name: "解題徵件 (7-11)",
                 type: "TypeA",
                 isFixed: true,
                 data: {
-                    columns: ["工項", "作業內容與日期", "文件檢核", "狀態", "說明"],
+                    columns: ["工項", "作業內容與日期", "需求文件檢核 (勾選完成)", "發文狀態", "說明"],
                     items: [
-                        { id: 1, title: "新創解題說明會", date: "2026-04-10", type: "實體", docs: ["說明會簡報", "直播連結"], status: "PENDING", note: "預計於 TTA 舉辦" },
-                        { id: 2, title: "解題提案收件截止", date: "2026-05-15", type: "線上", docs: ["提案系統"], status: "PENDING", note: "截止時間 17:00" }
+                        { id: 7, title: "解題申請說明會", date: "2026-03-24 ~ 2026-04-24", type: "線上", docs: ["解題補助申請須知", "114解題計畫書格式範本", "114採購_0618解題說明會_簡報v2", "經費預算編列注意事項說明會簡報"], status: "FALSE", note: "1. 包含案例分享(新創採購案例簡報)。\n2. 需準備相關說明會簡報與範本文件。" },
+                        { id: 8, title: "受理解題申請與收件", date: "2026-03-24 ~ 2026-04-24", type: "線上", docs: ["申請資料(計畫書、營登、繳稅證明)", "機關提案書(如:金門酒廠AI品檢案)", "促案清單(0613v2)"], status: "FALSE", note: "1. 確認廠商資格文件齊全。\n2. 整理出題機關需求與新創解題對應規格。" },
+                        { id: 9, title: "解題審查會議(籌備)", date: "2026-04-27 ~ 2026-05-04", type: "線上", docs: ["開會通知單(機關/委員)", "114場域實證-解題審查會議議程", "解題審查會出席名單", "114年度新創採購解題廠商簡報_彙整"], status: "TRUE", note: "1. 需發文通知機關出席。\n2. 聯繫委員確認時間(0707-0710調查)。\n3. 準備保密同意書。" },
+                        { id: 10, title: "解題審查會議(執行)", date: "2026-05-07 ~ 2026-05-12", type: "實體", docs: ["簽到表", "審查作業評審保密同意書", "書面審查表(空白/個別委員)", "工作小組簡報", "新創解題審查會審查意見表", "線上評分總表_連動"], status: "FALSE", note: "1. 現場需備座位圖、評分表。\n2. 針對出題機關預期功能進行對焦。" },
+                        { id: 11, title: "解題審查結果與修正", date: "2026-05-13 ~ 2026-05-18", type: "線上", docs: ["修正對照表範例(附件2_8)", "已確定入案之新創修正計畫書"], status: "TRUE", note: "1. 需核對廠商修正內容是否符合委員意見。\n2. 確認後續簽約文件準備。" }
                     ]
                 }
             },
             {
                 id: "tab-2-2",
-                name: "新創提案列表",
-                type: "TypeB",
+                name: "入選廠商列表",
+                type: "TypeList",
                 isFixed: true,
                 data: {
-                    headers: ["編號", "提案團隊", "對應題目", "申請日期", "審查狀態"],
+                    headers: ["提案編號", "廠商名稱", "解決方案名稱", "預估經費", "狀態"],
                     items: [
                         {
-                            id: "startup-1",
-                            col1: "ST-001",
+                            id: "detail-1",
+                            col1: "114-T058-003",
                             col2: "智通科技股份有限公司",
-                            col3: "智慧路口解決方案",
-                            col4: "2026/05/10",
-                            status: "資格符",
-                            statusClass: "tag-pass",
+                            col2_sub: "統編: 12345678",
+                            col3: "AI Edge 智慧路口車流偵測系統",
+                            col4: "NT$ 2,200,000",
+                            status: "已入選",
+                            statusClass: "tag tag-blue",
                             details: [
-                                { label: "統編", value: "12345678" },
-                                { label: "負責人", value: "王小明" },
-                                { label: "提案摘要", value: "使用 Edge AI 攝影機進行邊緣運算。", fullWidth: true }
+                                { label: "負責人", value: "王大明" },
+                                { label: "成立日期", value: "109年 05月 20日" },
+                                { label: "聯絡人", value: "李小美 (專案經理)" },
+                                { label: "聯絡電話", value: "02-2655-1234" },
+                                { label: "電子郵件", value: "contact@smart-tech.com.tw" },
+                                { label: "公司網址", value: "www.smart-tech.com.tw" },
+                                { label: "通訊地址", value: "台北市內湖區瑞光路999號10樓", fullWidth: true },
+                                { label: "應用技術", value: "Edge AI, Computer Vision, 5G", fullWidth: true },
+                                { label: "團隊實績", value: "獲獎：2024 台北智慧城市黑客松 金獎、2023 經濟部新創事業獎 優選<br>專利：發明專利 I123456 號 (邊緣運算車流計數)<br>案例：新北市交通局(112)科技執法影像辨識、高雄市政府(111)5G AIoT智慧杆", fullWidth: true },
+                                { label: "問題分析", value: "目前目標路口之感應線圈老舊，維護成本高，且無法分辨車種。傳統雲端方案延遲高，無法滿足即時號誌控制需求。", fullWidth: true },
+                                { label: "技術架構", value: "採用 NVIDIA Jetson 輕量化 AI 模型部署於路側端。僅回傳去識別化數據（流量、車種、轉向）以保護個資，並提供標準 RESTful API 對接交控中心。", fullWidth: true },
+                                { label: "預期效益", value: "1. 辨識準確率 > 95% (日間) / 2. 資料延遲 < 1秒 / 3. 大幅降低影像傳輸頻寬成本。", fullWidth: true }
                             ]
+                        },
+                        {
+                            id: "detail-2",
+                            col1: "114-T058-005",
+                            col2: "雲端數據應用實驗室",
+                            col2_sub: "統編: 87654321",
+                            col3: "智慧路燈能耗監測平台",
+                            col4: "NT$ 1,800,000",
+                            status: "已入選",
+                            statusClass: "tag tag-blue",
+                            details: []
+                        }
+                    ]
+                }
+            },
+            {
+                id: "tab-2-3",
+                name: "審查委員名單",
+                type: "TypeCommittee",
+                isFixed: true,
+                data: {
+                    headers: ["#", "姓名", "服務單位 / 職稱", "專長領域", "聯絡資訊", "邀約狀態"],
+                    items: [
+                        {
+                            id: 1,
+                            name: "王大明",
+                            org: "國立台灣大學 資訊工程學系",
+                            pos: "特聘教授",
+                            expertise: ["人工智慧", "智慧醫療", "大數據分析"],
+                            phone: "02-3366-XXXX",
+                            email: "dmwang@ntu.edu.tw",
+                            status: "已確認",
+                            statusClass: "status-confirmed"
+                        },
+                        {
+                            id: 2,
+                            name: "李美華",
+                            org: "財團法人資訊工業策進會",
+                            pos: "資深組長",
+                            expertise: ["雲端技術", "物聯網應用"],
+                            phone: "0912-345-678",
+                            email: "mhlee@iii.org.tw",
+                            status: "已確認",
+                            statusClass: "status-confirmed"
+                        },
+                        {
+                            id: 3,
+                            name: "張志強",
+                            org: "台北醫學大學 附設醫院",
+                            pos: "副院長",
+                            expertise: ["臨床試驗", "醫療體系管理"],
+                            phone: "02-2737-XXXX",
+                            email: "strong.c@tmu.edu.tw",
+                            status: "邀約中",
+                            statusClass: "status-pending"
+                        },
+                        {
+                            id: 4,
+                            name: "林小春",
+                            org: "科技部 產學合作小組",
+                            pos: "外部審查委員",
+                            expertise: ["政府補助法規", "技術鑑價"],
+                            phone: "0920-111-222",
+                            email: "spring.lin@most.gov.tw",
+                            status: "已拒絕",
+                            statusClass: "status-declined"
                         }
                     ]
                 }
@@ -123,7 +281,12 @@ const DEFAULT_STAGES = [
 let appState = {
     currentStageIndex: 0,
     currentTabIndex: 0,
-    stages: []
+    stages: [],
+    sortConfig: {
+        activeTabId: null,
+        columnIndex: null,
+        direction: 'asc'
+    }
 };
 
 // 初始化
@@ -134,11 +297,9 @@ function initApp() {
 
 // 讀取狀態 (LocalStorage + Default)
 function loadState() {
-    const saved = localStorage.getItem('cms_stages_v1');
+    const saved = localStorage.getItem('cms_stages_v5'); // 升級版本號強制刷新
     if (saved) {
         appState.stages = JSON.parse(saved);
-        // 確保固定階段資料不會因為舊 Cache 而遺失 (簡單合併邏輯)
-        // 實務上這裡可能需要更複雜的 merge，但在原型中我們假設 LocalStorage 是最新的
     } else {
         appState.stages = JSON.parse(JSON.stringify(DEFAULT_STAGES));
     }
@@ -146,13 +307,73 @@ function loadState() {
 
 // 儲存狀態
 function saveState() {
-    localStorage.setItem('cms_stages_v1', JSON.stringify(appState.stages));
+    localStorage.setItem('cms_stages_v5', JSON.stringify(appState.stages));
     renderAll();
 }
 
 // ==========================================
 // 3. 渲染邏輯 (Rendering)
 // ==========================================
+
+// 排序相關 helper
+function handleSort(columnIndex) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    
+    if (appState.sortConfig.activeTabId === currentTab.id && appState.sortConfig.columnIndex === columnIndex) {
+        appState.sortConfig.direction = appState.sortConfig.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+        appState.sortConfig.activeTabId = currentTab.id;
+        appState.sortConfig.columnIndex = columnIndex;
+        appState.sortConfig.direction = 'asc';
+    }
+    renderContent();
+}
+
+function getSortIcon(colIdx) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    if (appState.sortConfig.activeTabId !== currentTab.id || appState.sortConfig.columnIndex !== colIdx) {
+        return '<i class="fa-solid fa-sort" style="color:#ccc; font-size:0.8em; margin-left:5px;"></i>';
+    }
+    return appState.sortConfig.direction === 'asc' 
+        ? '<i class="fa-solid fa-sort-up" style="color:var(--primary-color); font-size:0.8em; margin-left:5px;"></i>'
+        : '<i class="fa-solid fa-sort-down" style="color:var(--primary-color); font-size:0.8em; margin-left:5px;"></i>';
+}
+
+function getSortValue(type, item, colIdx) {
+    if (type === 'TypeList') {
+        // Headers: ["挑戰編號", "出題單位", "挑戰題目摘要", "預算金額", "狀態"]
+        switch(colIdx) {
+            case 0: return item.col1;
+            case 1: return item.col2;
+            case 2: return item.col3;
+            case 3: return parseFloat(item.col4.replace(/[^0-9.-]+/g, "")) || 0;
+            case 4: return item.status;
+            default: return '';
+        }
+    } else if (type === 'TypeCommittee') {
+        // Headers: ["#", "姓名", "服務單位 / 職稱", "專長領域", "聯絡資訊", "邀約狀態"]
+        switch(colIdx) {
+            case 0: return item.id;
+            case 1: return item.name;
+            case 2: return item.org;
+            case 3: return (Array.isArray(item.expertise) ? item.expertise.join(',') : item.expertise) || '';
+            case 4: return item.phone || item.email || '';
+            case 5: return item.status;
+            default: return '';
+        }
+    } else if (type === 'TypeA') {
+        // Columns: ["工項", "作業內容與日期", "需求文件檢核 (勾選完成)", "發文狀態", "說明"]
+        switch(colIdx) {
+            case 0: return item.id;
+            case 1: return item.date; // 優先排日期，或者可改 title
+            case 2: return item.docs.length; // 依照文件數量排序
+            case 3: return item.status;
+            case 4: return item.note || '';
+            default: return '';
+        }
+    }
+    return '';
+}
 
 function renderAll() {
     renderStepper();
@@ -175,16 +396,12 @@ function renderStepper() {
         let deleteBtnHtml = '';
         let editIconHtml = '';
 
-        // 如果是非固定階段
         if (!stage.isFixed && isActive) {
-            // 編輯按鈕：移到名稱右側
             editIconHtml = `
                 <i class="fa-solid fa-pen step-edit-btn" 
                    onclick="editStageName(${index}, event)" 
                    title="編輯名稱"></i>
             `;
-            
-            // 刪除按鈕：維持右上角懸浮
             deleteBtnHtml = `
                 <div class="step-delete-btn" onclick="event.stopPropagation(); deleteStage(${index});" title="刪除此階段">
                     <i class="fa-solid fa-trash-can"></i>
@@ -201,7 +418,6 @@ function renderStepper() {
         container.appendChild(el);
     });
 
-    // 新增階段按鈕
     const addBtn = document.createElement('div');
     addBtn.className = 'step add-btn';
     addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> <div style="margin-top:5px; font-size:0.8rem;">新增階段</div>';
@@ -227,8 +443,6 @@ function renderTabs() {
         el.onclick = () => switchTab(index);
         
         let tabContent = tab.name;
-        
-        // 如果是非固定 Tab 且當前選中，顯示編輯筆
         if (!tab.isFixed && isActive) {
             tabContent += ` <i class="fa-solid fa-pen" style="font-size:0.7em; margin-left:5px; opacity:0.5; cursor:pointer;" onclick="editTabName(${index}, event)" title="編輯名稱"></i>`;
         }
@@ -237,7 +451,6 @@ function renderTabs() {
         container.appendChild(el);
     });
 
-    // 新增頁籤按鈕
     const addBtn = document.createElement('div');
     addBtn.className = 'tab add-tab-btn';
     addBtn.innerHTML = '<i class="fa-solid fa-plus"></i>';
@@ -257,15 +470,35 @@ function renderContent() {
     }
 
     const currentTab = currentStage.tabs[appState.currentTabIndex];
-    // 檢查是否為該階段下的最後一個 Tab
+    
+    // Default Sort Logic: If tab changed or init, reset to column 0 ascending
+    if (appState.sortConfig.activeTabId !== currentTab.id) {
+        appState.sortConfig = {
+            activeTabId: currentTab.id,
+            columnIndex: 0,
+            direction: 'asc'
+        };
+    }
+
     const isLastTab = currentStage.tabs.length <= 1;
 
-    // 根據版型類型呼叫對應渲染器
-    if (currentTab.type === 'TypeA') {
+    switch (currentTab.type) {
+        case 'TypeA':
         renderTypeA(container, currentTab, isLastTab);
-    } else if (currentTab.type === 'TypeB') {
+            break;
+        case 'TypeB': // 保留舊的 generic TypeB 以防萬一，但現在主要用 TypeList
         renderTypeB(container, currentTab, isLastTab);
-    } else {
+            break;
+        case 'TypeList': // 新增 List 專用
+            renderTypeList(container, currentTab, isLastTab);
+            break;
+        case 'TypeCommittee': // 新增 Committee 專用
+            renderTypeCommittee(container, currentTab, isLastTab);
+            break;
+        case 'TypePreview':
+            renderTypePreview(container, currentTab, isLastTab);
+            break;
+        default:
         container.innerHTML = '未知版型';
     }
 }
@@ -275,144 +508,543 @@ function renderContent() {
 // ------------------------------------------
 function renderTypeA(container, tabData, isLastTab) {
     const data = tabData.data;
-    const isDeletable = !tabData.isFixed && !isLastTab; // 非固定且不是最後一個才可刪
-    
-    let deleteBtnHtml = '';
-    if (isDeletable) {
-        deleteBtnHtml = `
-            <button class="btn btn-outline" style="color:var(--danger-color); border-color:var(--danger-color); margin-right:10px;" onclick="deleteTab(${appState.currentTabIndex})">
-                <i class="fa-solid fa-trash-can"></i> 刪除此頁籤
-            </button>
-        `;
+    const isDeletable = !tabData.isFixed && !isLastTab;
+    let deleteBtnHtml = isDeletable ? `<button class="btn btn-outline" style="color:var(--danger-color); border-color:var(--danger-color); margin-right:10px;" onclick="deleteTab(${appState.currentTabIndex})"><i class="fa-solid fa-trash-can"></i> 刪除此頁籤</button>` : '';
+
+    // Sorting Logic
+    let displayItems = [...data.items];
+    if (appState.sortConfig.activeTabId === tabData.id && appState.sortConfig.columnIndex !== null) {
+        const colIdx = appState.sortConfig.columnIndex;
+        const dir = appState.sortConfig.direction;
+        
+        displayItems.sort((a, b) => {
+            let valA = getSortValue(tabData.type, a, colIdx);
+            let valB = getSortValue(tabData.type, b, colIdx);
+            
+            if (valA < valB) return dir === 'asc' ? -1 : 1;
+            if (valA > valB) return dir === 'asc' ? 1 : -1;
+            return 0;
+        });
     }
 
     let html = `
         <div class="content-box">
             <div style="margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
-                <h3 style="color:var(--primary-color); margin:0; cursor:pointer;" onclick="editTabName(${appState.currentTabIndex})" title="點擊編輯名稱">${tabData.name} - 待辦事項</h3>
-                <div>
-                    ${deleteBtnHtml}
-                    <button class="btn btn-add" onclick="addItemTypeA()"><i class="fa-solid fa-plus"></i> 新增工項</button>
-                </div>
+                <h3 style="color:var(--primary-color); margin:0;">${tabData.name}</h3>
+                <div>${deleteBtnHtml}<button class="btn btn-add" onclick="addItemTypeA()"><i class="fa-solid fa-plus"></i> 新增工項</button></div>
             </div>
             <table class="data-table">
-                <thead>
-                    <tr>
-                        ${data.columns.map(col => `<th>${col}</th>`).join('')}
-                        <th width="100">動作</th>
-                    </tr>
-                </thead>
+                <thead><tr>${data.columns.map((col, idx) => `
+                    <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
+                        ${col} ${getSortIcon(idx)}
+                    </th>
+                `).join('')}<th width="140">動作</th></tr></thead>
                 <tbody>
     `;
 
-    data.items.forEach((item, idx) => {
-        const statusColor = item.status === 'TRUE' ? 'green' : (item.status === 'PENDING' ? 'orange' : '#ccc');
-        const docsHtml = item.docs ? item.docs.map(d => `<div><input type="checkbox"> ${d}</div>`).join('') : '';
+    displayItems.forEach((item, idx) => {
+        // Find original index for deletion/editing if not sorted? 
+        // Actually editing/deleting relies on index in array. 
+        // If we sort, the index 'idx' here is the display index, not the data index.
+        // We need to find the real index in data.items.
+        // Assuming 'id' is unique for this tab is safer.
+        // Let's check addItemTypeA generates unique IDs? 
+        // id: currentTab.data.items.length + 1. This might duplicate if we delete items.
+        // Better to use item.id if it's reliable or find index.
+        const realIndex = data.items.indexOf(item);
+
+        const docsHtml = item.docs.map(doc => `
+            <div class="check-item" style="display:flex; align-items:flex-start; gap:8px; margin-bottom:6px; line-height:1.4;">
+                <input type="checkbox" style="margin-top:3px;"> <span>${doc}</span>
+            </div>
+        `).join('');
         
         html += `
             <tr>
                 <td>${item.id}</td>
-                <td contenteditable="true" onblur="updateItemTypeA(${idx}, 'title', this.innerText)">
-                    <div style="font-weight:bold;">${item.title}</div>
-                    <div style="font-size:0.8rem; color:#888;">${item.date} | ${item.type}</div>
+                <td>
+                    <div style="font-weight:bold; color:var(--primary-color)">${item.title}</div>
+                    <div style="font-size:0.8rem; color:#888; margin-top:4px;">${item.date}</div>
+                    <div style="font-size:0.8rem; margin-top:4px;"><i class="fa-solid fa-location-dot"></i> ${item.type}</div>
                 </td>
                 <td>${docsHtml}</td>
-                <td><span style="color:${statusColor}; font-weight:bold;">● ${item.status}</span></td>
-                <td style="color:#666; font-size:0.9rem;" contenteditable="true" onblur="updateItemTypeA(${idx}, 'note', this.innerText)">${item.note || ''}</td>
+                <td><span style="color:${item.status==='TRUE'?'green':'#ccc'}; font-weight:bold;">● ${item.status}</span></td>
+                <td style="font-size:0.8rem; color:#666; white-space:pre-line;">${item.note || ''}</td>
                 <td>
-                    <button class="btn btn-delete" onclick="deleteItemTypeA(${idx})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-edit"><i class="fa-solid fa-pen"></i> 編輯</button>
+                    <button class="btn btn-delete" onclick="deleteItemTypeA(${realIndex})"><i class="fa-solid fa-trash-can"></i></button>
                 </td>
             </tr>
         `;
     });
-
-    html += `
-                </tbody>
-            </table>
-        </div>
-    `;
+    html += `</tbody></table></div>`;
     container.innerHTML = html;
 }
 
 // ------------------------------------------
-// 版型 B：展開明細 (Template B)
+// 版型 List：機關出題與新創提案列表
 // ------------------------------------------
-function renderTypeB(container, tabData, isLastTab) {
+function renderTypeList(container, tabData, isLastTab) {
     const data = tabData.data;
-    const isDeletable = !tabData.isFixed && !isLastTab;
 
-    let deleteBtnHtml = '';
-    if (isDeletable) {
-        deleteBtnHtml = `
-            <button class="btn btn-outline" style="color:var(--danger-color); border-color:var(--danger-color); margin-right:10px;" onclick="deleteTab(${appState.currentTabIndex})">
-                <i class="fa-solid fa-trash-can"></i> 刪除此頁籤
-            </button>
-        `;
+    // Sorting Logic
+    let displayItems = [...data.items];
+    if (appState.sortConfig.activeTabId === tabData.id && appState.sortConfig.columnIndex !== null) {
+        const colIdx = appState.sortConfig.columnIndex;
+        const dir = appState.sortConfig.direction;
+        
+        displayItems.sort((a, b) => {
+            let valA = getSortValue(tabData.type, a, colIdx);
+            let valB = getSortValue(tabData.type, b, colIdx);
+            
+            if (valA < valB) return dir === 'asc' ? -1 : 1;
+            if (valA > valB) return dir === 'asc' ? 1 : -1;
+            return 0;
+        });
     }
 
     let html = `
         <div class="content-box">
-             <div style="margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
-                <h3 style="color:var(--primary-color); margin:0; cursor:pointer;" onclick="editTabName(${appState.currentTabIndex})" title="點擊編輯名稱">${tabData.name} - 詳細資料列表</h3>
-                <div>
-                    ${deleteBtnHtml}
-                    <button class="btn btn-add" onclick="addItemTypeB()"><i class="fa-solid fa-plus"></i> 新增資料</button>
+             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="margin: 0; font-size: 1.1rem; color: var(--primary-color);">${tabData.name}</h3>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" placeholder="關鍵字搜尋..." style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                    <button class="btn btn-outline"><i class="fa-solid fa-filter"></i> 篩選</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> 新增資料</button>
                 </div>
             </div>
             <table class="data-table">
-                <thead>
-                    <tr>
-                        ${data.headers.map(h => `<th>${h}</th>`).join('')}
-                        <th width="100">動作</th>
-                    </tr>
-                </thead>
+                <thead><tr>${data.headers.map((h, idx) => `
+                    <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
+                        ${h} ${getSortIcon(idx)}
+                    </th>
+                `).join('')}<th width="120">動作</th></tr></thead>
                 <tbody>
     `;
 
-    data.items.forEach((item, idx) => {
+    displayItems.forEach((item, idx) => {
         html += `
             <tr>
-                <td contenteditable="true" onblur="updateItemTypeB(${idx}, 'col1', this.innerText)">${item.col1}</td>
-                <td><div style="font-weight:bold;" contenteditable="true" onblur="updateItemTypeB(${idx}, 'col2', this.innerText)">${item.col2}</div></td>
-                <td contenteditable="true" onblur="updateItemTypeB(${idx}, 'col3', this.innerText)">${item.col3}</td>
-                <td contenteditable="true" onblur="updateItemTypeB(${idx}, 'col4', this.innerText)">${item.col4}</td>
-                <td><span class="${item.statusClass || 'tag'}">${item.status}</span></td>
+                <td>${item.col1}</td>
+                <td><div style="font-weight:bold;">${item.col2}</div><div style="font-size:0.75rem; color:#888;">${item.col2_sub || ''}</div></td>
+                <td>${item.col3}</td>
+                <td>${item.col4}</td>
+                <td><span class="${item.statusClass}">${item.status}</span></td>
                 <td>
-                    <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')">詳情</button>
-                    <button class="btn btn-delete" onclick="deleteItemTypeB(${idx})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-edit" onclick="toggleDetailRow('${item.id}')"><i class="fa-solid fa-eye"></i> 詳情</button>
                 </td>
             </tr>
             <tr id="${item.id}" class="hidden-row" style="display:none; background:#fafafa;">
                 <td colspan="${data.headers.length + 1}">
+                    <div style="padding: 10px 20px 20px 20px;">
+                        <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">詳細資料規格書</h4>
                     <div class="detail-info-grid">
                         ${item.details.map(d => `
                             <div class="detail-label">${d.label}</div>
-                            <div class="detail-value ${d.fullWidth ? 'full-width' : ''}" contenteditable="true">${d.value}</div>
+                                <div class="detail-value ${d.fullWidth ? 'full-width' : ''}" style="${d.highlight ? 'font-weight:bold; color:var(--info-color);' : ''}">
+                                    ${d.value}
+                                </div>
                         `).join('')}
+                        </div>
+                        <div style="margin-top: 15px; text-align: right;">
+                            <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')">收合詳情</button>
+                            <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> 編輯內容</button>
+                        </div>
                     </div>
                 </td>
             </tr>
         `;
     });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+    
+    window.toggleDetailRow = function(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'none') ? 'table-row' : 'none';
+        if(el.style.display === 'table-row') el.classList.add('expanded');
+        else el.classList.remove('expanded');
+    };
+}
 
+// ------------------------------------------
+// 版型 Committee：審查委員名單 (專用)
+// ------------------------------------------
+function renderTypeCommittee(container, tabData, isLastTab) {
+    const data = tabData.data;
+
+    // Sorting Logic
+    let displayItems = [...data.items];
+    if (appState.sortConfig.activeTabId === tabData.id && appState.sortConfig.columnIndex !== null) {
+        const colIdx = appState.sortConfig.columnIndex;
+        const dir = appState.sortConfig.direction;
+        
+        displayItems.sort((a, b) => {
+            let valA = getSortValue(tabData.type, a, colIdx);
+            let valB = getSortValue(tabData.type, b, colIdx);
+            
+            if (valA < valB) return dir === 'asc' ? -1 : 1;
+            if (valA > valB) return dir === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
+    let html = `
+        <div class="content-box">
+            <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+                <button class="btn btn-add" onclick="addRowCommittee()"><i class="fa-solid fa-user-plus"></i> 新增審查委員</button>
+                <div style="font-size: 0.85rem; color: #666; background: #f9f9f9; padding: 8px 15px; border-radius: 5px; border: 1px solid #eee;">
+                    <i class="fa-solid fa-circle-info"></i> 提示：本清單將用於產製「審查評選會議」之開會通知與評分表。
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr>${data.headers.map((h, idx) => `
+                    <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
+                        ${h} ${getSortIcon(idx)}
+                    </th>
+                `).join('')}<th width="140">動作</th></tr></thead>
+                <tbody>
+    `;
+
+    displayItems.forEach((item) => {
+        if (item.isEdit) {
+            // 編輯模式
+             html += `
+                <tr style="background-color: #fffde7;">
+                    <td>${item.id}</td>
+                    <td><input type="text" id="m-name-${item.id}" value="${item.name}" style="width:100%"></td>
+                    <td>
+                        <input type="text" id="m-org-${item.id}" value="${item.org}" placeholder="單位" style="margin-bottom:5px; width:100%">
+                        <input type="text" id="m-pos-${item.id}" value="${item.pos}" placeholder="職稱" style="width:100%">
+                    </td>
+                    <td>
+                        <textarea id="m-exp-${item.id}" placeholder="專長領域，請以逗號分隔" rows="3" style="width:100%">${item.expertise.join(',')}</textarea>
+                    </td>
+                    <td>
+                        <input type="text" id="m-phone-${item.id}" value="${item.phone}" placeholder="電話" style="margin-bottom:5px; width:100%">
+                        <input type="email" id="m-email-${item.id}" value="${item.email}" placeholder="Email" style="width:100%">
+                    </td>
+                    <td>
+                        <select id="m-status-${item.id}" style="width:100%">
+                            <option value="已確認" ${item.status==='已確認'?'selected':''}>已確認</option>
+                            <option value="邀約中" ${item.status==='邀約中'?'selected':''}>邀約中</option>
+                            <option value="已拒絕" ${item.status==='已拒絕'?'selected':''}>已拒絕</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-save" onclick="saveRowCommittee(${item.id})"><i class="fa-solid fa-check"></i> 儲存</button>
+                        <button class="btn btn-outline" style="margin-top:5px" onclick="toggleEditCommittee(${item.id})">取消</button>
+                    </td>
+                </tr>
+            `;
+        } else {
+            // 檢視模式
+            const expHtml = item.expertise.map(exp => `<span class="tag">${exp}</span>`).join('');
+            html += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td style="font-weight:bold; color:var(--primary-color)">${item.name}</td>
+                    <td>
+                        <div>${item.org}</div>
+                        <div style="font-size:0.8rem; color:#888;">${item.pos}</div>
+                    </td>
+                    <td>${expHtml}</td>
+                    <td>
+                        <div style="font-size:0.85rem;"><i class="fa-solid fa-phone" style="width:18px"></i> ${item.phone}</div>
+                        <div style="font-size:0.85rem;"><i class="fa-solid fa-envelope" style="width:18px"></i> ${item.email}</div>
+                    </td>
+                    <td><span class="status-badge ${item.statusClass}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-edit" onclick="toggleEditCommittee(${item.id})"><i class="fa-solid fa-pen"></i> 編輯</button>
+                        <button class="btn btn-delete" style="margin-left:5px" onclick="deleteRowCommittee(${item.id})"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            `;
+        }
+    });
     html += `
                 </tbody>
             </table>
+            <div class="footer-btns">
+                <button class="btn btn-outline"><i class="fa-solid fa-file-export"></i> 匯出委員聯絡清冊</button>
+                <button class="btn btn-primary">儲存變更</button>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+function toggleEditCommittee(id) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if (item) {
+        item.isEdit = !item.isEdit;
+    saveState();
+    }
+}
+
+function saveRowCommittee(id) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    
+    if (item) {
+        item.name = document.getElementById(`m-name-${id}`).value;
+        item.org = document.getElementById(`m-org-${id}`).value;
+        item.pos = document.getElementById(`m-pos-${id}`).value;
+        item.expertise = document.getElementById(`m-exp-${id}`).value.split(',').map(s => s.trim()).filter(s => s !== '');
+        item.phone = document.getElementById(`m-phone-${id}`).value;
+        item.email = document.getElementById(`m-email-${id}`).value;
+        item.status = document.getElementById(`m-status-${id}`).value;
+    
+    // Update status class
+    if(item.status === '已確認') item.statusClass = 'status-confirmed';
+    else if(item.status === '已拒絕') item.statusClass = 'status-declined';
+    else item.statusClass = 'status-pending';
+
+    item.isEdit = false;
+    saveState();
+    }
+}
+
+function deleteRowCommittee(id) {
+    if(!confirm("確定要刪除此委員嗎？")) return;
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const idx = currentTab.data.items.findIndex(i => i.id === id);
+    if (idx !== -1) {
+    currentTab.data.items.splice(idx, 1);
+    saveState();
+    }
+}
+
+function addRowCommittee() {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const nextId = currentTab.data.items.length > 0 ? Math.max(...currentTab.data.items.map(i => i.id)) + 1 : 1;
+    
+    currentTab.data.items.push({
+        id: nextId,
+        isEdit: true,
+        name: "",
+        org: "",
+        pos: "",
+        expertise: [],
+        phone: "",
+        email: "",
+        status: "邀約中",
+        statusClass: "status-pending"
+    });
+    saveState();
+}
+
+// ------------------------------------------
+// 版型 C：前台預覽 (TypePreview) - 完整版
+// ------------------------------------------
+function renderTypePreview(container, tabData, isLastTab) {
+    const d = tabData.data;
+    const html = `
+        <div class="editor-container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; padding: 20px 20px 0 20px;">
+                <div>
+                    <h3 style="margin: 0; color: var(--primary-color);">[編輯模式] 114-T058 智慧路口公告</h3>
+                    <p style="font-size: 13px; color: #888; margin: 5px 0 15px 0;">此處設定的內容將直接呈現於「政府場域實證入口網」挑戰詳情頁面。</p>
+                </div>
+                <div class="mode-switcher">
+                    <button class="mode-btn active" id="btn-edit" onclick="switchPreviewMode('edit')"><i class="fa-solid fa-pen-to-square"></i> 內容編輯器</button>
+                    <button class="mode-btn" id="btn-preview" onclick="switchPreviewMode('preview')"><i class="fa-solid fa-desktop"></i> 前台即時預覽</button>
+                </div>
+            </div>
+
+            <div class="editor-grid" style="padding: 0 20px 20px 20px;">
+                <!-- 左側：編輯或預覽 -->
+                <div class="content-view-area">
+                    <!-- 內容編輯器 -->
+                    <div class="edit-pane" id="pane-edit" style="display:block;">
+                        <div class="form-group">
+                            <label>分類標籤 (多選/新增)</label>
+                            <div class="tag-editor-box" id="tag-editor-container">
+                                <span class="backend-tag">AI <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i></span>
+                                <span class="backend-tag">交通 <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i></span>
+                                <div class="tag-input-wrapper">
+                                    <input type="text" id="tag-input" placeholder="輸入標籤後按 Enter 或點擊新增..." onkeypress="handleTagKey(event)">
+                                    <button class="btn-add-tag" onclick="addNewTag()">新增</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>挑戰題目</label>
+                            <input type="text" id="in-title" value="${d.title}" oninput="syncPreviewData()">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label>出題機關</label>
+                                <input type="text" id="in-agency" value="${d.agency}" oninput="syncPreviewData()">
+                            </div>
+                            <div class="form-group">
+                                <label>徵件截止日期顯示</label>
+                                <input type="text" id="in-date" value="${d.date}" oninput="syncPreviewData()">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label>實證獎助金金額</label>
+                                <input type="text" id="in-money" value="${d.money}" oninput="syncPreviewData()">
+                            </div>
+                            <div class="form-group">
+                                <label>預計執行期程</label>
+                                <input type="text" id="in-timeline" value="${d.timeline}" oninput="syncPreviewData()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>詳細需求與規格內容</label>
+                            <div class="rich-editor-tools">
+                                <button class="tool-btn"><b>B</b></button>
+                                <button class="tool-btn"><i>I</i></button>
+                                <button class="tool-btn"><u>U</u></button>
+                            </div>
+                            <textarea id="in-req" rows="8" oninput="syncPreviewData()">${d.req}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>實證場域詳細地點說明</label>
+                            <textarea id="in-location" rows="3" oninput="syncPreviewData()">${d.location}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- 高擬真預覽面板 -->
+                    <div class="preview-pane" id="pane-preview">
+                        <div class="browser-chrome">
+                            <div class="chrome-dots">
+                                <span class="dot"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span>
+                            </div>
+                            <div class="chrome-address"><i class="fa-solid fa-lock" style="font-size: 11px;"></i> https://innovation.matchmaking.gov.tw/challenge/detail/114-T058</div>
+                        </div>
+                        <div class="portal-container">
+                            <div class="portal-header">
+                                <div class="portal-logo"><i class="fa-solid fa-mountain-sun"></i> 政府場域實證平台</div>
+                                <div style="grid-column: span 2; margin-top:5px;" id="pv-tags-display">
+                                    <span class="portal-tag">AI</span><span class="portal-tag">交通</span>
+                                </div>
+                            </div>
+                            <div class="portal-nav"><span><i class="fa-solid fa-magnifying-glass"></i> 尋找挑戰</span></div>
+                            <div class="portal-main">
+                                <div class="portal-breadcrumb">首頁 > 挑戰專區 > 挑戰詳情</div>
+                                <div class="portal-spec-card">
+                                    <div class="spec-header"><span><i class="fa-solid fa-list-check"></i> 挑戰規格與實證需求</span></div>
+                                    <table class="spec-table">
+                                        <tr><th>挑戰題目</th><td id="pv-title" class="spec-highlight">${d.title}</td></tr>
+                                        <tr><th>出題機關</th><td><span id="pv-agency">${d.agency}</span></td></tr>
+                                        <tr><th>徵件截止</th><td id="pv-date" style="color:#d32f2f;">${d.date}</td></tr>
+                                        <tr><th>獎助金</th><td id="pv-money">${d.money}</td></tr>
+                                        <tr><th>執行期程</th><td id="pv-timeline">${d.timeline}</td></tr>
+                                        <tr><th>實證場域</th><td id="pv-location">${d.location}</td></tr>
+                                        <tr><th>需求規格</th><td id="pv-req">${d.req.replace(/\n/g, '<br>')}</td></tr>
+                                    </table>
+                                </div>
+                                <div class="portal-sidebar">
+                                    <div class="portal-sidebar-box">
+                                        <div class="sidebar-title">目前進度</div>
+                                        <div class="status-box"><div class="status-text">徵件中</div></div>
+                                        <button class="apply-btn">立即提案</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：發佈控制台 -->
+                <aside>
+                    <div class="publish-console">
+                        <div class="console-section">
+                            <div class="console-title"><i class="fa-solid fa-earth-asia"></i> 狀態控制</div>
+                            <div class="toggle-row"><span class="toggle-label">前台公開顯示</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                            <div class="toggle-row"><span class="toggle-label">開啟線上投件</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button class="btn-action btn-save">儲存暫存草稿</button>
+                            <button class="btn-action btn-main" onclick="alert('公告內容已成功發佈！')"><i class="fa-solid fa-cloud-arrow-up"></i> 更新發佈至前台</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
         </div>
     `;
     container.innerHTML = html;
     
-    // 綁定 toggle 事件
-    window.toggleDetailRow = function(id) {
-        const el = document.getElementById(id);
-        if (el.style.display === 'none') {
-            el.style.display = 'table-row';
+    window.switchPreviewMode = function(mode) {
+        const paneEdit = document.getElementById('pane-edit');
+        const panePreview = document.getElementById('pane-preview');
+        const btnEdit = document.getElementById('btn-edit');
+        const btnPreview = document.getElementById('btn-preview');
+
+        if (mode === 'edit') {
+            paneEdit.style.display = 'block';
+            panePreview.classList.remove('active');
+            btnEdit.classList.add('active');
+            btnPreview.classList.remove('active');
         } else {
-            el.style.display = 'none';
+            paneEdit.style.display = 'none';
+            panePreview.classList.add('active');
+            btnEdit.classList.remove('active');
+            btnPreview.classList.add('active');
+            window.syncPreviewData();
         }
+    };
+
+    window.syncPreviewData = function() {
+        document.getElementById('pv-title').innerText = document.getElementById('in-title').value;
+        document.getElementById('pv-agency').innerText = document.getElementById('in-agency').value;
+        document.getElementById('pv-date').innerText = document.getElementById('in-date').value;
+        document.getElementById('pv-money').innerText = document.getElementById('in-money').value;
+        document.getElementById('pv-timeline').innerText = document.getElementById('in-timeline').value;
+        document.getElementById('pv-location').innerText = document.getElementById('in-location').value;
+        document.getElementById('pv-req').innerHTML = document.getElementById('in-req').value.replace(/\n/g, '<br>');
+        window.syncTagsToPreview();
+    };
+
+    window.handleTagKey = function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            window.addNewTag();
+        }
+    };
+
+    window.addNewTag = function() {
+        const input = document.getElementById('tag-input');
+        const tagValue = input.value.trim().replace('#', '');
+        if (tagValue === '') return;
+        const container = document.getElementById('tag-editor-container');
+        const newTag = document.createElement('span');
+        newTag.className = 'backend-tag';
+        newTag.innerHTML = `${tagValue} <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i>`;
+        container.insertBefore(newTag, container.querySelector('.tag-input-wrapper'));
+        input.value = '';
+        window.syncTagsToPreview();
+    };
+
+    window.removeTag = function(element) {
+        element.parentElement.remove();
+        window.syncTagsToPreview();
+    };
+
+    window.syncTagsToPreview = function() {
+        const backendTags = document.querySelectorAll('.backend-tag');
+        const previewContainer = document.getElementById('pv-tags-display');
+        previewContainer.innerHTML = '';
+        backendTags.forEach(tag => {
+            const text = tag.innerText.trim();
+            const portalTag = document.createElement('span');
+            portalTag.className = 'portal-tag';
+            portalTag.innerText = text;
+            previewContainer.appendChild(portalTag);
+        });
     };
 }
 
+// ------------------------------------------
+// 通用 TypeB (保留)
+// ------------------------------------------
+function renderTypeB(container, tabData, isLastTab) {
+    // 舊有邏輯，備用
+    container.innerHTML = 'Legacy TypeB';
+}
 
 // ==========================================
 // 4. 互動操作 (Actions)
@@ -420,19 +1052,18 @@ function renderTypeB(container, tabData, isLastTab) {
 
 function switchStage(index) {
     appState.currentStageIndex = index;
-    appState.currentTabIndex = 0; // 切換階段時重置 Tab
+    appState.currentTabIndex = 0;
     renderAll();
 }
 
 function switchTab(index) {
     appState.currentTabIndex = index;
-    renderContent(); // 這裡只要重繪內容區和 Tab 樣式
+    renderContent();
     renderTabs();
 }
 
-// 修改名稱相關功能
 function editStageName(index, event) {
-    if(event) event.stopPropagation(); // 防止觸發 switchStage
+    if(event) event.stopPropagation();
     const stage = appState.stages[index];
     const newName = prompt("請輸入階段名稱：", stage.name);
     if (newName && newName.trim() !== "") {
@@ -452,12 +1083,10 @@ function editTabName(index, event) {
     }
 }
 
-
 function promptAddStage() {
     const name = prompt("請輸入新階段名稱：", "新階段");
     if (!name) return;
     
-    // 新增時先給一個預設的空 Tab，讓使用者進去再刪改或新增
     appState.stages.push({
         id: `stage-${Date.now()}`,
         name: name,
@@ -477,7 +1106,6 @@ function promptAddStage() {
     switchStage(appState.stages.length - 1);
 }
 
-// Modal 相關邏輯
 function openTypeModal() {
     document.getElementById('type-modal').style.display = 'flex';
 }
@@ -492,7 +1120,6 @@ function selectType(type) {
     if (!name) return;
 
     const currentStage = appState.stages[appState.currentStageIndex];
-    
     let newData = {};
     if(type === 'TypeA') {
         newData = { columns: ["工作項目", "日期", "檢核", "狀態", "備註"], items: [] };
@@ -515,44 +1142,22 @@ function selectType(type) {
 function deleteStage(index) {
     if(!confirm("確定要刪除整個階段嗎？")) return;
     appState.stages.splice(index, 1);
-    // 如果刪到剩0個(不太可能因為有固定的)，或者刪掉當前的，要切換 index
     if(index <= appState.currentStageIndex) {
         appState.currentStageIndex = Math.max(0, appState.currentStageIndex - 1);
     }
     saveState();
 }
 
-
 function deleteTab(index) {
     if(!confirm("確定刪除此頁籤？")) return;
     const currentStage = appState.stages[appState.currentStageIndex];
     currentStage.tabs.splice(index, 1);
-    
-    // 已刪除邏輯會由 UI 防止 "最後一個被刪掉"，但為了雙重保險：
     if(currentStage.tabs.length === 0) {
          currentStage.tabs.push({ id: `tab-${Date.now()}`, name: "空白", type: "TypeA", isFixed: false, data: {columns:[], items:[]} });
     }
-    
     appState.currentTabIndex = 0;
     saveState();
 }
-
-// 簡單的資料更新 (ContentEditable 反寫回資料)
-function updateItemTypeA(idx, key, value) {
-    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
-    if(currentTab.data.items[idx]) {
-        currentTab.data.items[idx][key] = value;
-        saveState(); // 不重繪，避免游標跳掉
-    }
-}
-function updateItemTypeB(idx, key, value) {
-     const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
-    if(currentTab.data.items[idx]) {
-        currentTab.data.items[idx][key] = value;
-        saveState();
-    }
-}
-
 
 function addItemTypeA() {
     const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
@@ -561,8 +1166,9 @@ function addItemTypeA() {
         title: "新工作項目",
         date: "2026-01-01",
         type: "待定",
-        status: "PENDING",
-        note: "請編輯"
+        status: "FALSE",
+        note: "請編輯",
+        docs: []
     });
     saveState();
 }
@@ -573,27 +1179,12 @@ function deleteItemTypeA(idx) {
     saveState();
 }
 
-function addItemTypeB() {
+function updateItemTypeA(idx, key, value) {
     const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
-    currentTab.data.items.push({
-        id: `new-${Date.now()}`,
-        col1: "NEW-001",
-        col2: "新資料項目",
-        col3: "請點擊詳情編輯內容",
-        col4: "-",
-        status: "草稿",
-        details: [
-            { label: "欄位1", value: "內容..." },
-            { label: "欄位2", value: "內容..." }
-        ]
-    });
+    if(currentTab.data.items[idx]) {
+        currentTab.data.items[idx][key] = value;
     saveState();
 }
-
-function deleteItemTypeB(idx) {
-    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
-    currentTab.data.items.splice(idx, 1);
-    saveState();
 }
 
 // 啟動

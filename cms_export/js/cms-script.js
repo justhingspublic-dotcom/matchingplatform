@@ -618,6 +618,11 @@ function renderTypeList(container, tabData, isLastTab) {
         });
     }
 
+    const isAgencyList = tabData.name.includes("機關") || tabData.name.includes("出題");
+    const detailTitle = isAgencyList ? `機關需求詳細規格書 (挑戰編號: ${item.col1})` : `廠商提案詳細資料 (提案編號: ${item.col1})`;
+    const editBtnText = isAgencyList ? "編輯出題內容" : "編輯提案內容";
+    const actionBtnHtml = isAgencyList ? `<button class="btn btn-success"><i class="fa-solid fa-paper-plane"></i> 正式發佈公告</button>` : '';
+
     let html = `
         <div class="content-box">
              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -652,20 +657,21 @@ function renderTypeList(container, tabData, isLastTab) {
             <tr id="${item.id}" class="hidden-row" style="display:none; background:#fafafa;">
                 <td colspan="${data.headers.length + 1}">
                     <div style="padding: 10px 20px 20px 20px;">
-                        <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">機關需求詳細規格書 (挑戰編號: ${item.col1})</h4>
+                        <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">${detailTitle}</h4>
                     ${item.isDetailEdit ? renderDetailEditor(item) : `
                     <div class="detail-info-grid">
-                        ${item.details.map(d => `
+                        ${(item.details || []).map(d => `
                             <div class="detail-label">${d.label}</div>
                                 <div class="detail-value ${d.fullWidth ? 'full-width' : ''}" style="${d.highlight ? 'font-weight:bold; color:var(--info-color);' : ''}">
                                     ${d.value}
                                 </div>
                         `).join('')}
+                        ${(item.details && item.details.length === 0) ? '<div style="grid-column: span 4; padding: 20px; text-align: center; color: #999;">尚無詳細資料，請點擊編輯新增</div>' : ''}
                         </div>
                         <div style="margin-top: 15px; text-align: right;">
                             <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')">收合詳情</button>
-                            <button class="btn btn-info" onclick="toggleEditDetail('${item.id}')"><i class="fa-solid fa-pen-to-square"></i> 編輯出題內容</button>
-                            <button class="btn btn-success"><i class="fa-solid fa-paper-plane"></i> 正式發佈公告</button>
+                            <button class="btn btn-info" onclick="toggleEditDetail('${item.id}')"><i class="fa-solid fa-pen-to-square"></i> ${editBtnText}</button>
+                            ${actionBtnHtml}
                         </div>
                     `}
                     </div>
@@ -1364,7 +1370,7 @@ function renderDetailEditor(item) {
                 </div>
                 <div style="flex-grow:1;">
                     <label style="font-size:0.8rem; color:#666;">內容 (支援 HTML)</label>
-                    <textarea class="detail-value-input" data-idx="${idx}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; min-height:60px;">${d.value}</textarea>
+                    <textarea class="detail-value-input" data-idx="${idx}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; min-height:60px;">${d.value || ''}</textarea>
                     <label style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; font-size:0.8rem; color:#666;">
                         <input type="checkbox" class="detail-full-check" data-idx="${idx}" ${d.fullWidth ? 'checked' : ''}> 寬欄顯示
                     </label>
@@ -1453,12 +1459,19 @@ function saveDetail(id) {
     const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
     const item = currentTab.data.items.find(i => i.id === id);
     if(item) {
-        // 自動同步關鍵欄位到外層列表
+        // 自動同步關鍵欄位到外層列表 (機關出題)
         const titleDetail = item.details.find(d => d.label === "挑戰題目" || d.label === "題目" || d.label === "挑戰題目摘要");
         if(titleDetail) item.col3 = titleDetail.value;
 
         const agencyDetail = item.details.find(d => d.label === "出題單位全銜" || d.label === "出題單位");
         if(agencyDetail) item.col2 = agencyDetail.value;
+
+        // 自動同步關鍵欄位到外層列表 (入選廠商)
+        const vendorNameDetail = item.details.find(d => d.label === "廠商名稱" || d.label === "公司名稱");
+        if(vendorNameDetail) item.col2 = vendorNameDetail.value;
+
+        const solutionNameDetail = item.details.find(d => d.label === "解決方案名稱" || d.label === "方案名稱" || d.label === "解決方案");
+        if(solutionNameDetail) item.col3 = solutionNameDetail.value;
 
         item.isDetailEdit = false;
         saveState();

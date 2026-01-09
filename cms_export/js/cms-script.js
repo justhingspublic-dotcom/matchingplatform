@@ -301,7 +301,9 @@ let appState = {
         activeTabId: null,
         columnIndex: null,
         direction: 'asc'
-    }
+    },
+    columnVisibility: {}, // 儲存各 tab 的欄位可見性設定 { tabId: { 0: true, 1: true, ... } }
+    detailColumnsVisible: {} // 儲存各 tab 要顯示在第一層的 details 欄位 { tabId: { '欄位名稱': true, ... } }
 };
 
 // 初始化
@@ -602,6 +604,30 @@ function renderTypeA(container, tabData, isLastTab) {
 function renderTypeList(container, tabData, isLastTab) {
     const data = tabData.data;
 
+    // 收集所有 items 中 details 的唯一欄位名稱
+    const allDetailLabels = [];
+    data.items.forEach(item => {
+        if (item.details && Array.isArray(item.details)) {
+            item.details.forEach(d => {
+                if (d.label && !allDetailLabels.includes(d.label)) {
+                    allDetailLabels.push(d.label);
+                }
+            });
+        }
+    });
+
+    // 初始化詳情欄位可見性（預設不顯示在第一層）
+    if (!appState.detailColumnsVisible[tabData.id]) {
+        appState.detailColumnsVisible[tabData.id] = {};
+        allDetailLabels.forEach(label => {
+            appState.detailColumnsVisible[tabData.id][label] = false;
+        });
+    }
+    const detailColVisible = appState.detailColumnsVisible[tabData.id];
+
+    // 獲取已選擇要顯示的詳情欄位
+    const selectedDetailCols = allDetailLabels.filter(label => detailColVisible[label]);
+
     // Sorting Logic
     let displayItems = [...data.items];
     if (appState.sortConfig.activeTabId === tabData.id && appState.sortConfig.columnIndex !== null) {
@@ -622,40 +648,99 @@ function renderTypeList(container, tabData, isLastTab) {
     const editBtnText = isAgencyList ? "編輯出題內容" : "編輯提案內容";
     const actionBtnHtml = isAgencyList ? `<button class="btn btn-success"><i class="fa-solid fa-paper-plane"></i> 正式發佈公告</button>` : '';
 
+    // 生成詳情欄位篩選下拉選單
+    const columnFilterHtml = `
+        <div class="column-filter-dropdown" style="position: relative; display: inline-block;">
+            <button class="btn btn-outline" onclick="toggleColumnFilter('${tabData.id}')" id="col-filter-btn-${tabData.id}">
+                <i class="fa-solid fa-table-columns"></i> 顯示欄位 ${selectedDetailCols.length > 0 ? `<span style="background:var(--primary-color);color:white;padding:1px 6px;border-radius:10px;font-size:0.75rem;margin-left:4px;">${selectedDetailCols.length}</span>` : ''}
+            </button>
+            <div class="column-filter-menu" id="col-filter-menu-${tabData.id}" style="display: none; position: absolute; right: 0; top: 100%; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 12px; min-width: 220px; max-height: 400px; overflow-y: auto; z-index: 100; margin-top: 5px;">
+                <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #eee;">
+                    <i class="fa-solid fa-columns"></i> 選擇要顯示的詳情欄位
+                </div>
+                <div style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">勾選後會新增欄位至表格</div>
+                ${allDetailLabels.length > 0 ? allDetailLabels.map(label => `
+                    <label style="display: flex; align-items: center; gap: 8px; padding: 6px 4px; cursor: pointer; border-radius: 4px; transition: background 0.2s;" 
+                           onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='transparent'">
+                        <input type="checkbox" 
+                               ${detailColVisible[label] ? 'checked' : ''} 
+                               onchange="toggleDetailColumnVisibility('${tabData.id}', '${label.replace(/'/g, "\\'")}', this.checked)"
+                               style="width: 16px; height: 16px; accent-color: var(--primary-color);">
+                        <span style="font-size: 0.9rem;">${label}</span>
+                    </label>
+                `).join('') : '<div style="color:#999; font-size:0.85rem; padding:10px;">此列表尚無詳情欄位</div>'}
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid #eee; display: flex; gap: 8px;">
+                    <button class="btn btn-outline" style="flex: 1; font-size: 0.8rem; padding: 5px;" onclick="setAllDetailColumnsVisibility('${tabData.id}', true)">全選</button>
+                    <button class="btn btn-outline" style="flex: 1; font-size: 0.8rem; padding: 5px;" onclick="setAllDetailColumnsVisibility('${tabData.id}', false)">清除</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 計算總欄位數（基本欄位 + 選擇的詳情欄位 + 動作欄）
+    const baseColCount = data.headers.length;
+    const totalColCount = baseColCount + selectedDetailCols.length + 1; // +1 for action column
+
+    // 生成表頭（基本欄位 + 選擇的詳情欄位）
+    const baseHeadersHtml = data.headers.map((h, idx) => `
+        <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
+            ${h} ${getSortIcon(idx)}
+        </th>
+    `).join('');
+    
+    const detailHeadersHtml = selectedDetailCols.map(label => `
+        <th style="background: #e8f5e9; color: var(--primary-color);">
+            <i class="fa-solid fa-plus-circle" style="font-size:0.7em; margin-right:4px;"></i>${label}
+        </th>
+    `).join('');
+
     let html = `
         <div class="content-box">
              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <h3 style="margin: 0; font-size: 1.1rem; color: var(--primary-color);">${tabData.name}</h3>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; align-items: center;">
                     <input type="text" placeholder="關鍵字搜尋..." style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
                     <button class="btn btn-outline"><i class="fa-solid fa-filter"></i> 篩選</button>
+                    ${columnFilterHtml}
                     <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> 新增資料</button>
                 </div>
             </div>
             <table class="data-table">
-                <thead><tr>${data.headers.map((h, idx) => `
-                    <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
-                        ${h} ${getSortIcon(idx)}
-                    </th>
-                `).join('')}<th width="120">動作</th></tr></thead>
+                <thead><tr>${baseHeadersHtml}${detailHeadersHtml}<th width="120">動作</th></tr></thead>
                 <tbody>
     `;
 
     displayItems.forEach((item, idx) => {
         const detailTitle = isAgencyList ? `機關需求詳細規格書 (挑戰編號: ${item.col1})` : `廠商提案詳細資料 (提案編號: ${item.col1})`;
+        
+        // 基本欄位
+        const baseCellsHtml = `
+            <td>${item.col1}</td>
+            <td><div style="font-weight:bold;">${item.col2}</div><div style="font-size:0.75rem; color:#888;">${item.col2_sub || ''}</div></td>
+            <td>${item.col3}</td>
+            <td>${item.col4}</td>
+            <td><span class="${item.statusClass}">${item.status}</span></td>
+        `;
+        
+        // 從詳情中獲取選擇的欄位值
+        const detailCellsHtml = selectedDetailCols.map(label => {
+            const detailItem = (item.details || []).find(d => d.label === label);
+            const value = detailItem ? detailItem.value : '-';
+            // 截斷過長的內容
+            const displayValue = value.length > 50 ? value.substring(0, 50) + '...' : value;
+            return `<td style="background: #fafff8; font-size: 0.85rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${value.replace(/"/g, '&quot;').replace(/<[^>]*>/g, '')}">${displayValue}</td>`;
+        }).join('');
+        
         html += `
             <tr>
-                <td>${item.col1}</td>
-                <td><div style="font-weight:bold;">${item.col2}</div><div style="font-size:0.75rem; color:#888;">${item.col2_sub || ''}</div></td>
-                <td>${item.col3}</td>
-                <td>${item.col4}</td>
-                <td><span class="${item.statusClass}">${item.status}</span></td>
+                ${baseCellsHtml}
+                ${detailCellsHtml}
                 <td>
                     <button class="btn btn-edit" onclick="toggleDetailRow('${item.id}')"><i class="fa-solid fa-eye"></i> 詳情</button>
                 </td>
             </tr>
             <tr id="${item.id}" class="hidden-row" style="display:none; background:#fafafa;">
-                <td colspan="${data.headers.length + 1}">
+                <td colspan="${totalColCount}">
                     <div style="padding: 10px 20px 20px 20px;">
                         <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">${detailTitle}</h4>
                     ${item.isDetailEdit ? renderDetailEditor(item) : `
@@ -1329,6 +1414,85 @@ function updateItemTypeA(idx, key, value) {
 
 // 啟動
 window.onload = initApp;
+
+// ==========================================
+// 欄位篩選功能 (Column Filter) - 詳情欄位顯示在第一層
+// ==========================================
+
+// 切換欄位篩選下拉選單
+function toggleColumnFilter(tabId) {
+    const menu = document.getElementById(`col-filter-menu-${tabId}`);
+    if (menu) {
+        const isVisible = menu.style.display === 'block';
+        // 先關閉所有其他下拉選單
+        document.querySelectorAll('.column-filter-menu').forEach(m => m.style.display = 'none');
+        menu.style.display = isVisible ? 'none' : 'block';
+    }
+}
+
+// 切換單個詳情欄位可見性（是否顯示在第一層表格）
+function toggleDetailColumnVisibility(tabId, label, isVisible) {
+    if (!appState.detailColumnsVisible[tabId]) {
+        appState.detailColumnsVisible[tabId] = {};
+    }
+    appState.detailColumnsVisible[tabId][label] = isVisible;
+    renderContent(); // 重新渲染表格
+}
+
+// 設置所有詳情欄位可見性（全選/清除）
+function setAllDetailColumnsVisibility(tabId, isVisible) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    if (currentTab && currentTab.data && currentTab.data.items) {
+        // 收集所有詳情欄位
+        const allLabels = [];
+        currentTab.data.items.forEach(item => {
+            if (item.details && Array.isArray(item.details)) {
+                item.details.forEach(d => {
+                    if (d.label && !allLabels.includes(d.label)) {
+                        allLabels.push(d.label);
+                    }
+                });
+            }
+        });
+        
+        if (!appState.detailColumnsVisible[tabId]) {
+            appState.detailColumnsVisible[tabId] = {};
+        }
+        allLabels.forEach(label => {
+            appState.detailColumnsVisible[tabId][label] = isVisible;
+        });
+        renderContent();
+    }
+}
+
+// 舊的欄位可見性函數（保留備用）
+function toggleColumnVisibility(tabId, colIndex, isVisible) {
+    if (!appState.columnVisibility[tabId]) {
+        appState.columnVisibility[tabId] = {};
+    }
+    appState.columnVisibility[tabId][colIndex] = isVisible;
+    renderContent();
+}
+
+function setAllColumnsVisibility(tabId, isVisible) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    if (currentTab && currentTab.data && currentTab.data.headers) {
+        currentTab.data.headers.forEach((_, idx) => {
+            if (!appState.columnVisibility[tabId]) {
+                appState.columnVisibility[tabId] = {};
+            }
+            appState.columnVisibility[tabId][idx] = isVisible;
+        });
+        renderContent();
+    }
+}
+
+// 點擊頁面其他區域時關閉下拉選單
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.column-filter-dropdown')) {
+        document.querySelectorAll('.column-filter-menu').forEach(m => m.style.display = 'none');
+    }
+});
 
 // ==========================================
 // 5. 詳細資料編輯功能 (Detail Editor)

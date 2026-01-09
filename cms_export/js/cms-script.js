@@ -840,6 +840,13 @@ function addRowCommittee() {
 function renderTypePreview(container, tabData, isLastTab) {
     const d = tabData.data;
     const html = `
+        <style>
+            .default-cover-option input:checked + img {
+                border-color: var(--primary-color) !important;
+                box-shadow: 0 0 0 3px rgba(0, 140, 149, 0.2);
+                transform: translateY(-2px);
+            }
+        </style>
         <div class="editor-container">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; padding: 20px 20px 0 20px;">
                 <div>
@@ -857,6 +864,53 @@ function renderTypePreview(container, tabData, isLastTab) {
                 <div class="content-view-area">
                     <!-- 內容編輯器 -->
                     <div class="edit-pane" id="pane-edit" style="display:block;">
+                        <div class="form-group">
+                            <label>封面圖片設定 (非強制)</label>
+                            <div style="font-size: 0.8rem; color: #666; margin-bottom: 8px;">建議尺寸：1200 x 600 px，JPG/PNG 格式。若未上傳將使用預設圖片。</div>
+                            
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #eee;">
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <input type="radio" name="cover-option" id="opt-upload" value="upload" onchange="toggleCoverOption()" style="width: auto; margin: 0;"> 
+                                        <span>自行上傳圖片</span>
+                                    </label>
+                                    <div style="padding-left: 24px;">
+                                        <input type="file" id="in-cover-upload" accept="image/*" onchange="handleCoverUpload(this)" disabled style="width: auto; padding: 8px; background: white;">
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <input type="radio" name="cover-option" id="opt-default" value="default" onchange="toggleCoverOption()" checked style="width: auto; margin: 0;"> 
+                                        <span>使用預設圖片 (請選擇)</span>
+                                    </label>
+                                    
+                                    <div id="default-covers-area" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; margin-top: 10px; padding-left: 24px;">
+                                        <label class="default-cover-option" style="cursor: pointer; display: block; margin: 0;">
+                                            <input type="radio" name="default-cover" value="https://placehold.co/1200x600/008c95/ffffff?text=Default+1" onchange="syncPreviewData()" style="display:none;" checked>
+                                            <img src="https://placehold.co/150x80/008c95/ffffff?text=1" style="width: 100%; border-radius: 4px; border: 2px solid transparent; transition: all 0.2s; display: block;">
+                                        </label>
+                                        <label class="default-cover-option" style="cursor: pointer; display: block; margin: 0;">
+                                            <input type="radio" name="default-cover" value="https://placehold.co/1200x600/e91e63/ffffff?text=Default+2" onchange="syncPreviewData()" style="display:none;">
+                                            <img src="https://placehold.co/150x80/e91e63/ffffff?text=2" style="width: 100%; border-radius: 4px; border: 2px solid transparent; transition: all 0.2s; display: block;">
+                                        </label>
+                                        <label class="default-cover-option" style="cursor: pointer; display: block; margin: 0;">
+                                            <input type="radio" name="default-cover" value="https://placehold.co/1200x600/2196f3/ffffff?text=Default+3" onchange="syncPreviewData()" style="display:none;">
+                                            <img src="https://placehold.co/150x80/2196f3/ffffff?text=3" style="width: 100%; border-radius: 4px; border: 2px solid transparent; transition: all 0.2s; display: block;">
+                                        </label>
+                                        <label class="default-cover-option" style="cursor: pointer; display: block; margin: 0;">
+                                            <input type="radio" name="default-cover" value="https://placehold.co/1200x600/ff9800/ffffff?text=Default+4" onchange="syncPreviewData()" style="display:none;">
+                                            <img src="https://placehold.co/150x80/ff9800/ffffff?text=4" style="width: 100%; border-radius: 4px; border: 2px solid transparent; transition: all 0.2s; display: block;">
+                                        </label>
+                                        <label class="default-cover-option" style="cursor: pointer; display: block; margin: 0;">
+                                            <input type="radio" name="default-cover" value="https://placehold.co/1200x600/9c27b0/ffffff?text=Default+5" onchange="syncPreviewData()" style="display:none;">
+                                            <img src="https://placehold.co/150x80/9c27b0/ffffff?text=5" style="width: 100%; border-radius: 4px; border: 2px solid transparent; transition: all 0.2s; display: block;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>分類標籤 (多選/新增)</label>
                             <div class="tag-editor-box" id="tag-editor-container">
@@ -925,6 +979,11 @@ function renderTypePreview(container, tabData, isLastTab) {
                             <div class="portal-nav"><span><i class="fa-solid fa-magnifying-glass"></i> 尋找挑戰</span></div>
                             <div class="portal-main">
                                 <div class="portal-breadcrumb">首頁 > 挑戰專區 > 挑戰詳情</div>
+                                
+                                <div id="pv-cover-container" style="margin-bottom: 20px; border-radius: 8px; overflow: hidden; display: none;">
+                                    <img id="pv-cover-img" src="" style="width: 100%; height: auto; display: block; object-fit: cover; max-height: 400px;">
+                                </div>
+
                                 <div class="portal-spec-card">
                                     <div class="spec-header"><span><i class="fa-solid fa-list-check"></i> 挑戰規格與實證需求</span></div>
                                     <table class="spec-table">
@@ -989,6 +1048,44 @@ function renderTypePreview(container, tabData, isLastTab) {
     };
 
     window.syncPreviewData = function() {
+        // Image Logic
+        const uploadOption = document.getElementById('opt-upload');
+        let coverSrc = '';
+        
+        if (uploadOption.checked) {
+            // Check if file input has file (mocking preview)
+            // In real world, we need FileReader. Here we just assume if value exists or use a placeholder if valid
+            const fileInput = document.getElementById('in-cover-upload');
+            if (fileInput.files && fileInput.files[0]) {
+                 // Create object URL for preview
+                 if (window.currentPreviewUrl) URL.revokeObjectURL(window.currentPreviewUrl);
+                 window.currentPreviewUrl = URL.createObjectURL(fileInput.files[0]);
+                 coverSrc = window.currentPreviewUrl;
+            }
+        } else {
+             const selectedDefault = document.querySelector('input[name="default-cover"]:checked');
+             if (selectedDefault) {
+                 coverSrc = selectedDefault.value;
+             }
+        }
+
+        const pvCoverContainer = document.getElementById('pv-cover-container');
+        const pvCoverImg = document.getElementById('pv-cover-img');
+        
+        if (coverSrc) {
+            pvCoverContainer.style.display = 'block';
+            pvCoverImg.src = coverSrc;
+        } else {
+             // Optional: hide if no image
+             // pvCoverContainer.style.display = 'none';
+             // But requirement says "If no picture, use default image". 
+             // If upload is selected but empty, maybe fallback to default or show nothing?
+             // User says: "沒圖的話用預設圖". This implies default should be selected by default.
+             if (uploadOption.checked) {
+                 pvCoverContainer.style.display = 'none'; 
+             }
+        }
+
         document.getElementById('pv-title').innerText = document.getElementById('in-title').value;
         document.getElementById('pv-agency').innerText = document.getElementById('in-agency').value;
         document.getElementById('pv-date').innerText = document.getElementById('in-date').value;
@@ -997,6 +1094,25 @@ function renderTypePreview(container, tabData, isLastTab) {
         document.getElementById('pv-location').innerText = document.getElementById('in-location').value;
         document.getElementById('pv-req').innerHTML = document.getElementById('in-req').value.replace(/\n/g, '<br>');
         window.syncTagsToPreview();
+    };
+
+    window.toggleCoverOption = function() {
+        const isUpload = document.getElementById('opt-upload').checked;
+        const defaultArea = document.getElementById('default-covers-area');
+        const uploadInput = document.getElementById('in-cover-upload');
+        
+        if (isUpload) {
+            defaultArea.style.display = 'none';
+            uploadInput.disabled = false;
+        } else {
+            defaultArea.style.display = 'grid';
+            uploadInput.disabled = true;
+        }
+        window.syncPreviewData();
+    };
+
+    window.handleCoverUpload = function(input) {
+        window.syncPreviewData();
     };
 
     window.handleTagKey = function(event) {

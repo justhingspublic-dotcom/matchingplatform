@@ -45,6 +45,7 @@ const DEFAULT_STAGES = [
                             col4: "NT$ 2,500,000",
                             status: "審核通過",
                             statusClass: "tag tag-pass",
+                            isPublished: true, // 前台上架狀態
                             details: [
                                 { label: "出題單位全銜", value: "臺北市政府交通局" },
                                 { label: "承辦人/職稱", value: "林小明 (專案技正)" },
@@ -71,6 +72,7 @@ const DEFAULT_STAGES = [
                             col4: "NT$ 1,800,000",
                             status: "審核中",
                             statusClass: "tag tag-review",
+                            isPublished: false, // 前台上架狀態
                             details: [
                                 { label: "出題單位全銜", value: "衛生福利部臺北醫院" },
                                 { label: "承辦人/職稱", value: "張雅婷 (資訊室主任)" },
@@ -202,6 +204,7 @@ const DEFAULT_STAGES = [
                             col4: "NT$ 2,200,000",
                             status: "已入選",
                             statusClass: "tag tag-blue",
+                            isPublished: true, // 前台上架狀態
                             details: [
                                 { label: "負責人", value: "王大明" },
                                 { label: "成立日期", value: "109年 05月 20日" },
@@ -226,6 +229,7 @@ const DEFAULT_STAGES = [
                             col4: "NT$ 1,800,000",
                             status: "已入選",
                             statusClass: "tag tag-blue",
+                            isPublished: true, // 前台上架狀態
                             details: []
                         }
                     ]
@@ -677,11 +681,11 @@ function renderTypeList(container, tabData, isLastTab) {
         </div>
     `;
 
-    // 計算總欄位數（基本欄位 + 選擇的詳情欄位 + 動作欄）
+    // 計算總欄位數（基本欄位 + 選擇的詳情欄位 + 前台狀態欄 + 動作欄）
     const baseColCount = data.headers.length;
-    const totalColCount = baseColCount + selectedDetailCols.length + 1; // +1 for action column
+    const totalColCount = baseColCount + selectedDetailCols.length + 2; // +1 for publish status, +1 for action column
 
-    // 生成表頭（基本欄位 + 選擇的詳情欄位）
+    // 生成表頭（基本欄位 + 選擇的詳情欄位 + 前台狀態）
     const baseHeadersHtml = data.headers.map((h, idx) => `
         <th onclick="handleSort(${idx})" style="cursor:pointer; user-select:none;">
             ${h} ${getSortIcon(idx)}
@@ -693,6 +697,13 @@ function renderTypeList(container, tabData, isLastTab) {
             <i class="fa-solid fa-plus-circle" style="font-size:0.7em; margin-right:4px;"></i>${label}
         </th>
     `).join('');
+    
+    // 前台狀態欄位標題
+    const publishStatusHeaderHtml = `
+        <th style="text-align: center; min-width: 100px;">
+            <i class="fa-solid fa-globe" style="margin-right: 4px;"></i>前台狀態
+        </th>
+    `;
 
     let html = `
         <div class="content-box">
@@ -706,7 +717,7 @@ function renderTypeList(container, tabData, isLastTab) {
                 </div>
             </div>
             <table class="data-table">
-                <thead><tr>${baseHeadersHtml}${detailHeadersHtml}<th width="120">動作</th></tr></thead>
+                <thead><tr>${baseHeadersHtml}${detailHeadersHtml}${publishStatusHeaderHtml}<th width="120">動作</th></tr></thead>
                 <tbody>
     `;
 
@@ -722,6 +733,22 @@ function renderTypeList(container, tabData, isLastTab) {
             <td><span class="${item.statusClass}">${item.status}</span></td>
         `;
         
+        // 前台狀態開關
+        const isPublished = item.isPublished !== false; // 預設為上架
+        const publishStatusCellHtml = `
+            <td style="text-align: center;">
+                <div class="publish-toggle-cell">
+                    <label class="switch" title="${isPublished ? '目前已上架，點擊下架' : '目前已下架，點擊上架'}">
+                        <input type="checkbox" ${isPublished ? 'checked' : ''} onchange="togglePublishStatus('${item.id}', this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="publish-status-label" style="margin-top: 4px; font-size: 0.75rem; color: ${isPublished ? 'var(--success-color)' : '#999'};">
+                        ${isPublished ? '<i class="fa-solid fa-eye"></i> 已上架' : '<i class="fa-solid fa-eye-slash"></i> 已下架'}
+                    </div>
+                </div>
+            </td>
+        `;
+        
         // 從詳情中獲取選擇的欄位值
         const detailCellsHtml = selectedDetailCols.map(label => {
             const detailItem = (item.details || []).find(d => d.label === label);
@@ -732,9 +759,10 @@ function renderTypeList(container, tabData, isLastTab) {
         }).join('');
         
         html += `
-            <tr>
+            <tr class="${isPublished ? '' : 'row-unpublished'}">
                 ${baseCellsHtml}
                 ${detailCellsHtml}
+                ${publishStatusCellHtml}
                 <td>
                     <button class="btn btn-edit" onclick="toggleDetailRow('${item.id}')"><i class="fa-solid fa-eye"></i> 詳情</button>
                 </td>
@@ -772,6 +800,62 @@ function renderTypeList(container, tabData, isLastTab) {
         el.style.display = (el.style.display === 'none') ? 'table-row' : 'none';
         if(el.style.display === 'table-row') el.classList.add('expanded');
         else el.classList.remove('expanded');
+    };
+    
+    // 切換前台上下架狀態
+    window.togglePublishStatus = function(id, isPublished) {
+        const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+        const item = currentTab.data.items.find(i => i.id === id);
+        if (item) {
+            item.isPublished = isPublished;
+            // 顯示狀態變更提示
+            const statusText = isPublished ? '已上架' : '已下架';
+            const actionText = isPublished ? '前台將顯示此項目' : '前台將隱藏此項目';
+            
+            // 創建一個簡易的 Toast 提示
+            showPublishToast(`${item.col2 || item.col1} ${statusText}`, actionText, isPublished);
+            
+            saveState();
+        }
+    };
+    
+    // 簡易 Toast 提示
+    window.showPublishToast = function(title, message, isPublished) {
+        // 移除舊的 toast
+        const existingToast = document.getElementById('publish-toast');
+        if (existingToast) existingToast.remove();
+        
+        const toast = document.createElement('div');
+        toast.id = 'publish-toast';
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: ${isPublished ? '#e8f5e9' : '#fff3e0'};
+            border: 1px solid ${isPublished ? '#a5d6a7' : '#ffcc80'};
+            color: ${isPublished ? '#2e7d32' : '#ef6c00'};
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        `;
+        toast.innerHTML = `
+            <i class="fa-solid ${isPublished ? 'fa-circle-check' : 'fa-circle-pause'}" style="font-size: 1.5rem;"></i>
+            <div>
+                <div style="font-weight: bold;">${title}</div>
+                <div style="font-size: 0.85rem; opacity: 0.8;">${message}</div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
     };
 }
 

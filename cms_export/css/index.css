@@ -305,3 +305,50 @@ input:checked + .slider:before { transform: translateX(22px); }
 /* 前台標籤樣式 */
 .portal-tag { display: inline-block; background: #f1f8e9; color: #558b2f; padding: 2px 10px; border-radius: 4px; font-size: 12px; margin-right: 6px; font-weight: bold; border: 1px solid #dcedc8; }
 .portal-tag::before { content: "#"; margin-right: 2px; }
+
+/* --- 前台上下架狀態控制樣式 --- */
+.row-unpublished {
+    background-color: #fafafa !important;
+    opacity: 0.65;
+}
+
+.row-unpublished:hover {
+    opacity: 0.85;
+}
+
+.publish-toggle-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish-status-label {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Toast 動畫 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}

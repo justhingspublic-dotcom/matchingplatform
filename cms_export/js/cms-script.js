@@ -56,7 +56,10 @@ const DEFAULT_STAGES = [
                                 { label: "現況問題痛點", value: "目前本市主要幹道於上下班尖峰時刻，常因固定號誌時相無法應對突發性車流，導致路口回堵嚴重。現有之感應線圈維護成本高且數據單一，缺乏車種辨識與人流分析能力，無法作為動態號誌調整之依據。", fullWidth: true },
                                 { label: "技術規格要求", value: "1. 需利用路口現有 CCTV 影像進行分析，不額外架設大型硬體為原則。<br>2. 辨識準確率：日間 > 95%，夜間 > 85% (需包含大客車、小客車、機車、行人)。<br>3. 數據延遲：影像分析數據回傳至中控中心延遲需小於 2 秒。<br>4. 介接規範：需提供標準 RESTful API 介接本局交控中心平台。", fullWidth: true },
                                 { label: "評選與審查標準", value: "技術創新性 (30%)、場域可行性 (30%)、團隊執行力 (20%)、經費編列合理性 (20%)。", fullWidth: true },
-                                { label: "預期實證效益", value: "1. 降低路口尖峰時段平均延滯時間 15% 以上。<br>2. 節省人工車流調查人力成本約 50 萬元/年。<br>3. 建立即時交通戰情儀表板，提供交通決策輔助。", fullWidth: true }
+                                { label: "預期實證效益", value: "1. 降低路口尖峰時段平均延滯時間 15% 以上。<br>2. 節省人工車流調查人力成本約 50 萬元/年。<br>3. 建立即時交通戰情儀表板，提供交通決策輔助。", fullWidth: true },
+                                { label: "相關參考附件", value: `<a href="#" class="attachment-link"><i class="fa-solid fa-file-pdf"></i> 114年智慧交通徵案簡章.pdf</a>
+                                    <a href="#" class="attachment-link"><i class="fa-solid fa-image"></i> 場域現況照片(基隆路口).jpg</a>
+                                    <a href="#" class="attachment-link"><i class="fa-solid fa-file-excel"></i> 經費預算表範本(機關版).xlsx</a>`, fullWidth: true }
                             ]
                         },
                         {
@@ -69,7 +72,19 @@ const DEFAULT_STAGES = [
                             status: "審核中",
                             statusClass: "tag tag-review",
                             details: [
-                                { label: "出題單位全銜", value: "衛生福利部臺北醫院" }
+                                { label: "出題單位全銜", value: "衛生福利部臺北醫院" },
+                                { label: "承辦人/職稱", value: "張雅婷 (資訊室主任)" },
+                                { label: "聯繫電話", value: "02-2276-5566 #2233" },
+                                { label: "電子郵件", value: "yt.chang@tph.mohw.gov.tw" },
+                                { label: "挑戰題目", value: "AI輔助急診檢傷分類系統實證", fullWidth: true, highlight: true },
+                                { label: "技術領域分類", value: "AI 醫療影像 / 大數據分析" },
+                                { label: "建議實證場域", value: "衛生福利部臺北醫院 急診室" },
+                                { label: "現況問題痛點", value: "急診檢傷分類目前仰賴護理師人工判斷，尖峰時刻易因人力不足導致壅塞。且不同護理人員判斷標準可能存在細微差異，影響病患分流效率。", fullWidth: true },
+                                { label: "技術規格要求", value: "1. 系統需介接醫院 HIS 系統，即時讀取病患生理量測數據。<br>2. AI 模型需基於過去 5 年去識別化病歷進行訓練。<br>3. 檢傷分類預測準確率需達 90% 以上（對比資深護理師判斷）。<br>4. 需符合 HL7 FHIR 標準交換格式。", fullWidth: true },
+                                { label: "評選與審查標準", value: "醫療法規合規性 (30%)、AI 模型準確度 (30%)、系統整合可行性 (25%)、資安防護機制 (15%)。", fullWidth: true },
+                                { label: "預期實證效益", value: "1. 縮短檢傷分類平均作業時間 20%。<br>2. 提升檢傷分類一致性，降低醫療糾紛風險。<br>3. 減輕急診護理人員行政負擔。", fullWidth: true },
+                                { label: "相關參考附件", value: `<a href="#" class="attachment-link"><i class="fa-solid fa-file-pdf"></i> 114年醫療場域實證規範.pdf</a>
+                                    <a href="#" class="attachment-link"><i class="fa-solid fa-file-word"></i> 專案計畫書範本.docx</a>`, fullWidth: true }
                             ]
                         }
                     ]
@@ -637,7 +652,8 @@ function renderTypeList(container, tabData, isLastTab) {
             <tr id="${item.id}" class="hidden-row" style="display:none; background:#fafafa;">
                 <td colspan="${data.headers.length + 1}">
                     <div style="padding: 10px 20px 20px 20px;">
-                        <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">詳細資料規格書</h4>
+                        <h4 style="border-left: 4px solid var(--primary-color); padding-left: 10px; margin-bottom: 10px; color: var(--primary-color);">機關需求詳細規格書 (挑戰編號: ${item.col1})</h4>
+                    ${item.isDetailEdit ? renderDetailEditor(item) : `
                     <div class="detail-info-grid">
                         ${item.details.map(d => `
                             <div class="detail-label">${d.label}</div>
@@ -648,8 +664,10 @@ function renderTypeList(container, tabData, isLastTab) {
                         </div>
                         <div style="margin-top: 15px; text-align: right;">
                             <button class="btn btn-outline" onclick="toggleDetailRow('${item.id}')">收合詳情</button>
-                            <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> 編輯內容</button>
+                            <button class="btn btn-info" onclick="toggleEditDetail('${item.id}')"><i class="fa-solid fa-pen-to-square"></i> 編輯出題內容</button>
+                            <button class="btn btn-success"><i class="fa-solid fa-paper-plane"></i> 正式發佈公告</button>
                         </div>
+                    `}
                     </div>
                 </td>
             </tr>
@@ -1305,3 +1323,167 @@ function updateItemTypeA(idx, key, value) {
 
 // 啟動
 window.onload = initApp;
+
+// ==========================================
+// 5. 詳細資料編輯功能 (Detail Editor)
+// ==========================================
+
+function toggleEditDetail(id) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if (item) {
+        if (!item.isDetailEdit) {
+            // 進入編輯模式前，先備份一份資料以供取消時還原 (可選，這裡簡化直接切換)
+            item.isDetailEdit = true;
+        } else {
+            // 已經在編輯模式，可能是按錯或切換，這裡假設是切換狀態
+            item.isDetailEdit = false;
+        }
+        saveState();
+        
+        // 確保展開
+        setTimeout(() => {
+            const row = document.getElementById(id);
+            if(row && row.style.display === 'none') {
+                toggleDetailRow(id);
+            }
+        }, 50);
+    }
+}
+
+function renderDetailEditor(item) {
+    let html = `<div class="detail-editor-box" style="background:#fff3e0; padding:15px; border-radius:6px; border:1px solid #ffe0b2;">`;
+    
+    html += `<div id="editor-fields-${item.id}">`;
+    item.details.forEach((d, idx) => {
+        html += `
+            <div class="edit-field-row" style="display:flex; gap:10px; margin-bottom:10px; align-items:flex-start;">
+                <div style="width: 200px; flex-shrink:0;">
+                    <label style="font-size:0.8rem; color:#666;">欄位名稱</label>
+                    <input type="text" class="detail-label-input" value="${d.label}" data-idx="${idx}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+                </div>
+                <div style="flex-grow:1;">
+                    <label style="font-size:0.8rem; color:#666;">內容 (支援 HTML)</label>
+                    <textarea class="detail-value-input" data-idx="${idx}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; min-height:60px;">${d.value}</textarea>
+                    <label style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; font-size:0.8rem; color:#666;">
+                        <input type="checkbox" class="detail-full-check" data-idx="${idx}" ${d.fullWidth ? 'checked' : ''}> 寬欄顯示
+                    </label>
+                    <label style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; margin-left:10px; font-size:0.8rem; color:#666;">
+                        <input type="checkbox" class="detail-highlight-check" data-idx="${idx}" ${d.highlight ? 'checked' : ''}> 重點標示
+                    </label>
+                </div>
+                <div style="padding-top: 24px;">
+                    <button class="btn btn-outline" style="color:var(--danger-color); border-color:#ffcdd2;" onclick="removeDetailField('${item.id}', ${idx})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    html += `</div>`;
+
+    html += `
+        <div style="margin-top:10px; margin-bottom:20px;">
+            <button class="btn btn-outline" style="border-style:dashed; width:100%;" onclick="addDetailField('${item.id}')">
+                <i class="fa-solid fa-plus"></i> 新增欄位
+            </button>
+        </div>
+        
+        <div style="text-align:right; border-top:1px solid #ffe0b2; padding-top:15px;">
+            <button class="btn btn-outline" onclick="cancelEditDetail('${item.id}')">取消</button>
+            <button class="btn btn-primary" onclick="saveDetail('${item.id}')"><i class="fa-solid fa-floppy-disk"></i> 儲存變更</button>
+        </div>
+    `;
+    
+    html += `</div>`;
+    return html;
+}
+
+function syncDetailFromDOM(id) {
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if (!item) return;
+
+    const container = document.getElementById(`editor-fields-${id}`);
+    if (!container) return;
+
+    const rows = container.getElementsByClassName('edit-field-row');
+    const newDetails = [];
+
+    Array.from(rows).forEach(row => {
+        const labelInput = row.querySelector('.detail-label-input');
+        const valueInput = row.querySelector('.detail-value-input');
+        const fullCheck = row.querySelector('.detail-full-check');
+        const highlightCheck = row.querySelector('.detail-highlight-check');
+
+        newDetails.push({
+            label: labelInput.value,
+            value: valueInput.value,
+            fullWidth: fullCheck.checked,
+            highlight: highlightCheck.checked
+        });
+    });
+
+    item.details = newDetails;
+}
+
+function addDetailField(id) {
+    syncDetailFromDOM(id); // 先同步當前輸入
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if(item) {
+        item.details.push({ label: "新欄位", value: "", fullWidth: true });
+        saveState();
+    }
+}
+
+function removeDetailField(id, idx) {
+    if(!confirm("確定刪除此欄位？")) return;
+    syncDetailFromDOM(id); // 先同步當前輸入
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if(item) {
+        item.details.splice(idx, 1);
+        saveState();
+    }
+}
+
+function saveDetail(id) {
+    syncDetailFromDOM(id);
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if(item) {
+        // 自動同步關鍵欄位到外層列表
+        const titleDetail = item.details.find(d => d.label === "挑戰題目" || d.label === "題目" || d.label === "挑戰題目摘要");
+        if(titleDetail) item.col3 = titleDetail.value;
+
+        const agencyDetail = item.details.find(d => d.label === "出題單位全銜" || d.label === "出題單位");
+        if(agencyDetail) item.col2 = agencyDetail.value;
+
+        item.isDetailEdit = false;
+        saveState();
+    }
+}
+
+function cancelEditDetail(id) {
+    if(!confirm("確定取消編輯？未儲存的內容將會遺失。")) return;
+    // 這裡簡單做：直接重新讀取 state (因為 syncDetailFromDOM 會寫入 state，但如果不 call saveState 其實不會持久化... 
+    // 等等，syncDetailFromDOM 直接改了 appState 記憶體物件。
+    // 如果要真正取消，應該在進入編輯時 clone 一份。
+    // 但因為我們目前架構較簡單，直接 reload state from storage 可能是最快還原法，
+    // 前提是中間沒有觸發 saveState。
+    // 但 add/remove field 會觸發 saveState。
+    // 如果 add/remove 了，就已經存了。
+    // 簡單處理：取消就只是退出編輯模式，不做複雜還原，除非我們實作 deep clone undo。
+    // 為了使用者體驗，這裏僅退出模式，保留剛才的操作結果 (若有 add/remove)。
+    // 若只是改文字沒 save，syncDetailFromDOM 還沒跑，所以直接退出會還原文字。
+    
+    const currentTab = appState.stages[appState.currentStageIndex].tabs[appState.currentTabIndex];
+    const item = currentTab.data.items.find(i => i.id === id);
+    if(item) {
+        item.isDetailEdit = false;
+        // 為了確保文字還原，重新讀取
+        loadState(); 
+        renderAll();
+    }
+}

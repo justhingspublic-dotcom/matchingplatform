@@ -12,16 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/common.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#005a87',
-                        secondary: '#4facfe',
-                        accent: '#ffb400',
-                        'primary-dark': '#003d5c',
-                        'teal-gov': '#008c95',
+                        primary: '#003366',
+                        secondary: '#0089A7',
+                        accent: '#F2A900',
+                        'primary-dark': '#002244',
+                        'teal-gov': '#0089A7',
                     },
                     fontFamily: {
                         sans: ['Noto Sans TC', 'sans-serif'],
@@ -32,15 +33,15 @@
     </script>
     <style>
         .form-section-header {
-            background-color: #005a87;
+            background-color: #003366;
             color: white;
             padding: 12px 20px;
             font-weight: 700;
             border-radius: 4px 4px 0 0;
         }
         .section-label {
-            background-color: #005a87; /* Primary blue */
-            color: #ffffff; /* White text */
+            background-color: #003366;
+            color: #ffffff;
             padding: 20px;
             font-weight: 700;
             font-size: 15px;
@@ -77,7 +78,7 @@
     <main class="max-w-7xl mx-auto px-4 py-10">
         <!-- Breadcrumbs -->
         <nav class="flex text-xs text-gray-400 mb-4 gap-2 items-center">
-            <a href="index.html" class="hover:text-primary">首頁</a>
+            <a href="home.html" class="hover:text-primary">首頁</a>
             <span>></span>
             <a href="challenges.html" class="hover:text-primary">提案審查</a>
             <span>></span>
@@ -93,7 +94,7 @@
         <!-- Submission Header - Removed, will add inside card -->
 
         <!-- Data Table Card -->
-        <div class="bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden mb-8">
+        <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden mb-8">
             <div class="form-section-header flex items-center gap-2">
                 <i class="fa-solid fa-file-lines"></i> 提案編號：114-T058-003 | 智通科技股份有限公司
             </div>
@@ -268,7 +269,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#2d2d2d] text-gray-400 py-8 mt-16">
+    <footer class="bg-[#1e272e] text-gray-400 py-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs">
             <p class="mb-2">© 2025 Innovation Matchmaking Platform. 專勵部勞動力發展署版權所有</p>
             <p>地址：24219 新北市新莊區中平路439號南棟4樓 | 客服專線：0800-777-888</p>

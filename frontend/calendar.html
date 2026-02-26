@@ -25,7 +25,7 @@
     <main class="max-w-7xl mx-auto px-4 py-8">
         <!-- Breadcrumbs -->
         <nav class="flex text-xs text-gray-400 mb-6 gap-2 items-center">
-            <a href="index.html" class="hover:text-primary">首頁</a>
+            <a href="home.html" class="hover:text-primary">首頁</a>
             <span>></span>
             <a href="#" class="hover:text-primary">計畫時程</a>
             <span>></span>
@@ -44,8 +44,8 @@
                 <div class="flex justify-end mb-3 opacity-0">
                     <p class="text-[10px]">&nbsp;</p> <!-- Spacer to align with right side -->
                 </div>
-                <div class="bg-white rounded-md border border-gray-200 p-6 shadow-sm relative overflow-hidden flex-grow">
-                    <h2 class="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+                <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-md relative overflow-hidden flex-grow">
+                    <h2 class="text-lg font-bold text-secondary flex items-center gap-2 mb-6">
                         <i class="fa-solid fa-magnifying-glass"></i> 時程查詢條件
                     </h2>
 
@@ -116,20 +116,20 @@
                         <!-- Keyword Filter -->
                         <div>
                             <p class="font-bold text-sm mb-3">關鍵字：</p>
-                            <input type="text" placeholder="例：說明會、繳件..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded text-sm focus:outline-none focus:border-primary">
+                            <input type="text" placeholder="例：說明會、繳件..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded text-sm focus:outline-none focus:border-secondary">
                         </div>
 
                         <!-- Date Filter -->
                         <div>
                             <p class="font-bold text-sm mb-3">日期區間：</p>
                             <div class="space-y-2">
-                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-primary">
+                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-secondary">
                                 <p class="text-center text-xs text-gray-400">至</p>
-                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-primary">
+                                <input type="text" value="2025/12/22" class="w-full px-3 py-2 bg-white border border-gray-200 rounded text-sm text-gray-400 focus:outline-none focus:border-secondary">
                             </div>
                         </div>
 
-                        <button class="w-full bg-primary text-white py-2.5 rounded text-sm font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+                        <button class="w-full bg-secondary text-white py-2.5 rounded text-sm font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
                             <i class="fa-solid fa-magnifying-glass"></i> 查詢
                         </button>
                     </div>
@@ -144,7 +144,7 @@
                     </p>
                 </div>
 
-                <div class="bg-white rounded-md shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
                     <table class="w-full gov-table border-collapse">
                         <thead>
                             <tr>
@@ -158,10 +158,10 @@
                         <tbody>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/06/06</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">備妥並提交申請文件截止 (Application Deadline)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">備妥並提交申請文件截止 (Application Deadline)</td>
                                 <td class="text-center text-gray-600">申請審查</td>
                                 <td class="text-center">
                                     <span class="px-2 py-0.5 border border-red-500 text-red-500 rounded-full text-xs font-medium">即將截止</span>
@@ -169,73 +169,73 @@
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/06/10</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">審查會議 (Review Meeting)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">審查會議 (Review Meeting)</td>
                                 <td class="text-center text-gray-600">申請審查</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/06/25</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">公告審查結果與獲選名單</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">公告審查結果與獲選名單</td>
                                 <td class="text-center text-gray-600">申請審查</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/07/10</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">簽約文件繳交截止 (MOU & Contract)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">簽約文件繳交截止 (MOU & Contract)</td>
                                 <td class="text-center text-gray-600">簽約啟動</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/07/30</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">第一期款撥付 (30%)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">第一期款撥付 (30%)</td>
                                 <td class="text-center text-gray-600">簽約啟動</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
                                 </td>
                                 <td class="text-center text-gray-600">每月 10 號</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">例行工作紀錄繳交 (Monthly Log)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">例行工作紀錄繳交 (Monthly Log)</td>
                                 <td class="text-center text-gray-600">執行管考</td>
                                 <td class="text-center text-gray-600">常態性</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">檢視</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/09/15</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">期中審查會議 (Mid-term Review)</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">期中審查會議 (Mid-term Review)</td>
                                 <td class="text-center text-gray-600">執行管考</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/11/10</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">期末報告初稿繳交截止</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">期末報告初稿繳交截止</td>
                                 <td class="text-center text-gray-600">結案驗收</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='#'">
                                 <td class="text-center">
-                                    <button class="bg-primary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
+                                    <button class="bg-secondary text-white px-3 py-1 rounded text-xs font-medium">下載</button>
                                 </td>
                                 <td class="text-center text-gray-600">2025/11/30</td>
-                                <td class="text-gray-800 font-medium group-hover:text-primary transition-colors">結案文件與請款單據繳交截止</td>
+                                <td class="text-gray-800 font-medium group-hover:text-secondary transition-colors">結案文件與請款單據繳交截止</td>
                                 <td class="text-center text-gray-600">結案驗收</td>
                                 <td class="text-center text-gray-400">未開始</td>
                             </tr>
@@ -285,17 +285,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#2d2d2d] text-gray-400 py-8">
+    <footer class="bg-[#1e272e] text-gray-400 py-8">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#2d2d2d] text-lg font-bold">
+                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#1e272e] text-lg font-bold">
                             <i class="fa-solid fa-lightbulb"></i>
                         </div>
                         <span class="text-xl font-bold text-white tracking-tight">實證媒合平台</span>
                     </div>
-                    <p class="text-xs leading-relaxed mb-4">
+                    <p class="text-sm leading-relaxed mb-4">
                         政府出題，企業解題。我們致力於連結公部門需求與民間創新能量，共同解決社會痛點。
                     </p>
                     <div class="flex gap-3">
@@ -306,8 +306,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">關於我們</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">關於我們</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition-colors">計畫緣起</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">服務條款</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">隱私權政策</a></li>
@@ -316,8 +316,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">計畫資源</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">計畫資源</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">資源下載</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
@@ -326,8 +326,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
-                    <ul class="space-y-3 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
+                    <ul class="space-y-3 text-sm">
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-phone text-gray-400 mt-0.5"></i>
                             <div>

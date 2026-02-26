@@ -35,12 +35,12 @@
 
     <!-- Search Section (Integrated Style) -->
     <div class="max-w-4xl mx-auto px-4 -mt-8 relative z-10">
-        <div class="bg-white p-1.5 rounded-md shadow-lg flex items-center border border-gray-200">
-            <div class="flex bg-primary rounded-l-md overflow-hidden">
-                <button class="px-5 py-2.5 text-white text-sm font-bold whitespace-nowrap bg-primary-dark">找挑戰</button>
+        <div class="bg-white rounded-full shadow-xl flex items-stretch border-2 border-secondary overflow-hidden">
+            <div class="flex bg-secondary">
+                <button class="px-7 py-4 text-white text-base font-bold whitespace-nowrap bg-secondary min-w-[120px]">找挑戰</button>
             </div>
-            <input type="text" placeholder="搜尋挑戰關鍵字、機關名稱 or 技術領域..." class="flex-grow px-4 py-2 bg-transparent focus:outline-none text-gray-600 text-sm">
-            <button class="bg-accent text-primary-dark w-10 h-10 rounded-md flex items-center justify-center hover:bg-yellow-500 transition-colors">
+            <input type="text" placeholder="搜尋挑戰關鍵字、機關名稱 or 技術領域..." class="flex-grow px-5 py-4 bg-transparent focus:outline-none text-gray-600 text-base">
+            <button class="bg-accent text-primary-dark px-8 flex items-center justify-center hover:bg-yellow-500 transition-colors text-lg">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
@@ -52,7 +52,7 @@
             
             <!-- Sidebar (Filters) -->
             <aside class="w-full lg:w-1/4">
-                <div class="bg-white rounded-md border border-gray-200 p-6 shadow-sm sticky top-24">
+                <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-md sticky top-24">
                     <h2 class="text-lg font-bold text-primary flex items-center gap-2 mb-6 pb-4 border-b border-gray-100">
                         <i class="fa-solid fa-filter text-sm"></i> 篩選條件
                     </h2>
@@ -130,7 +130,7 @@
                             </ul>
                         </div>
 
-                        <button class="w-full py-2 bg-gray-100 text-gray-500 rounded text-xs font-bold hover:bg-gray-200 transition-colors">
+                        <button class="w-full py-2 bg-gray-100 text-gray-500 rounded text-sm font-bold hover:bg-gray-200 transition-colors">
                             重置篩選
                         </button>
                     </div>
@@ -144,7 +144,7 @@
                     <p class="text-sm text-gray-500">共搜尋到 <span class="text-primary font-bold">128</span> 筆相關挑戰</p>
                     
                     <div class="flex items-center gap-4">
-                        <select class="bg-white border border-gray-200 text-xs rounded px-3 py-2 outline-none focus:border-primary">
+                        <select class="bg-white border border-gray-200 text-sm rounded px-3 py-2 outline-none focus:border-primary">
                             <option>最新發布優先</option>
                             <option>截止日期由近到遠</option>
                             <option>獎助金額由高到低</option>
@@ -162,10 +162,10 @@
                 </div>
 
                 <!-- Cards Grid -->
-                <div id="challenges-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-500">
+                <div id="challenges-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500">
                     
                     <!-- Challenge Card 1 -->
-                    <article class="challenge-card bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all group overflow-hidden flex flex-col">
+                    <article class="challenge-card bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
                         <div class="card-image relative h-48 flex-shrink-0">
                             <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Traffic" class="w-full h-full object-cover">
                             <div class="absolute top-3 left-3 flex gap-2">
@@ -181,7 +181,7 @@
                             <h3 class="text-base font-bold text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">
                                 國道即時壅塞偵測與預警系統開發
                             </h3>
-                            <p class="text-xs text-gray-500 mb-6 line-clamp-2">
+                            <p class="text-sm text-gray-500 mb-6 line-clamp-2">
                                 針對高速公路多事故路段，利用影像辨識技術進行全天候監控與事故自動告警系統...
                             </p>
                             
@@ -190,7 +190,7 @@
                                     <p class="text-[10px] text-gray-400 mb-1">獎助金額</p>
                                     <p class="text-lg font-bold text-primary">$350<span class="text-xs ml-0.5">萬</span></p>
                                 </div>
-                                <a href="challenge-detail.html" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-dark transition-all">
+                                <a href="challenge-detail.html" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-dark transition-all">
                                     查看詳情
                                 </a>
                             </div>
@@ -198,7 +198,7 @@
                     </article>
 
                     <!-- Challenge Card 2 -->
-                    <article class="challenge-card bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all group overflow-hidden flex flex-col">
+                    <article class="challenge-card bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
                         <div class="card-image relative h-48 flex-shrink-0">
                             <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical" class="w-full h-full object-cover">
                             <div class="absolute top-3 left-3 flex gap-2">
@@ -214,7 +214,7 @@
                             <h3 class="text-base font-bold text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">
                                 AI 門診自動化分流與預約優化方案
                             </h3>
-                            <p class="text-xs text-gray-500 mb-6 line-clamp-2">
+                            <p class="text-sm text-gray-500 mb-6 line-clamp-2">
                                 結合病患病歷摘要與大數據分析，精準預測門診需求並優化醫師排班與病患預約流程...
                             </p>
                             
@@ -223,7 +223,7 @@
                                     <p class="text-[10px] text-gray-400 mb-1">獎助金額</p>
                                     <p class="text-lg font-bold text-primary">$200<span class="text-xs ml-0.5">萬</span></p>
                                 </div>
-                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-dark transition-all">
+                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-dark transition-all">
                                     查看詳情
                                 </a>
                             </div>
@@ -231,7 +231,7 @@
                     </article>
 
                     <!-- Challenge Card 3 -->
-                    <article class="challenge-card bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all group overflow-hidden flex flex-col">
+                    <article class="challenge-card bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
                         <div class="card-image relative h-48 flex-shrink-0">
                             <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="ESG" class="w-full h-full object-cover">
                             <div class="absolute top-3 left-3 flex gap-2">
@@ -247,7 +247,7 @@
                             <h3 class="text-base font-bold text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">
                                 園區碳盤查自動化監測與回報平台
                             </h3>
-                            <p class="text-xs text-gray-500 mb-6 line-clamp-2">
+                            <p class="text-sm text-gray-500 mb-6 line-clamp-2">
                                 為協助中小企業快速轉型，開發基於 IoT 之能耗監測與自動化碳盤查試算工具...
                             </p>
                             
@@ -256,7 +256,7 @@
                                     <p class="text-[10px] text-gray-400 mb-1">獎助金額</p>
                                     <p class="text-lg font-bold text-primary">$500<span class="text-xs ml-0.5">萬</span></p>
                                 </div>
-                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-dark transition-all">
+                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-dark transition-all">
                                     查看詳情
                                 </a>
                             </div>
@@ -264,7 +264,7 @@
                     </article>
 
                     <!-- Challenge Card 4 -->
-                    <article class="challenge-card bg-white rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-all group overflow-hidden flex flex-col">
+                    <article class="challenge-card bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col">
                         <div class="card-image relative h-48 flex-shrink-0">
                             <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Drone" class="w-full h-full object-cover">
                             <div class="absolute top-3 left-3 flex gap-2">
@@ -280,7 +280,7 @@
                             <h3 class="text-base font-bold text-gray-800 mb-3 leading-snug group-hover:text-primary transition-colors">
                                 高壓電塔自動化無人機巡檢系統
                             </h3>
-                            <p class="text-xs text-gray-500 mb-6 line-clamp-2">
+                            <p class="text-sm text-gray-500 mb-6 line-clamp-2">
                                 在複雜山區環境下，利用無人機搭載紅外線熱顯像儀進行電塔異常自動偵測與路徑規劃...
                             </p>
                             
@@ -289,7 +289,7 @@
                                     <p class="text-[10px] text-gray-400 mb-1">獎助金額</p>
                                     <p class="text-lg font-bold text-primary">$180<span class="text-xs ml-0.5">萬</span></p>
                                 </div>
-                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-dark transition-all">
+                                <a href="#" class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-dark transition-all">
                                     查看詳情
                                 </a>
                             </div>
@@ -300,15 +300,15 @@
 
                 <!-- Pagination -->
                 <div class="flex justify-center items-center gap-2 mt-16">
-                    <button class="w-9 h-9 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:bg-white hover:border-primary hover:text-primary transition-all">
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:bg-white hover:border-primary hover:text-primary transition-all">
                         <i class="fa-solid fa-chevron-left text-xs"></i>
                     </button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-primary text-white font-bold shadow-sm">1</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">2</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">3</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-sm">1</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">2</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">3</button>
                     <span class="text-gray-300 px-2">...</span>
-                    <button class="w-9 h-9 flex items-center justify-center rounded border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">12</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:bg-white hover:border-primary hover:text-primary transition-all">
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-white hover:border-primary hover:text-primary transition-all">12</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:bg-white hover:border-primary hover:text-primary transition-all">
                         <i class="fa-solid fa-chevron-right text-xs"></i>
                     </button>
                 </div>
@@ -317,17 +317,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#2d2d2d] text-gray-400 py-8">
+    <footer class="bg-[#1e272e] text-gray-400 py-8">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#2d2d2d] text-lg font-bold">
+                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#1e272e] text-lg font-bold">
                             <i class="fa-solid fa-lightbulb"></i>
                         </div>
                         <span class="text-lg font-bold text-white tracking-tight">實證媒合平台</span>
                     </div>
-                    <p class="text-xs leading-relaxed mb-4">
+                    <p class="text-sm leading-relaxed mb-4">
                         政府出題，企業解題。我們致力於連結公部門需求與民間創新能量，共同解決社會痛點。
                     </p>
                     <div class="flex gap-3">
@@ -338,8 +338,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">關於我們</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">關於我們</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition-colors">計畫緣起</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">服務條款</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">隱私權政策</a></li>
@@ -348,8 +348,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">計畫資源</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">計畫資源</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">資源下載</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
@@ -358,8 +358,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
-                    <ul class="space-y-3 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
+                    <ul class="space-y-3 text-sm">
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-phone text-gray-400 mt-0.5"></i>
                             <div>

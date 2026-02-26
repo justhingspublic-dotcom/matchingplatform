@@ -24,7 +24,7 @@
     <!-- Hero Section -->
     <section class="hero-gradient min-h-[400px] flex items-center relative">
         <div class="max-w-7xl mx-auto px-4 w-full py-12">
-            <div class="bg-primary/90 backdrop-blur-sm p-8 md:p-12 max-w-xl text-center md:text-left text-white rounded-md shadow-2xl border border-white/10 mx-auto md:mx-0">
+            <div class="bg-primary/90 backdrop-blur-sm p-8 md:p-12 max-w-xl text-center md:text-left text-white rounded-lg shadow-2xl border border-white/10 mx-auto md:mx-0">
                 <h1 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">
                     114年度 創新場域實證計畫 <br>
                     徵案開跑
@@ -33,7 +33,7 @@
                     總獎金高達 5,000 萬，開放 20+ 政府場域，等你來挑戰！
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                    <a href="#" class="bg-accent hover:bg-yellow-500 text-primary-dark font-bold px-6 py-2.5 rounded-md text-center transition-all shadow-lg">
+                    <a href="#" class="bg-accent hover:bg-yellow-500 text-primary-dark font-bold px-6 py-2.5 rounded-full text-center transition-all shadow-lg">
                         立即報名
                     </a>
                 </div>
@@ -43,16 +43,16 @@
 
     <!-- Search Section -->
     <div class="max-w-4xl mx-auto px-4 -mt-8 relative z-10">
-        <div class="bg-white p-1.5 rounded-md shadow-lg flex items-center border border-gray-200">
-            <div class="flex bg-primary rounded-l-md overflow-hidden">
-                <button class="px-5 py-2.5 text-white text-sm font-bold whitespace-nowrap bg-primary-dark">找挑戰</button>
+        <div class="bg-white rounded-full shadow-xl flex items-stretch border-2 border-secondary overflow-hidden">
+            <div class="flex bg-secondary">
+                <button class="px-7 py-4 text-white text-base font-bold whitespace-nowrap bg-secondary min-w-[120px]">找挑戰</button>
             </div>
-            <input type="text" placeholder="請輸入關鍵字 (例：AI、淨零碳排...)" class="flex-grow px-4 py-2 bg-transparent focus:outline-none text-gray-600 text-sm">
-            <button class="bg-accent text-primary-dark w-10 h-10 rounded-md flex items-center justify-center hover:bg-yellow-500 transition-colors">
+            <input type="text" placeholder="請輸入關鍵字（例：AI、淨零碳排、智慧交通...）" class="flex-grow px-5 py-4 bg-transparent focus:outline-none text-gray-600 text-base">
+            <button class="bg-accent text-primary-dark px-8 flex items-center justify-center hover:bg-yellow-500 transition-colors text-lg">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
-        <div class="mt-3 flex flex-wrap justify-center gap-3 text-xs text-gray-500">
+        <div class="mt-3 flex flex-wrap justify-center gap-3 text-sm text-gray-500">
             <span>熱門關鍵字：</span>
             <a href="#" class="text-primary hover:underline">#生成式AI</a>
             <a href="#" class="text-primary hover:underline">#ESG淨零</a>
@@ -63,37 +63,37 @@
 
     <!-- Quick Links (Circular Icons) -->
     <section class="py-10 bg-gray-50">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <a href="challenges.html" class="flex flex-col items-center group">
-                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
-                        <i class="fa-solid fa-rocket text-primary text-xl group-hover:scale-110 transition-transform"></i>
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-10">
+                <a href="challenges.html" class="flex flex-col items-center group w-[100px]">
+                    <div class="w-[84px] h-[84px] rounded-full border-4 border-secondary bg-white flex items-center justify-center mb-3 group-hover:border-secondary group-hover:bg-secondary transition-all shadow-[0_4px_10px_rgba(0,137,167,0.2)]">
+                        <i class="fa-solid fa-rocket text-secondary text-[2rem] group-hover:scale-110 group-hover:text-white transition-all"></i>
                     </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">尋找挑戰</span>
+                    <span class="text-base font-bold text-gray-700 group-hover:text-secondary transition-colors">尋找挑戰</span>
                 </a>
-                <a href="#" class="flex flex-col items-center group">
-                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
-                        <i class="fa-solid fa-city text-primary text-xl group-hover:scale-110 transition-transform"></i>
+                <a href="#" class="flex flex-col items-center group w-[100px]">
+                    <div class="w-[84px] h-[84px] rounded-full border-4 border-secondary bg-white flex items-center justify-center mb-3 group-hover:border-secondary group-hover:bg-secondary transition-all shadow-[0_4px_10px_rgba(0,137,167,0.2)]">
+                        <i class="fa-solid fa-city text-secondary text-[2rem] group-hover:scale-110 group-hover:text-white transition-all"></i>
                     </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">機關出題</span>
+                    <span class="text-base font-bold text-gray-700 group-hover:text-secondary transition-colors">機關出題</span>
                 </a>
-                <a href="#" class="flex flex-col items-center group">
-                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
-                        <i class="fa-solid fa-calendar-check text-primary text-xl group-hover:scale-110 transition-transform"></i>
+                <a href="#" class="flex flex-col items-center group w-[100px]">
+                    <div class="w-[84px] h-[84px] rounded-full border-4 border-secondary bg-white flex items-center justify-center mb-3 group-hover:border-secondary group-hover:bg-secondary transition-all shadow-[0_4px_10px_rgba(0,137,167,0.2)]">
+                        <i class="fa-solid fa-calendar-check text-secondary text-[2rem] group-hover:scale-110 group-hover:text-white transition-all"></i>
                     </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">活動時程</span>
+                    <span class="text-base font-bold text-gray-700 group-hover:text-secondary transition-colors">活動時程</span>
                 </a>
-                <a href="#" class="flex flex-col items-center group">
-                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
-                        <i class="fa-solid fa-trophy text-primary text-xl group-hover:scale-110 transition-transform"></i>
+                <a href="#" class="flex flex-col items-center group w-[100px]">
+                    <div class="w-[84px] h-[84px] rounded-full border-4 border-secondary bg-white flex items-center justify-center mb-3 group-hover:border-secondary group-hover:bg-secondary transition-all shadow-[0_4px_10px_rgba(0,137,167,0.2)]">
+                        <i class="fa-solid fa-trophy text-secondary text-[2rem] group-hover:scale-110 group-hover:text-white transition-all"></i>
                     </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">成功案例</span>
+                    <span class="text-base font-bold text-gray-700 group-hover:text-secondary transition-colors">成功案例</span>
                 </a>
-                <a href="#" class="flex flex-col items-center group">
-                    <div class="w-16 h-16 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 group-hover:border-primary transition-all shadow-sm">
-                        <i class="fa-solid fa-file-arrow-down text-primary text-xl group-hover:scale-110 transition-transform"></i>
+                <a href="#" class="flex flex-col items-center group w-[100px]">
+                    <div class="w-[84px] h-[84px] rounded-full border-4 border-secondary bg-white flex items-center justify-center mb-3 group-hover:border-secondary group-hover:bg-secondary transition-all shadow-[0_4px_10px_rgba(0,137,167,0.2)]">
+                        <i class="fa-solid fa-file-arrow-down text-secondary text-[2rem] group-hover:scale-110 group-hover:text-white transition-all"></i>
                     </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-primary transition-colors">資源下載</span>
+                    <span class="text-base font-bold text-gray-700 group-hover:text-secondary transition-colors">資源下載</span>
                 </a>
             </div>
         </div>
@@ -102,34 +102,30 @@
     <!-- Entry Points -->
     <section class="pb-10 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-8">
                 <!-- Startup Box -->
-                <div class="bg-white border-l-4 border-primary rounded-md shadow-sm p-6 flex items-center gap-6 group border border-gray-200">
-                    <div class="hidden sm:flex w-16 h-16 bg-primary/10 text-primary items-center justify-center rounded text-2xl group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
+                <div class="bg-white border border-gray-200 border-l-[5px] border-l-secondary rounded-xl shadow-md p-[30px] flex items-center gap-5 group hover:-translate-y-[3px] transition-transform duration-300">
+                    <div class="hidden sm:flex w-[120px] h-[120px] bg-secondary/10 text-secondary items-center justify-center rounded-full text-4xl shrink-0">
                         <i class="fa-solid fa-laptop-code"></i>
                     </div>
                     <div class="flex-grow">
                         <h3 class="text-xl font-bold text-gray-800 mb-1">我是新創/團隊</h3>
-                        <p class="text-xs text-gray-500">尋找政府場域實證機會，獲取補助資源。</p>
-                    </div>
-                    <div class="shrink-0 self-end">
-                        <a href="#" class="inline-flex items-center gap-2 px-6 py-2 bg-primary/20 text-primary text-sm font-bold rounded-full hover:bg-primary hover:text-white transition-all whitespace-nowrap">
+                        <p class="text-sm text-gray-500 mb-3">尋找政府場域實證機會，獲取補助資源。</p>
+                        <a href="#" class="inline-flex items-center gap-2 px-5 py-2 bg-secondary/15 text-secondary text-sm font-bold rounded-full hover:bg-secondary hover:text-white transition-all">
                             找尋挑戰機會 <i class="fa-solid fa-chevron-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Enterprise Box -->
-                <div class="bg-white rounded-md shadow-sm p-6 flex items-center gap-6 group border border-accent border-l-4">
-                    <div class="hidden sm:flex w-16 h-16 bg-accent/10 text-accent items-center justify-center rounded text-2xl group-hover:bg-accent group-hover:text-white transition-colors shrink-0">
+                <div class="bg-white border border-gray-200 border-l-[5px] border-l-accent rounded-xl shadow-md p-[30px] flex items-center gap-5 group hover:-translate-y-[3px] transition-transform duration-300">
+                    <div class="hidden sm:flex w-[120px] h-[120px] bg-accent/10 text-accent items-center justify-center rounded-full text-4xl shrink-0">
                         <i class="fa-solid fa-building-columns"></i>
                     </div>
                     <div class="flex-grow">
                         <h3 class="text-xl font-bold text-gray-800 mb-1">我是機關/企業</h3>
-                        <p class="text-xs text-gray-500">提出痛點需求，媒合創新解決方案。</p>
-                    </div>
-                    <div class="shrink-0 self-end">
-                        <a href="#" class="inline-flex items-center gap-2 px-6 py-2 bg-accent/20 text-accent text-sm font-bold rounded-full hover:bg-accent hover:text-white transition-all whitespace-nowrap">
+                        <p class="text-sm text-gray-500 mb-3">提出痛點需求，媒合創新解決方案。</p>
+                        <a href="#" class="inline-flex items-center gap-2 px-5 py-2 bg-accent/15 text-accent text-sm font-bold rounded-full hover:bg-accent hover:text-white transition-all">
                             發布出題需求 <i class="fa-solid fa-chevron-right text-xs"></i>
                         </a>
                     </div>
@@ -143,12 +139,12 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid lg:grid-cols-3 gap-8">
                 <!-- Latest News (Width ratio 2) -->
-                <div class="lg:col-span-2 bg-white rounded-md shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-md border border-gray-200 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-end mb-6 border-b border-gray-100 pb-3">
                         <h2 class="text-xl font-bold text-primary flex items-center gap-2">
-                            <span class="w-1 h-5 bg-primary"></span> 最新公告
+                            <span class="w-1.5 h-6 bg-secondary rounded-sm"></span> 最新公告
                         </h2>
-                        <a href="#" class="text-gray-400 text-xs hover:text-primary transition-colors">查看更多 ></a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">查看更多 ></a>
                     </div>
                     <div class="divide-y divide-gray-100 flex-grow">
                         <a href="#" class="py-3 flex flex-col md:flex-row md:items-center gap-3 group">
@@ -180,10 +176,10 @@
                 </div>
 
                 <!-- Newbie Guide (Width ratio 1) -->
-                <div class="bg-white rounded-md shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+                <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-end mb-6 border-b border-gray-100 pb-3">
                         <h2 class="text-xl font-bold text-secondary flex items-center gap-2">
-                            <span class="w-1 h-5 bg-secondary"></span> 新手上路
+                            <span class="w-1.5 h-6 bg-secondary rounded-sm"></span> 新手上路
                         </h2>
                     </div>
                     <div class="space-y-4 flex-grow">
@@ -191,19 +187,19 @@
                             <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
                                 <i class="fa-solid fa-question"></i>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">如何提案報名？</span>
+                            <span class="text-base font-bold text-gray-700">如何提案報名？</span>
                         </a>
                         <a href="#" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200 rounded group">
                             <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
                                 <i class="fa-solid fa-book"></i>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">計畫申請懶人包</span>
+                            <span class="text-base font-bold text-gray-700">計畫申請懶人包</span>
                         </a>
                         <a href="#" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-gray-100 transition-all border border-gray-200 rounded group">
                             <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary text-sm group-hover:bg-primary group-hover:text-white transition-colors">
                                 <i class="fa-solid fa-video"></i>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">線上說明會回放</span>
+                            <span class="text-base font-bold text-gray-700">線上說明會回放</span>
                         </a>
                     </div>
                 </div>
@@ -220,47 +216,47 @@
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- AI -->
-                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
-                    <div class="text-3xl text-primary mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                <div class="bg-white p-8 rounded-lg border border-gray-200 border-t-4 border-t-transparent hover:border-t-secondary shadow-md group hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl text-primary mb-4 flex justify-center group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-robot"></i>
                     </div>
                     <h3 class="text-lg font-bold text-center mb-4">AI 與 數據分析</h3>
-                    <ul class="text-xs text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> 生成式 AI 應用</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> 大數據預測模型</li>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 生成式 AI 應用</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 大數據預測模型</li>
                     </ul>
                 </div>
                 <!-- ESG -->
-                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
-                    <div class="text-3xl text-green-600 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                <div class="bg-white p-8 rounded-lg border border-gray-200 border-t-4 border-t-transparent hover:border-t-secondary shadow-md group hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl text-green-600 mb-4 flex justify-center group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-leaf"></i>
                     </div>
                     <h3 class="text-lg font-bold text-center mb-4">淨零碳排 (ESG)</h3>
-                    <ul class="text-xs text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-green-600 rounded-full"></span> 能源管理系統</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-green-600 rounded-full"></span> 循環經濟模式</li>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 能源管理系統</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 循環經濟模式</li>
                     </ul>
                 </div>
                 <!-- Transport -->
-                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
-                    <div class="text-3xl text-blue-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                <div class="bg-white p-8 rounded-lg border border-gray-200 border-t-4 border-t-transparent hover:border-t-secondary shadow-md group hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl text-blue-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-truck-fast"></i>
                     </div>
                     <h3 class="text-lg font-bold text-center mb-4">智慧交通</h3>
-                    <ul class="text-xs text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> 智慧號誌控制</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> 無人載具物流</li>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 智慧號誌控制</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 無人載具物流</li>
                     </ul>
                 </div>
                 <!-- Health -->
-                <div class="bg-white p-6 rounded-md border border-gray-200 shadow-sm group">
-                    <div class="text-3xl text-red-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
+                <div class="bg-white p-8 rounded-lg border border-gray-200 border-t-4 border-t-transparent hover:border-t-secondary shadow-md group hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-4xl text-red-500 mb-4 flex justify-center group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-heart-pulse"></i>
                     </div>
                     <h3 class="text-lg font-bold text-center mb-4">智慧醫療</h3>
-                    <ul class="text-xs text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-red-500 rounded-full"></span> 遠距照護平台</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-red-500 rounded-full"></span> 穿戴式裝置</li>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 遠距照護平台</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> 穿戴式裝置</li>
                     </ul>
                 </div>
             </div>
@@ -273,7 +269,7 @@
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Video Card -->
                 <div class="space-y-4">
-                    <div class="relative aspect-video rounded-md overflow-hidden shadow-lg group">
+                    <div class="relative aspect-video rounded-lg overflow-hidden shadow-xl group">
                         <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Video" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
                             <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-primary text-xl shadow-lg group-hover:scale-110 transition-transform">
@@ -284,19 +280,19 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-800 mb-1">【影音專區】如何撰寫完美的提案計畫書？</h3>
-                        <p class="text-gray-500 text-sm">掌握這 5 個關鍵要素，讓你的實證提案脫穎而出。</p>
+                        <p class="text-gray-500 text-base">掌握這 5 個關鍵要素，讓你的實證提案脫穎而出。</p>
                     </div>
                 </div>
 
                 <!-- Case Card -->
                 <div class="space-y-4">
-                    <div class="relative aspect-video rounded-md overflow-hidden shadow-lg group">
+                    <div class="relative aspect-video rounded-lg overflow-hidden shadow-xl group">
                         <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Case" class="w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded">Case</div>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-800 mb-1">【企業專訪】智新科技：從實證到商轉的旅程</h3>
-                        <p class="text-gray-500 text-sm">透過本平台媒合，成功將 AI 巡檢系統導入捷運局。</p>
+                        <p class="text-gray-500 text-base">透過本平台媒合，成功將 AI 巡檢系統導入捷運局。</p>
                     </div>
                 </div>
             </div>
@@ -304,17 +300,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#2d2d2d] text-gray-400 py-7">
+    <footer class="bg-[#1e272e] text-gray-400 py-7">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#2d2d2d] text-lg font-bold">
+                        <div class="w-9 h-9 bg-white rounded flex items-center justify-center text-[#1e272e] text-lg font-bold">
                             <i class="fa-solid fa-lightbulb"></i>
                         </div>
                         <span class="text-lg font-bold text-white tracking-tight">實證媒合平台</span>
                     </div>
-                    <p class="text-xs leading-relaxed mb-4">
+                    <p class="text-sm leading-relaxed mb-4">
                         政府出題，企業解題。我們致力於連結公部門需求與民間創新能量，共同解決社會痛點。
                     </p>
                     <div class="flex gap-3">
@@ -325,8 +321,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">關於我們</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">關於我們</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition-colors">計畫緣起</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">服務條款</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">隱私權政策</a></li>
@@ -335,8 +331,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">計畫資源</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">計畫資源</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="challenges.html" class="hover:text-white transition-colors">尋找挑戰</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">資源下載</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">常見問答</a></li>
@@ -345,8 +341,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-4 text-sm border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
-                    <ul class="space-y-2 text-xs">
+                    <h4 class="text-white font-bold mb-4 text-base border-l-2 border-gray-500 pl-3">聯絡資訊</h4>
+                    <ul class="space-y-2 text-sm">
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-phone text-gray-400 mt-0.5"></i>
                             <div>

@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!placeholder) return;
 
     const initialTheme = placeholder.getAttribute('data-theme') || 'light';
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'home.html';
 
     const navHTML = `
     <div class="fixed top-0 left-0 w-full z-50">
         <!-- Utility Top Bar -->
         <div class="bg-primary/90 backdrop-blur-sm py-1 hidden md:block">
-            <div class="max-w-7xl mx-auto px-4 flex justify-end items-center gap-6 text-[11px] text-white/90">
+            <div class="max-w-7xl mx-auto px-4 flex justify-end items-center gap-6 text-xs text-white/90">
                 <a href="#" class="hover:text-white transition-colors">網站導覽</a>
                 <span class="text-white/30">|</span>
                 <a href="#" class="hover:text-white transition-colors bg-white/10 px-2 rounded">常見問答</a>
@@ -28,21 +28,21 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <!-- Brand Name (No Logo) -->
-                    <a href="index.html" class="flex items-center gap-4 cursor-pointer">
+                    <a href="home.html" class="flex items-center gap-4 cursor-pointer">
                         <div class="flex flex-col">
-                            <span class="text-xl font-bold text-primary tracking-tight">實證媒合平台</span>
-                            <span class="text-[10px] text-gray-400 uppercase tracking-widest -mt-1">Innovation Matchmaking Platform</span>
+                            <span class="text-2xl font-bold text-primary tracking-tight">實證媒合平台</span>
+                            <span class="text-[11px] text-gray-400 uppercase tracking-widest -mt-1">Innovation Matchmaking Platform</span>
                         </div>
                     </a>
 
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex items-center space-x-6">
-                        <a href="challenges.html" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors ${currentPage === 'challenges.html' ? 'text-primary border-b-2 border-primary' : ''}">尋找挑戰</a>
-                        <a href="calendar.html" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors ${currentPage === 'calendar.html' ? 'text-primary border-b-2 border-primary' : ''}">計畫時程</a>
-                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">計畫資源</a>
-                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">成功案例</a>
-                        <a href="#" class="text-gray-700 text-sm font-bold hover:text-primary transition-colors">關於我們</a>
-                        <a href="#" class="flex items-center gap-1.5 text-primary text-sm font-bold hover:text-primary-dark transition-colors">
+                        <a href="challenges.html" class="text-gray-700 text-base font-bold hover:text-primary transition-colors ${currentPage === 'challenges.html' ? 'text-primary border-b-2 border-primary' : ''}">尋找挑戰</a>
+                        <a href="calendar.html" class="text-gray-700 text-base font-bold hover:text-primary transition-colors ${currentPage === 'calendar.html' ? 'text-primary border-b-2 border-primary' : ''}">計畫時程</a>
+                        <a href="#" class="text-gray-700 text-base font-bold hover:text-primary transition-colors">計畫資源</a>
+                        <a href="#" class="text-gray-700 text-base font-bold hover:text-primary transition-colors">成功案例</a>
+                        <a href="#" class="text-gray-700 text-base font-bold hover:text-primary transition-colors">關於我們</a>
+                        <a href="#" class="flex items-center gap-1.5 text-secondary text-base font-bold hover:text-teal-gov transition-colors">
                             <i class="fa-solid fa-user-circle text-lg"></i> 會員登入
                         </a>
                     </div>
